@@ -30,16 +30,29 @@
         </ul>
         
         <!-- BEGIN LOGO -->
-        <div class="page-logo">
+        <!-- <div class="page-logo">
             <a href="{{ URL::to('/',null)}}">
             <img src="{!! asset('assets/logo.png') !!}" height="50px"  alt="logo" class="logo-default"/>
-            </a>
+            </a> -->
 
-            {{-- <div class="menu-toggler sidebar-toggler"> --}}
+            <!-- {{-- <div class="menu-toggler sidebar-toggler"> --}} -->
                 <!-- DOC: Remove the above "hide" to enable the sidebar toggler button on header -->
-            {{-- </div> --}}
-        </div>
+            <!-- {{-- </div> --}} -->
+        <!-- </div> -->
         <!-- END LOGO -->
+
+        <!-- Header left side -->
+        <div class="header-left">
+            <button class="sidebar-toggle">
+                <span></span>
+            </button>
+            <div class="browse-site-btn">
+                <a href="#">
+                    <i class="fa fa-globe" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+        <!-- End header left side -->
         
         <!-- BEGIN PAGE ACTIONS -->
         <!-- DOC: Remove "hide" class to enable the page header actions -->
