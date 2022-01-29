@@ -67,6 +67,31 @@ jQuery(document).ready(function() {
    
 });
 </script>
+<script type="text/javascript">
+// sidebar js
+      $(document).ready(function() {
+         $('.page-sidebar-menu').each(function() {
+            $(this).find('.sidebar-sub-menu').parent().addClass('dropdown-inner');
+         });
+         $(".dropdown-inner > li > a").click(function(){
+            $(this).toggleClass("open-dropdown");
+         });
+      });
+
+      // header js
+      $(document).ready(function() {
+         $(".sidebar-toggle").click(function(){
+            $("body").toggleClass("full-width");
+         });
+      });
+
+      $(document).ready(function() {
+         $('.dropdown-inner').on('click', function(){
+            $('.dropdown-inner.active-submenu').not(this).removeClass('active-submenu');
+            $(this).toggleClass('active-submenu');
+         });
+      });
+</script>
 @yield('script')
 @section('scripts')
     {{--custom js goes here--}}

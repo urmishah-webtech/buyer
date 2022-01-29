@@ -48,32 +48,32 @@ $file_name = Session::get('content');
             </a>
          </li>
          <li>
-            <a <?php if($file_name=='Content Management' ){ echo 'class="active"'; } ?> href="{{URL('admin/dashboard/Content Management')}}">
+            <a <?php if($file_name=='Content Management' ){ echo 'class="active"'; } ?>>
                <i class="fa fa-file-text-o" aria-hidden="true"></i>
                <span class="title">Content Management</span>
                <span class="arrow "></span>
             </a>
             <ul class="sidebar-sub-menu">
-               <li><a>Content Description</a></li>
-               <li><a>Content Categories</a></li>
-               <li><a>Categories Lists</a></li>
-               <li><a>Add Page</a></li>
-               <li><a>Manage Page</a></li>
-               <li><a>Manage SEO</a></li>
-               <li><a>Add SEO</a></li>
+               <li><a href="{{URL('/admin/description-add')}}">Content Description</a></li>
+               <li><a href="{{URL('/admin/content-add')}}">Content Categories</a></li>
+               <li><a href="{{URL('/admin/content-manage')}}">Categories Lists</a></li>
+               <li><a href="{{URL('/page_content/create')}}">Add Page</a></li>
+               <li><a href="{{URL('/page_content')}}">Manage Page</a></li>
+               <li><a href="{{URL('/admin/manage-seo')}}">Manage SEO</a></li>
+               <li><a href="{{URL('/admin/add-seo')}}">Add SEO</a></li>
             </ul>
          </li>
          <li>
-            <a <?php if($file_name=='Classifieds (B2b)' ){ echo 'class="active"'; } ?> href="{{URL('admin/dashboard/Classifieds (B2b)')}}">
+            <a <?php if($file_name=='Classifieds (B2b)' ){ echo 'class="active"'; } ?>>
                <i class="icon-home" aria-hidden="true"></i>
                <span class="title">Classifieds (B2b)</span>
                <span class="arrow "></span>
             </a>
             <ul class="sidebar-sub-menu">
-               <li><a>Manage Products</a></li>
-               <li><a>Manage Tradeshow</a></li>
-               <li><a>Add Category</a></li>
-               <li><a>Manage Categories</a></li>
+               <li><a href="{{URL('/admin/product')}}">Manage Products</a></li>
+               <li><a href="{{URL('/admin/tradeshow-show')}}">Manage Tradeshow</a></li>
+               <li><a href="{{URL('/admin/Category-add')}}">Add Category</a></li>
+               <li><a href="{{URL('/admin/category-list')}}">Manage Categories</a></li>
             </ul>
          </li>
          <li>
@@ -98,14 +98,14 @@ $file_name = Session::get('content');
             </a>
          </li>
          <li>
-            <a <?php if($file_name=='Menu' ){ echo 'class="active"'; } ?> href="{{URL('admin/dashboard/Menu')}}">
+            <a <?php if($file_name=='Menu' ){ echo 'class="active"'; } ?>>
                <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
                <span class="title">Menu</span>
                <span class="arrow "></span>
             </a>
             <ul class="sidebar-sub-menu">
-               <li><a>Manage Inquiry</a></li>
-               <li><a>Manage Home Products</a></li>
+               <li><a href="{{URL('/admin/manage-inquiry')}}">Manage Inquiry</a></li>
+               <li><a href="{{URL('/admin/manage-home-products')}}">Manage Home Products</a></li>
             </ul>
          </li>
 

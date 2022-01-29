@@ -11,9 +11,9 @@
    <div class="col-md-12">
       <!-- BEGIN EXAMPLE TABLE PORTLET-->
       <div class="portlet box grey-cascade">
-         <div class="portlet-title" style="background-color:#082154;">
+         <div class="portlet-title">
             <div class="caption">
-               <i class="fa fa-globe"></i>Manage Users
+               Manage Users
             </div>
             <div class="tools">
                <a href="javascript:;" class="collapse">
@@ -25,7 +25,7 @@
          <div class="portlet-body">
             <div class="table-toolbar">
 
-               <div class="row">
+               <!-- <div class="row">
                   <div class="col-md-6">
                      {{-- <div class="btn-group">
                         <button id="sample_editable_1_new" class="btn green">
@@ -50,9 +50,9 @@
                         </ul>
                      </div> --}}
                   </div>
-               </div>
+               </div> -->
 
-               <div>
+               <div class="pagination-main">
                   {!! $users->render() !!}
                </div>
 
@@ -82,7 +82,6 @@
                            @endforeach
                         </select>
                      </div>
-
                      <div class="form-group">
                         <select name="category_name" class="form-control">
                            <option value="0">Select all</option>

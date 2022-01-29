@@ -51,23 +51,6 @@
          });
       });
 
-      // sidebar js
-      $(document).ready(function() {
-         $('.page-sidebar-menu').each(function() {
-            $(this).find('.sidebar-sub-menu').parent().addClass('dropdown-inner');
-         });
-         $(".dropdown-inner > li > a").click(function(){
-            $(this).toggleClass("open-dropdown");
-         });
-      });
-
-      // header js
-      $(document).ready(function() {
-         $(".sidebar-toggle").click(function(){
-            $("body").toggleClass("full-width");
-         });
-      });
-
    </script>
    </body>
 </html>

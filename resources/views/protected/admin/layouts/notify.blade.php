@@ -6,7 +6,7 @@
 </style>
 <div class="page-header navbar navbar-fixed-top col-lg-12 col-12 p-0 flex-row">
     <!-- BEGIN HEADER INNER -->
-    <div class="page-header-inner navbar-menu-wrapper bg-white d-flex align-center justify-content-between" style="padding:0px 30px;">
+    <div class="page-header-inner navbar-menu-wrapper bg-white d-flex align-center justify-content-between">
         <ul class="navbar-nav mr-lg-2 d-none d-flex align-center flex-row" style="display:none;">
             <li class="nav-item nav-toggler-item">
                 <!-- BEGIN RESPONSIVE MENU TOGGLER -->
@@ -439,10 +439,11 @@
                     @endphp
                     <div class="page-actions ">
                         <div class="btn-group">
-                            <button type="button" class="btn btn-circle dropdown-toggle" data-toggle="dropdown">
-                            <span id="all_notification"><i class="fa fa-globe" aria-hidden="true"></i><i data-count="{{$all_notifications}}" class="glyphicon notification-icon"></i></span>&nbsp;<i class="fa fa-angle-down"></i>
+                            <button type="button" class="btn btn-circle dropdown-toggle notification-btn" data-toggle="dropdown">
+                                <span id="all_notification"><i class="fa fa-bell-o" aria-hidden="true"></i><i data-count="{{$all_notifications}}" class="glyphicon notification-icon"></i></span>
                             </button>
-                            <ul class="dropdown-menu" role="menu">
+                            <ul class="dropdown-menu notification-dropdown" role="menu">
+                                <h3 class="h3">Notifications</h3>
                                 <li id="pusher_notification_4">
                                     <a href="{{ URL::to('admin/profiles',null) }}">
                                         <i class="icon-user"></i> New User <span><i data-count="{{$new_user_notifications}}" class="glyphicon notification-icon"></i></span>
@@ -466,18 +467,161 @@
                             </ul>
                         </div>
                     </div>
-  
+                    
+                    <div class="dropdown country-dropdown">
+                        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <img src="http://localhost/script/script/install/public/assets/img/flags/en.png" height="11">
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                            <li>
+                                <a href="javascript:void(0)" data-flag="en" class="dropdown-item  active ">
+                                    <img src="http://localhost/script/script/install/public/assets/img/flags/en.png" class="mr-2">
+                                    <span class="language">English</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0)" data-flag="bd">
+                                    <img src="http://localhost/script/script/install/public/assets/img/flags/bd.png">
+                                    <span class="language">Bangla</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0)" data-flag="sa">
+                                    <img src="http://localhost/script/script/install/public/assets/img/flags/sa.png">
+                                    <span class="language">Arabic</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0)" data-flag="es">
+                                    <img src="http://localhost/script/script/install/public/assets/img/flags/es.png">
+                                    <span class="language">Spain</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0)" data-flag="jp">
+                                    <img src="http://localhost/script/script/install/public/assets/img/flags/jp.png">
+                                    <span class="language">Japan</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0)" data-flag="fr">
+                                    <img src="http://localhost/script/script/install/public/assets/img/flags/fr.png">
+                                    <span class="language">France</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0)" data-flag="in">
+                                    <img src="http://localhost/script/script/install/public/assets/img/flags/in.png">
+                                    <span class="language">India</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0)" data-flag="nl">
+                                    <img src="http://localhost/script/script/install/public/assets/img/flags/nl.png">
+                                    <span class="language">Netherland</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0)" data-flag="af">
+                                    <img src="http://localhost/script/script/install/public/assets/img/flags/af.png">
+                                    <span class="language">Afghanistan</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0)" data-flag="eg">
+                                    <img src="http://localhost/script/script/install/public/assets/img/flags/eg.png">
+                                    <span class="language">Egypt</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0)" data-flag="za">
+                                    <img src="http://localhost/script/script/install/public/assets/img/flags/za.png">
+                                    <span class="language">Africa</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0)" data-flag="ie">
+                                    <img src="http://localhost/script/script/install/public/assets/img/flags/ie.png">
+                                    <span class="language">ireland</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0)" data-flag="sg">
+                                    <img src="http://localhost/script/script/install/public/assets/img/flags/sg.png">
+                                    <span class="language">Singapore</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0)" data-flag="vn">
+                                    <img src="http://localhost/script/script/install/public/assets/img/flags/vn.png">
+                                    <span class="language">Vietnam</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0)" data-flag="my">
+                                    <img src="http://localhost/script/script/install/public/assets/img/flags/my.png">
+                                    <span class="language">Malaysia</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0)" data-flag="lk">
+                                    <img src="http://localhost/script/script/install/public/assets/img/flags/lk.png">
+                                    <span class="language">Sri Lanka</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0)" data-flag="ke">
+                                    <img src="http://localhost/script/script/install/public/assets/img/flags/ke.png">
+                                    <span class="language">Kenya</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0)" data-flag="th">
+                                    <img src="http://localhost/script/script/install/public/assets/img/flags/th.png">
+                                    <span class="language">Thailand</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0)" data-flag="cn">
+                                    <img src="http://localhost/script/script/install/public/assets/img/flags/cn.png">
+                                    <span class="language">China</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0)" data-flag="zw">
+                                    <img src="http://localhost/script/script/install/public/assets/img/flags/zw.png">
+                                    <span class="language">Zimbabwe</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0)" data-flag="pk">
+                                    <img src="http://localhost/script/script/install/public/assets/img/flags/pk.png">
+                                    <span class="language">Pakistan</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0)" data-flag="tr">
+                                    <img src="http://localhost/script/script/install/public/assets/img/flags/tr.png">
+                                    <span class="language">Turkey</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
                     <li class="dropdown dropdown-user">
                         <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-                        <img alt="" class="img-circle" src="{{ asset('assets/admin/profile/',Sentinel::getUser()->profile_pic) }}"/>
-                        <span class="username username-hide-on-mobile">
-                         {{ Sentinel::getUser()->first_name }}</span>
-                        <i class="fa fa-angle-down"></i>
+                            <!-- <img alt="" class="img-circle" src="{{ asset('assets/admin/profile/',Sentinel::getUser()->profile_pic) }}"/> -->
+                            <img src="{{ url('assets/images/avatar-place.png') }}" class="img-circle">
+                            <div class="admin-name">
+                                <span>admin</span>
+                                <span class="username username-hide-on-mobile">
+                                {{ Sentinel::getUser()->first_name }}</span>
+                            </div>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-default">
                              <li>
                                 <a href="{{ URL::to('admin/profiles',Sentinel::getUser()->id )}}">
-                                <i class="icon-user"></i> My Profile </a>
+                                <i class="icon-user"></i>Profile </a>
                             </li>
                         {{--
                             <li>
@@ -504,7 +648,7 @@
                             </li> --}}
                             <li>
                                 <a href="{{ URL::to('logout')}}">
-                                <i class="icon-key"></i> Log Out </a>
+                                <i class="fa fa-sign-out" aria-hidden="true"></i>Logout</a>
                             </li>
                         </ul>
                     </li>
