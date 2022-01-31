@@ -98,10 +98,10 @@
                      </div>
                      {!! Form::token() !!}
                      <div class="form-group">
-                        <input type="submit" class="btn btn-success trade_search_btn " value="SEARCH"/>
+                        <input type="submit" class="btn btn-success trade_search_btn admin-list-btn" value="SEARCH"/>
                      </div>
                      <div class="form-group">
-                        <button type="button" class="btn btn-success resetval">RESET</button>
+                        <button type="button" class="btn btn-success resetval admin-list-btn">RESET</button>
                      </div>
                     
                   </form>
@@ -109,93 +109,96 @@
                   
                </div>
             </div>
-            <table class="table table-striped table-bordered table-hover th-bg" id="sample_1">
-               <thead>
-                  <tr>
-                     <th class="table-checkbox">
-                        <input type="checkbox" class="group-checkable" data-set="#sample_1 .checkboxes" />
-                     </th>
-                     <th>User name</th>
-                     <th>Seller Products</th>
-                     <th>Email</th>
-                     <th>User type</th>
-                     <th>Company</th>
-                     <th>Business type</th>
-                     <!-- <th>category</th -->
-                     <th>Join Date</th>
-                     <th>Sort order</th>
-                     <th>Status</th>
-                     <th>Action</th>
+            <div class="table-responsive">
+               <table class="admin-table table table-striped table-bordered table-hover th-bg" id="sample_1">
+                  <thead>
+                     <tr>
+                        <th class="table-checkbox">
+                           <input type="checkbox" class="group-checkable" data-set="#sample_1 .checkboxes" />
+                        </th>
+                        <th>User name</th>
+                        <th>Seller Products</th>
+                        <th>Email</th>
+                        <th>User type</th>
+                        <th class="company-filed">Company</th>
+                        <th class="join-date-filed">Business type</th>
+                        <!-- <th>category</th -->
+                        <th>Join Date</th>
+                        <th>Sort order</th>
+                        <th>Status</th>
+                        <th>Action</th>
 
-                  </tr>
-               </thead>
-               <tbody>
-                  @foreach ($users as $user)
-                  <tr class="odd gradeX">
-                     <td><input type="checkbox" class="checkboxes" value="1" /></td>
-                     <td>
-                        <a title="login as {{ $user->first_name }} {{ $user->last_name}}" href="{{URL::to('admin/make-me-login',$user->id)}}">{{ $user->first_name }} {{ $user->last_name}}</a>
-                     </td><td>
-                        <a href="{{ URL::to('admin/profiles/sellerproduct/'.$user->id) }}">List Seller Product</a> <br>
-                     </td>
-                     <td>
-                        <a href="{{ URL::to('admin/profiles/'.$user->id) }}">{{ $user->email }}</a> <br>
-                        @if ($user->inRole($admin))
-                        <span class="label label-success">Admin</span>
-                        @endif
-                     </td>
-                     <td class="center">
-                        @if ($user->inRole($supplier))
-                           Supplier
-                        @else
-                           Buyer
-                        @endif
-                     </td>
-                     <td class="center">
-                        @if($user->companies)
-                        @if($user->companies->name_string && (trim($user->companies->name_string->name) != ''))
-                        <a target="_blank" href="{{ URL::to('Home/'.preg_replace('/[^A-Za-z0-9\-]/', '-',$user->companies->name_string->name),$user->companies->id) }}"> {{ $user->companies->name_string->name }}</a>
-                        @else
-                        <a target="_blank" href="{{ URL::to('Home/'.preg_replace('/[^A-Za-z0-9\-]/', '-','Not Available'),$user->companies->id) }}"> {{ 'Not Available'}}</a>
-                        @endif
-                        @else
-                        Not Available
-                        @endif
-                     </td>
-                     <td class="center">
-                        @if ($user->suppliers)
-                        @if($user->suppliers->business_types)
-                           {{$user->suppliers->business_types->name}}
-                        @endif
-                        @endif
-                     </td>
-                     <td>{{ $user->created_at ?? '' }}</td>
-
-                     <td class="sortproduct_td text-center">
-                        <select name="sortproduct_option" data-id="{{ $user->id }}" class="sortproduct_option">
-                           @if($total_u > 0)
-                              @for($hi=0; $hi < $total_u; $hi++)
-                                 <option value="'.$hi.'">{{$hi}}</option>
-                              @endfor
+                     </tr>
+                  </thead>
+                  <tbody>
+                     @foreach ($users as $user)
+                     <tr class="odd gradeX">
+                        <td><input type="checkbox" class="checkboxes" value="1" /></td>
+                        <td>
+                           <a title="login as {{ $user->first_name }} {{ $user->last_name}}" href="{{URL::to('admin/make-me-login',$user->id)}}">{{ $user->first_name }} {{ $user->last_name}}</a>
+                        </td>
+                        <td>
+                           <a href="{{ URL::to('admin/profiles/sellerproduct/'.$user->id) }}">List Seller Product</a> <br>
+                        </td>
+                        <td>
+                           <a href="{{ URL::to('admin/profiles/'.$user->id) }}">{{ $user->email }}</a> <br>
+                           @if ($user->inRole($admin))
+                           <span class="label label-success">Admin</span>
                            @endif
-                        </select>
-                     </td>
+                        </td>
+                        <td class="center">
+                           @if ($user->inRole($supplier))
+                              Supplier
+                           @else
+                              Buyer
+                           @endif
+                        </td>
+                        <td class="center company-filed">
+                           @if($user->companies)
+                           @if($user->companies->name_string && (trim($user->companies->name_string->name) != ''))
+                           <a target="_blank" href="{{ URL::to('Home/'.preg_replace('/[^A-Za-z0-9\-]/', '-',$user->companies->name_string->name),$user->companies->id) }}"> {{ $user->companies->name_string->name }}</a>
+                           @else
+                           <a target="_blank" href="{{ URL::to('Home/'.preg_replace('/[^A-Za-z0-9\-]/', '-','Not Available'),$user->companies->id) }}"> {{ 'Not Available'}}</a>
+                           @endif
+                           @else
+                           Not Available
+                           @endif
+                        </td>
+                        <td class="center ">
+                           @if ($user->suppliers)
+                           @if($user->suppliers->business_types)
+                              {{$user->suppliers->business_types->name}}
+                           @endif
+                           @endif
+                        </td>
+                        <td class="join-date-filed">{{ $user->created_at ?? '' }}</td>
 
-                     <td>
-                        @if($user->activated==1)
-                        <a type="button" class="" href="{{ URL::to('admin/profiles/deactive/'. $user->id) }}">Deactive</a>
-                        @else
-                        <a type="button" class="" href="{{ URL::to('admin/profiles/active/'. $user->id) }}">Active</a>
-                        @endif
-                     </td>
-                     <td>
-                        <a onclick="return confirm('Are you sure want to delete the user?')" type="button" class="btn btn-danger btn-xs delete_product" href="{{ URL::to('admin/profiles/deletuser/'. $user->id) }}"><i class="fa fa-times"></i></a>
-                     </td>
-                  </tr>
-                  @endforeach
-               </tbody>
+                        <td class="sortproduct_td text-center">
+                           <select name="sortproduct_option" data-id="{{ $user->id }}" class="sortproduct_option">
+                              @if($total_u > 0)
+                                 @for($hi=0; $hi < $total_u; $hi++)
+                                    <option value="'.$hi.'">{{$hi}}</option>
+                                 @endfor
+                              @endif
+                           </select>
+                        </td>
 
-            </table>
+                        <td>
+                           @if($user->activated==1)
+                           <a class="deactive-btn" type="button" class="" href="{{ URL::to('admin/profiles/deactive/'. $user->id) }}">Deactive</a>
+                           @else
+                           <a class="active-btn" type="button" class="" href="{{ URL::to('admin/profiles/active/'. $user->id) }}">Active</a>
+                           @endif
+                        </td>
+                        <td>
+                           <a onclick="return confirm('Are you sure want to delete the user?')" type="button" class="btn btn-danger btn-xs delete_product delete-icon-btn" href="{{ URL::to('admin/profiles/deletuser/'. $user->id) }}"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                        </td>
+                     </tr>
+                     @endforeach
+                  </tbody>
+
+               </table>
+            </div>
             {!! $users->render() !!}
          </div>
       </div>
