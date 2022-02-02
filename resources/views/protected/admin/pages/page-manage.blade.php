@@ -12,14 +12,14 @@
             </div>
         @endif
                 <!-- END PAGE HEADER-->
-        <div class="portlet box grey-cascade">
+        <!-- <div class="portlet box grey-cascade">
             <div class="portlet-title" style="background-color:#082154;color:white;">
                 <div class="caption">
                     <i class="fa fa-globe"></i>Manage Page Lists
                 </div>
             </div>
-        </div>
-        <div class="page-bar page-breadcrumb-bar">
+        </div> -->
+        <div class="page-bar page-top-bar">
             <ul class="page-breadcrumb" >
                 <li>
                     <i class="fa fa-home" style="color:black;"></i>
@@ -36,7 +36,7 @@
                 </li>
             </ul>
             <div class="page-toolbar">
-                <a href="{{URL('admin/dashboard/Content Management')}}" class="btn green-haze btn-circle pull-right" style="margin-right:50px;"><i class="fa fa-backward"></i> Back</a>
+                <a href="{{URL('admin/dashboard/Content Management')}}" class="btn green-haze btn-circle pull-right back-btn"><i class="fa fa-backward"></i> Back</a>
             </div>
         </div>     
                 
@@ -58,6 +58,11 @@
                                 </div>-->
                                 <!-- <a href="{{URL('admin/dashboard/Content Management')}}" class="btn green-haze btn-circle pull-right" style="margin-right:50px;margin-top: 5px;"><i class="fa fa-backward"></i> Back</a> -->
                             <!-- </div> -->
+                            <div class="portlet-title justify-content-start">
+                                <div class="caption">
+                                    Manage Page Lists
+                                </div>
+                            </div>
                             <div class="portlet-body">
                                 <!-- <div class="table-toolbar">
                                     <div class="pull-right"><label class=" control-label"> Search </label><input type="text" class="light-table-filter" data-table="order-table" placeholder="" style=" padding: 5px;font-size: 13px;"></div>
@@ -65,7 +70,7 @@
                                 <!--<h3>All Available Products list-->
           
       <!--</h3>-->
-      <table id ="datavalue" class="order-table table table-striped table-bordered table-hover th-bg">
+      <table id ="datavalue" class="order-table table table-striped table-bordered table-hover th-bg admin-table">
          
                     <thead>
                     <tr>
@@ -84,11 +89,12 @@
                             <td>{{ $page->sort_name }}</td>
                             <td>{{ $page->prefix }}</td>
                             <td>{{ $page->slug }}</td>
-                            <td  style="white-space: nowrap;">{{ date('d-M-Y',strtotime($page->created_at)) }}</td>
-                            <td  style="white-space: nowrap;">
-                                <a href="{{ URL::to('page_content/'.$page->id.'/edit',null) }}" class="btn btn-xs btn-info">Edit</a>
-                                <a onclick="return confirm('Are you sure, you want to delete the Page?')" href="{{ URL::to('admin/page_content-delete',$page->id) }}" class="btn btn-xs btn-danger">Delete</a>
-
+                            <td class="join-date-filed">{{ date('d-M-Y',strtotime($page->created_at)) }}</td>
+                            <td>
+                                <div class="table-grp-btn">
+                                    <a href="{{ URL::to('page_content/'.$page->id.'/edit',null) }}" class="btn btn-xs btn-info edit-icon-btn"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                                    <a onclick="return confirm('Are you sure, you want to delete the Page?')" href="{{ URL::to('admin/page_content-delete',$page->id) }}" class="btn btn-xs btn-danger delete-icon-btn"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                                </div>
                             </td>
                         </tr>
                     @endforeach

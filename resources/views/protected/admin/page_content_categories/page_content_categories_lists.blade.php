@@ -7,34 +7,30 @@
             <p style="color:white;">{{ session('flash_message') }}</p>
       </div>
    @endif
-    <div class="portlet box grey-cascade">
-        <div class="portlet-title" style="background-color:#082154;color:white;">
-            <div class="caption">
-                <i class="fa fa-globe"></i>Categories Lists
-            </div>
-        </div>
-    </div>
-   <div class="page-bar page-breadcrumb-bar">
-        
-        <ul class="page-breadcrumb" >
-            <li>
-                <i class="fa fa-home" style="color:black;"></i>
-                <a href="{{URL::route('admin_dashboard')}}" >Home</a>
-                <i class="fa fa-angle-right" style="color:black;"></i>
-            </li>
-           
-            <li>
-                <a href="{{URL('admin/dashboard/Content Management')}}">Content Management</a>
-                 <i class="fa fa-angle-right" style="color:black;"></i>
-            </li>
-            <li>
-               Categories Lists
-            </li>
-        </ul>
-        <div class="page-toolbar">
-            <a href="{{URL('admin/dashboard/Content Management')}}" class="btn green-haze btn-circle pull-right" style="margin-right:50px;"><i class="fa fa-backward"></i> Back</a>
-         </div>
-    </div>
+   <div class="page-bar page-top-bar">
+      <ul class="page-breadcrumb" >
+         <li>
+             <i class="fa fa-home" style="color:black;"></i>
+             <a href="{{URL::route('admin_dashboard')}}" >Home</a>
+             <i class="fa fa-angle-right" style="color:black;"></i>
+         </li>
+         <li>
+             <a href="{{URL('admin/dashboard/Content Management')}}">Content Management</a>
+              <i class="fa fa-angle-right" style="color:black;"></i>
+         </li>
+         <li>
+            Categories Lists
+         </li>
+      </ul>
+      <div class="page-toolbar">
+         <a href="{{URL('admin/dashboard/Content Management')}}" class="btn green-haze btn-circle pull-right back-btn"><i class="fa fa-backward"></i> Back</a>
+      </div>
+   </div>
+   <!-- <div class="portlet-title">
+      <div class="caption">
+         Categories Lists
+      </div>
+   </div> -->
 
 <!-- END PAGE HEADER-->
 <!-- BEGIN PAGE CONTENT-->
@@ -56,6 +52,11 @@
                                 </div>-->
                                  <!-- <a href="{{URL('admin/dashboard/Content Management')}}" class="btn green-haze btn-circle pull-right" style="margin-right:50px;margin-top: 5px;"><i class="fa fa-backward"></i> Back</a> -->
                             <!-- </div> -->
+                            <div class="portlet-title justify-content-start">
+                              <div class="caption">
+                                 Categories Lists
+                              </div>
+                           </div>
                             <div class="portlet-body">
                                 <!-- <div class="table-toolbar">
                                     <span class="pull-right"><label class=" control-label"> Search </label><input type="text" class="light-table-filter" data-table="order-table" placeholder="" style=" padding: 5px;font-size: 13px;"></span>
@@ -63,7 +64,7 @@
                                 <!--<h3>All Available Products list-->
           
       <!--</h3>-->
-      <table id ="datavalue" class="order-table table table-striped table-bordered table-hover th-bg">
+      <table id ="datavalue" class="order-table table table-striped table-bordered table-hover th-bg admin-table">
          <thead>
             <tr>
                <th class="text-left">Name</th>
@@ -77,10 +78,11 @@
             <tr>
                <td>{{ $cat->name }}</td>
                <td>{{ $cat->sort_name }}</td>
-               <td style="white-space: nowrap;">{{ date('d-M-Y',strtotime($cat->created_at)) }}</td>
-               <td style="white-space: nowrap;">
-                  <a href="{{ URL::to('admin/content-edit',$cat->id) }}" class="btn btn-xs btn-info">Edit</a>
-                  <a onclick="return confirm('Are you sure, you want to delete the Category?')" href="{{ URL::to('admin/content-delete',$cat->id) }}" class="btn btn-xs btn-danger">Delete</a>
+               <td class="join-date-filed">{{ date('d-M-Y',strtotime($cat->created_at)) }}</td>
+               <td>
+                  <div class="table-grp-btn">
+                  <a href="{{ URL::to('admin/content-edit',$cat->id) }}" class="btn btn-xs btn-info  edit-icon-btn"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                  <a onclick="return confirm('Are you sure, you want to delete the Category?')" href="{{ URL::to('admin/content-delete',$cat->id) }}" class="btn btn-xs btn-danger delete-icon-btn"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
 
                </td>
             </tr>

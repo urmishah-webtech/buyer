@@ -9,19 +9,19 @@
    @endif
 </div>
 <!--<a href="{{URL('admin/dashboard/Content Management')}}" class="btn green-haze btn-circle pull-right" style="margin-right:50px;"><i class="fa fa-backward"></i> Back</a>-->  
-<div class="portlet box grey-cascade">
+<!-- <div class="portlet box grey-cascade">
     <div class="portlet-title" style="background-color:#082154;color:white;">
         <div class="caption">
             <i class="fa fa-globe"></i>Add Content Categories
         </div>
     </div>
-</div>
+</div> -->
 @if (session()->has('flash_message'))
    <div class="alert alert-success">
          <p style="color:white;">{{ session()->get('flash_message') }}</p>
    </div>
 @endif
-<div class="page-bar page-breadcrumb-bar">
+<div class="page-bar page-top-bar">
    <ul class="page-breadcrumb">
       <li>
          <i class="fa fa-home" style="color:black;"></i>
@@ -38,7 +38,7 @@
             </li>
    </ul>
    <div class="page-toolbar">
-      <a href="{{URL('admin/content-manage')}}" class="btn green-haze btn-circle pull-right" style="margin-right:50px;"><i class="fa fa-backward"></i> Back</a>
+      <a href="{{URL('admin/content-manage')}}" class="btn green-haze btn-circle pull-right back-btn"><i class="fa fa-backward"></i> Back</a>
    </div>
 </div>
 <!-- END PAGE HEADER-->
@@ -46,37 +46,35 @@
 <div class="row">
    <div class="col-md-12">
       {!! Form::open(array('route'=>array('admin.content-add'),'id'=>'form1','class'=>'form-horizontal form-row-seperated','files'=>true)) !!}
-      <div class="portlet light">
-         <div class="portlet-title">
-            <div class="caption">
-               <i class="icon-basket font-green-sharp"></i>
-               <span class="caption-subject font-green-sharp bold uppercase">
-                  Add Content Categories </span>
-            </div>
-            <div class="actions btn-set">
-               <button name="save" value="1" class="btn green-haze btn-circle"><i class="fa fa-check"></i> Save</button>
-               <button name="save" value="2" class="btn green-haze btn-circle"><i class="fa fa-check-circle"></i> Save & Continue Edit</button>
-               <a href="{{url('/admin/content-manage')}}" class="btn green-haze btn-circle pull-right" style="margin-right:50px;"><i class="fa fa-list"></i> View Content Categories List</a>
-               {{-- <div class="btn-group">
-                  <a class="btn yellow btn-circle" href="javascript:;" data-toggle="dropdown">
-                     <i class="fa fa-share"></i> More <i class="fa fa-angle-down"></i>
-                  </a>
-                  <ul class="dropdown-menu pull-right">
-                     <li>
-                        <a href="javascript:;">Duplicate </a>
-                     </li>
-                     <li>
-                        <a href="javascript:;">Delete </a>
-                     </li>
-                     <li class="divider">
-                     </li>
-                     <li>
-                        <a href="javascript:;">Print </a>
-                     </li>
-                   </ul>
-               </div> --}}
-            </div>
+      <div class="portlet-title">
+         <div class="caption">
+            Add Content Categories
          </div>
+         <div class="actions btn-set">
+            <button name="save" value="1" class="btn green-haze btn-circle green-btn"><i class="fa fa-check"></i> Save</button>
+            <button name="save" value="2" class="btn green-haze btn-circle btn-primary"><i class="fa fa-check-circle"></i> Save & Continue Edit</button>
+            <a href="{{url('/admin/content-manage')}}" class="btn green-haze btn-circle pull-right yellow-btn" style="margin-right:50px;"><i class="fa fa-list"></i> View Content Categories List</a>
+            {{-- <div class="btn-group">
+               <a class="btn yellow btn-circle" href="javascript:;" data-toggle="dropdown">
+                  <i class="fa fa-share"></i> More <i class="fa fa-angle-down"></i>
+               </a>
+               <ul class="dropdown-menu pull-right">
+                  <li>
+                     <a href="javascript:;">Duplicate </a>
+                  </li>
+                  <li>
+                     <a href="javascript:;">Delete </a>
+                  </li>
+                  <li class="divider">
+                  </li>
+                  <li>
+                     <a href="javascript:;">Print </a>
+                  </li>
+                </ul>
+            </div> --}}
+         </div>
+      </div>
+      <div class="portlet light">
          @if (count($errors) > 0)
          <div class="alert alert-danger">
             <ul>
@@ -99,27 +97,24 @@
                      <div class="page-bar">
                         <ul class="page-breadcrumb">
                            <li>
-                              <b>Content Information:</b>
+                              Content Information:
                            </li>
                         </ul>
                      </div>
                      <div class="form-body">
                         <div class="form-group">
-                        <fieldset class="form-group">
                            <label class="col-md-2 control-label">Content Name: <span class="required">
                               * </span>
                            </label>
-                           <div class="col-md-8">
+                           <div class="col-md-9">
                               <input type="text" class="form-control" name="name" placeholder="Module Name" value="{{old('name')}}">
                            </div>
-</fieldset>
                         </div>
                         <div class="form-group">
-                            <fieldset class="form-group">
                            <label class="col-md-2 control-label">Parent ID: <span class="required">
                               * </span>
                            </label>
-                           <div class="col-md-8">
+                           <div class="col-md-9">
                               <select class="form-control parent_id" name="parent_id" id="sel1">
                                  <option value="0">Parent</option>
                                  @foreach($categories as $cat)
@@ -130,26 +125,20 @@
                                  @endforeach
                               </select>
                            </div>
-                            </fieldset>
                         </div>
-
                         <div class="form-group">
-                            <fieldset class="form-group">
                            <label class="col-md-2 control-label">Sort Name: <span class="required">
                               * </span>
                            </label>
-                           <div class="col-md-8">
+                           <div class="col-md-9">
                               <input type="text" class="form-control" name="sort_name" placeholder="" value="{{old('sort_name')}}">
                            </div>
-                            </fieldset>
                         </div>
-
                         <div class="form-group" id="show_page_caetgory" style="display: none;">
-                            <fieldset class="form-group">
                            <label class="col-md-2 control-label">Page Category: <span class="required">
                               * </span>
                            </label>
-                           <div class="col-md-8">
+                           <div class="col-md-9">
                               <select class="form-control" name="page_id" id="sell">
                                  <option value="0">Select Any</option>
                                  @foreach($pages as $page)
@@ -157,7 +146,6 @@
                                  @endforeach
                               </select>
                            </div>
-                            </fieldset>
                         </div>
                      </div>
                   </div>

@@ -98,10 +98,10 @@
                      </div>
                      {!! Form::token() !!}
                      <div class="form-group">
-                        <input type="submit" class="btn btn-success trade_search_btn admin-list-btn" value="SEARCH"/>
+                        <input type="submit" class="btn btn-success trade_search_btn btn-primary" value="SEARCH"/>
                      </div>
                      <div class="form-group">
-                        <button type="button" class="btn btn-success resetval admin-list-btn">RESET</button>
+                        <button type="button" class="btn btn-success resetval green-btn">RESET</button>
                      </div>
                     
                   </form>

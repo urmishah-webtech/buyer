@@ -16,14 +16,7 @@
                 <p style="color:white;">{{ session('flash_message') }}</p>
             </div>
         @endif
-        <div class="portlet box grey-cascade">
-            <div class="portlet-title" style="background-color:#082154;color:white;">
-                <div class="caption">
-                    <i class="fa fa-globe"></i>Manage SEO Lists
-                </div>
-            </div>
-        </div>
-        <div class="page-bar page-breadcrumb-bar">
+        <div class="page-bar page-top-bar">
             <ul class="page-breadcrumb" >
                 <li>
                     <i class="fa fa-home" style="color:black;"></i>
@@ -40,7 +33,7 @@
                 </li>
             </ul>
             <div class="page-toolbar">
-                <a href="{{URL('admin/dashboard/Content Management')}}" class="btn green-haze btn-circle pull-right" style="margin-right:50px;"><i class="fa fa-backward"></i> Back</a>
+                <a href="{{URL('admin/dashboard/Content Management')}}" class="btn green-haze btn-circle pull-right back-btn"><i class="fa fa-backward"></i> Back</a>
             </div>
         </div>
 <!-- BEGIN PAGE CONTENT-->
@@ -62,38 +55,39 @@
                                 </div>-->
                                     <!-- <a href="{{URL('admin/dashboard/Content Management')}}" class="btn green-haze btn-circle pull-right" style="margin-right:50px;margin-top: 5px;"><i class="fa fa-backward"></i> Back</a> -->
                             <!-- </div> -->
-                            
+                            <div class="portlet-title justify-content-start">
+                                <div class="caption">
+                                    Manage SEO Lists
+                                </div>
+                            </div>
                             <div class="portlet-body">
-                                <div class="table-toolbar">
-                                    
-<!--                                    <div class="page-bar page-breadcrumb-bar" style="background-color:#ddd;">
-        <ul class="page-breadcrumb">
-            <li>
-                <i class="fa fa-home" style="color:black"></i>
-                <a href="{{URL::route('admin_dashboard')}}" >Home</a>
-                <i class="fa fa-angle-right" style="color:black"></i>
-            </li>
-           
-           <li>
-                <a href="{{URL('admin/dashboard/Content Management')}}">Content Management</a>
-                 <i class="fa fa-angle-right" style="color:black"></i>
-            </li>
-            <li>
-               Manage SEO
-            </li>
-        </ul>
-        <div class="page-toolbar">
-            <div class="back"><a href="{{URL('admin/dashboard/Content Management')}}" ><i class="fa fa-long-arrow-left" aria-hidden="true"></i></a></div>            
-        </div>
-    </div>-->
-                                    
-                                    
-                                    <div class="row">
+                                <!--<div class="table-toolbar">
+                                    <div class="page-bar page-breadcrumb-bar" style="background-color:#ddd;">
+                                        <ul class="page-breadcrumb">
+                                            <li>
+                                                <i class="fa fa-home" style="color:black"></i>
+                                                <a href="{{URL::route('admin_dashboard')}}" >Home</a>
+                                                <i class="fa fa-angle-right" style="color:black"></i>
+                                            </li>
+                                           
+                                           <li>
+                                                <a href="{{URL('admin/dashboard/Content Management')}}">Content Management</a>
+                                                 <i class="fa fa-angle-right" style="color:black"></i>
+                                            </li>
+                                            <li>
+                                               Manage SEO
+                                            </li>
+                                        </ul>
+                                        <div class="page-toolbar">
+                                            <div class="back"><a href="{{URL('admin/dashboard/Content Management')}}" ><i class="fa fa-long-arrow-left" aria-hidden="true"></i></a></div>            
+                                        </div>
+                                    </div>-->
+                                    <!-- <div class="row">
                                         <div class="col-md-6">
                                             <div class="btn-group">
                                                
-                                                <!-- <a href="{{URL::to('admin/add-seo')}}" , class="btn btn-primary btn green", id="sample_editable_1_new"><i class="fa fa-plus"></i>Add New</a>  -->
-                                                <!--<a href="{{URL('admin/dashboard/Content Management')}}" class="btn green-haze btn-circle pull-right" style="margin-right:-370%;"><i class="fa fa-backward"></i> Back</a>-->
+                                               <a href="{{URL::to('admin/add-seo')}}" , class="btn btn-primary btn green", id="sample_editable_1_new"><i class="fa fa-plus"></i>Add New</a>  
+                                                <a href="{{URL('admin/dashboard/Content Management')}}" class="btn green-haze btn-circle pull-right" style="margin-right:-370%;"><i class="fa fa-backward"></i> Back</a>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
@@ -116,10 +110,9 @@
                                                 </ul>
                                             </div> --}}
                                         </div>
-                                    </div>
-                                </div>
+                                    </div> -->
                                 <!-- <table class="table table-striped table-bordered table-hover order-table" id="sample_1"> -->
-                                <table class="table table-striped table-bordered table-hover order-table th-bg">
+                                <table class="table table-striped table-bordered table-hover order-table th-bg admin-table">
                                 <thead>
                            
 
@@ -169,8 +162,10 @@
                                     
                                    
                                     <td  style="white-space: nowrap;">
-                                        <a href="{{ URL::to('admin/edit-seo',$s->id) }}" class="btn btn-xs btn-info">Edit</a>
-                                        <a onclick="return confirm('Are you sure, you want to delete the SEO?')" href="{{ URL::to('admin/delete-seo',$s->id) }}" class="btn btn-xs btn-danger">Delete</a>
+                                        <div class="table-grp-btn">
+                                            <a href="{{ URL::to('admin/edit-seo',$s->id) }}" class="btn btn-xs btn-info edit-icon-btn"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                                            <a onclick="return confirm('Are you sure, you want to delete the SEO?')" href="{{ URL::to('admin/delete-seo',$s->id) }}" class="btn btn-xs btn-danger delete-icon-btn"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                                        </div>
                                     </td>
                                    <!-- <td>
                                         <span class="label label-sm label-success">

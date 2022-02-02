@@ -10,19 +10,19 @@
 <!--    <h3 class="page-title">
         Add Page <small></small>
     </h3>-->
-    <div class="portlet box grey-cascade">
+    <!-- <div class="portlet box grey-cascade">
         <div class="portlet-title" style="background-color:#082154;color:white;">
             <div class="caption">
                 <i class="fa fa-globe"></i>Add Page 
             </div>
         </div>
-    </div>
+    </div> -->
     @if (session()->has('flash_message'))
         <div class="alert alert-success">
             <p style="color:white;">{{ session()->get('flash_message') }}</p>
         </div>
     @endif
-    <div class="page-bar page-breadcrumb-bar">
+    <div class="page-bar page-top-bar">
         <ul class="page-breadcrumb">
             <li>
                 <i class="fa fa-home" style="color:black"></i>
@@ -39,7 +39,7 @@
             </li>
         </ul>
         <div class="page-toolbar">
-            <a href="{{URL('page_content')}}" class="btn green-haze btn-circle pull-right" style="margin-right:50px;"><i class="fa fa-backward"></i> Back</a>    
+            <a href="{{URL('page_content')}}" class="btn green-haze btn-circle pull-right back-btn"><i class="fa fa-backward"></i> Back</a>    
         </div>
     </div>
     <!-- END PAGE HEADER-->
@@ -47,41 +47,39 @@
     <div class="row">
         <div class="col-md-12">
             {!! Form::open(array('route'=>array('page_content.store'),'id'=>'form1','class'=>'form-horizontal  form-row-seperated','files'=>true)) !!}
-            <div class="portlet light">
-                <div class="portlet-title">
-                    <div class="caption">
-                        <i class="icon-basket font-green-sharp"></i>
-										<span class="caption-subject font-green-sharp bold uppercase">
-										Add Page </span>
-                    </div>
-                    <div class="actions btn-set">
-                       
-                        <button name="save" value="1" class="btn green-haze btn-circle"><i class="fa fa-check"></i> Save</button>
-                        <button name="save" value="2" class="btn green-haze btn-circle"><i class="fa fa-check-circle"></i> Save & Continue Edit</button>
-                        <a href="{{URL('page_content')}}" class="btn green-haze btn-circle pull-right" style="margin-right:50px;"><i class="fa fa-list"></i> View Page Content List</a>
-                        {{-- <div class="btn-group">
-                            <a class="btn yellow btn-circle" href="javascript:;" data-toggle="dropdown">
-                                <i class="fa fa-share"></i> More <i class="fa fa-angle-down"></i>
-                            </a>
-                            <ul class="dropdown-menu pull-right">
-                                <li>
-                                    <a href="javascript:;">
-                                        Duplicate </a>
-                                </li>
-                                <li>
-                                    <a href="javascript:;">
-                                        Delete </a>
-                                </li>
-                                <li class="divider">
-                                </li>
-                                <li>
-                                    <a href="javascript:;">
-                                        Print </a>
-                                </li>
-                            </ul>
-                        </div> --}}
-                    </div>
+            <div class="portlet-title">
+                <div class="caption">
+					Add Page
                 </div>
+                <div class="actions btn-set">
+                   
+                    <button name="save" value="1" class="btn green-haze btn-circle green-btn"><i class="fa fa-check"></i> Save</button>
+                    <button name="save" value="2" class="btn green-haze btn-circle btn-primary"><i class="fa fa-check-circle"></i> Save & Continue Edit</button>
+                    <a href="{{URL('page_content')}}" class="btn green-haze btn-circle pull-right yellow-btn" style="margin-right:50px;"><i class="fa fa-list"></i> View Page Content List</a>
+                    {{-- <div class="btn-group">
+                        <a class="btn yellow btn-circle" href="javascript:;" data-toggle="dropdown">
+                            <i class="fa fa-share"></i> More <i class="fa fa-angle-down"></i>
+                        </a>
+                        <ul class="dropdown-menu pull-right">
+                            <li>
+                                <a href="javascript:;">
+                                    Duplicate </a>
+                            </li>
+                            <li>
+                                <a href="javascript:;">
+                                    Delete </a>
+                            </li>
+                            <li class="divider">
+                            </li>
+                            <li>
+                                <a href="javascript:;">
+                                    Print </a>
+                            </li>
+                        </ul>
+                    </div> --}}
+                </div>
+            </div>
+            <div class="portlet light">
                 @if (count($errors) > 0)
                                 <div class="alert alert-danger">
                                     <ul>
@@ -104,53 +102,53 @@
                                 <div class="page-bar">
                                     <ul class="page-breadcrumb">
                                         <li>
-                                            <b>Page Information:</b>
+                                            Page Information:
                                         </li>
                                     </ul>
                                 </div>
                                 <div class="form-body">
-                                    <div class="col-md-12 form-group">
+                                    <div class="row form-group">
                                         <label class="col-md-2 control-label">Page Name: <span class="required">
 														* </span>
                                         </label>
-                                        <div class="col-md-8">
+                                        <div class="col-md-9">
                                             <input type="text" class="form-control" name="name" placeholder="Page Name" required>
                                         </div>
                                     </div>
 
-                                    <div class="col-md-12 form-group">
+                                    <div class="row form-group">
                                         <label class="col-md-2 control-label">Sort Name: <span class="required">
 														* </span>
                                         </label>
-                                        <div class="col-md-8">
+                                        <div class="col-md-9">
                                             <input type="text" class="form-control" name="sort_name" placeholder="Sort Name" required>
                                         </div>
                                     </div>
 
-                                    <div class="col-md-12 form-group">
+                                    <div class="row form-group">
                                         <label class="col-md-2 control-label">Prefix: <span class="required">
 														* </span>
                                         </label>
-                                        <div class="col-md-8">
+                                        <div class="col-md-9">
                                             <input type="text" class="form-control" name="prefix" placeholder="Prefix" required>
                                         </div>
                                     </div>
 
 
-                                    <div class="col-md-12 form-group">
+                                    <div class="row form-group">
                                         <label class="col-md-2 control-label">Slug: <span class="required">
 														* </span>
                                         </label>
-                                        <div class="col-md-8">
+                                        <div class="col-md-9">
                                             <input type="text" class="form-control" name="slug" placeholder="Slug" required>
                                         </div>
                                     </div>
 
-                                    <div class="col-md-12 form-group attribute_area">
+                                    <div class="row form-group">
                                         <label class="col-md-2 control-label">Tabs: <span class="required">
 														* </span>
                                         </label>
-                                        <div class="col-md-8">
+                                        <div class="col-md-9">
                                             <input type="text" class="form-control" name="tabs[]" placeholder="Tabs" required>
                                         </div>
                                         {{-- <button class="btn green-haze btn-circle add_more_attribute_btn"><i class="fa fa-plus"></i> Add More</button> --}}
