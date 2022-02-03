@@ -1,7 +1,7 @@
 @extends('protected.admin.master')
 @section('title', 'Admin Dashboard')
 @section('content')
-<hr class=".text-danger">
+<!-- <hr class=".text-danger"> -->
 
 <!-- END PAGE HEADER-->
 <!-- BEGIN PAGE CONTENT-->
@@ -15,13 +15,32 @@
             <p style="color:white;">{{ session('flash_message') }}</p>
       </div>
    @endif
-<div class="row">
+               <div class="page-bar page-top-bar">
+                  <ul class="page-breadcrumb" >
+                     <li>
+                         <i class="fa fa-home" style="color:black;"></i>
+                         <a href="{{URL::route('admin_dashboard')}}" >Home</a>
+                         <i class="fa fa-angle-right" style="color:black;"></i>
+                     </li>
+                     <li>
+                         <a href="{{URL('admin/dashboard/Classifieds (B2b)')}}">Classifieds (B2b)</a>
+                          <i class="fa fa-angle-right" style="color:black;"></i>
+                     </li>
+                     <li>
+                        Products list
+                     </li>
+                  </ul>
+                  <div class="page-toolbar">
+                     <a href="{{URL('admin/dashboard/Classifieds (B2b)')}}" class="btn green-haze btn-circle pull-right back-btn" style="margin-right:50px;margin-top: 5px;"><i class="fa fa-backward"></i> Back</a>
+                  </div>
+               </div>
+                  <div class="row">
                     <div class="col-md-12">
                         <!-- BEGIN EXAMPLE TABLE PORTLET-->
                         <div class="portlet box grey-cascade">
-                            <div class="portlet-title" style="background-color:#082154;color:white;">
+                            <div class="portlet-title justify-content-start">
                                 <div class="caption">
-                                    <i class="fa fa-globe"></i>Products list
+                                    Products list
                                 </div>
 <!--                                <div class="tools">
                                     <a href="javascript:;" class="collapse">
@@ -30,65 +49,62 @@
                                     <a href="javascript:;" class="remove">
                                     </a>
                                 </div>-->
-<a href="{{URL('admin/dashboard/Classifieds (B2b)')}}" class="btn green-haze btn-circle pull-right" style="margin-right:50px;margin-top: 5px;"><i class="fa fa-backward"></i> Back</a>
+                                 <!-- <a href="{{URL('admin/dashboard/Classifieds (B2b)')}}" class="btn green-haze btn-circle pull-right" style="margin-right:50px;margin-top: 5px;"><i class="fa fa-backward"></i> Back</a> -->
                             </div>
                             <div class="portlet-body">
-                                <div class="table-toolbar">
-                                    <div class="col-xs-11 col-xs-offset-1" style="width: 110%;margin-left: 40px;">
-                                 <input type="hidden" name="url" value="{{ URL::to('/') }}">
-      <form class="navbar-form navbar-left trade_search_form form-inline" method="get" action="{{ URL::to('admin/product-search') }}" role="search" style="padding:0;">
-         <div class="col-md-2 form-group">
-             <label class=" control-label">Product Name: </label><br>
-            <input type="text" name="product_name" style="height:34px;" placeholder="">
-         </div>
-         <div class="col-md-2 form-group">
-             <label class=" control-label">Product Id: </label><br>
-            <input type="text" name="product_id" style="height: 34px;" placeholder="">
-         </div>
-         <div class="col-md-2 form-group">
-            @if(@$category_list)
-            <label class=" control-label"></label><br>
-            <select name="product_category" style="height:34px;width:110%;margin-top: 10px;" placeholder=" Product category">
-               <option value="0">Select Product category</option>
-               @foreach($category_list as $c)
-               @if($c->sub_cat)
-               @foreach($c->sub_cat as $sub)
-               <option value="{{$sub->name}}">{{$sub->name ?? ''}}</option>
-               @endforeach
-               @endif
-               @endforeach
-            </select>
-            @endif
-            <br><br>
-            <!-- <input type="text" name="product_category" style="height: 34px;" placeholder=" Product category"> -->
-         </div>
+                              <div class="table-toolbar">
+                                 <div class="row">
+                                    <div class="col-12">
+                                       <input type="hidden" name="url" value="{{ URL::to('/') }}">
+                                       <form class="navbar-form navbar-left trade_search_form form-inline" method="get" action="{{ URL::to('admin/product-search') }}" role="search">
+                                          <div class="form-group">
+                                             <input type="text" name="product_name" placeholder="Product Name" class="form-control">
+                                          </div>
+                                          <div class="form-group">
+                                             <input type="text" name="product_id" placeholder="Product Id" class="form-control">
+                                          </div>
+                                          <div class="form-group">
+                                             @if(@$category_list)
+                                             <select name="product_category" placeholder=" Product category" class="form-control">
+                                                <option value="0">Select Product category</option>
+                                                @foreach($category_list as $c)
+                                                @if($c->sub_cat)
+                                                @foreach($c->sub_cat as $sub)
+                                                <option value="{{$sub->name}}">{{$sub->name ?? ''}}</option>
+                                                @endforeach
+                                                @endif
+                                                @endforeach
+                                             </select>
+                                             @endif
+                                             <br><br>
+                                             <!-- <input type="text" name="product_category" style="height: 34px;" placeholder=" Product category"> -->
+                                          </div>
 
-         <div class="col-md-2 form-group">
-            @if($country_list)
-            <label class=" control-label"></label><br>
-            <select name="product_country" style="height:34px;width:110%;margin-top: 10px;" placeholder=" Product country">
-               <option value="0">Select Product country</option>
-               @foreach($country_list as $co)
-               <option value="{{$co->name}}">{{$co->name}}</option>
-               @endforeach
-            </select>
-            @endif
-            <!-- <input type="text" placeholder=" Product country"> -->
-         </div>
-          <div class="col-md-1 form-group" style="margin-top: 30px;">
-            <input type="submit" class="btn btn-success trade_search_btn"  value="SEARCH" />
-         </div>
-         <div class="col-md-1 form-group" style="margin-top: 30px;">
-            <button type="button" class="btn btn-success resetval">RESET</button>
-         </div>
-      </form>
-      
-   </div>
+                                          <div class="form-group">
+                                             @if($country_list)
+                                             <select name="product_country" placeholder=" Product country" class="form-control">
+                                                <option value="0">Select Product country</option>
+                                                @foreach($country_list as $co)
+                                                <option value="{{$co->name}}">{{$co->name}}</option>
+                                                @endforeach
+                                             </select>
+                                             @endif
+                                             <!-- <input type="text" placeholder=" Product country"> -->
+                                          </div>
+                                           <div class="form-group flex-none ">
+                                             <input type="submit" class="btn btn-success trade_search_btn btn-primary"  value="SEARCH" />
+                                          </div>
+                                          <div class="form-group flex-none ">
+                                             <button type="button" class="btn btn-success resetval green-btn">RESET</button>
+                                          </div>
+                                       </form>
+                                    </div>
                                 </div>
+                             </div>
                                 <!--<h3>All Available Products list-->
-          <span class="pull-right"><label class=" control-label" style="margin-right:10px;"> Search </label><input type="text" class="light-table-filter" data-table="order-table" placeholder="" style=" padding: 5px;font-size: 13px;"></span>
+          <!-- <span class="pull-right"><label class=" control-label" style="margin-right:10px;"> Search </label><input type="text" class="light-table-filter" data-table="order-table" placeholder="" style=" padding: 5px;font-size: 13px;"></span> -->
       <!--</h3>-->
-      <table id ="datavalue" class="order-table table table-striped table-bordered table-hover th-bg">
+      <table id ="datavalue" class="admin-table order-table table table-striped table-bordered table-hover th-bg">
          <thead>
             <tr>
                <th>Product Name</th>
@@ -106,29 +122,28 @@
                <td>{{ $product['brandname'] }}</td>
                <td>{{ $product->category->bdtdcCategory->name ?? ''  }}</td>
                <td  style="white-space: nowrap;">
-                  <a href="{{ URL::to('admin/edit-product',$product->id) }}" class="btn btn-xs btn-info" >Edit</a>
-                  <!-- <a href="{{ URL::to('supplier/product_edit',$product->id) }}" class="btn btn-xs btn-info">Edit</a> -->
-                  <a onclick="return confirm('Are you sure want to delete the Product?')" class="btn btn-xs btn-danger" href="{{ URL::to('admin/productdelete/'.$product->id) }}" class="btn btn-xs btn-info" >Delete</a>
-                  <!-- <a class="btn btn-xs btn-danger delete_product" data-product_id="{{$product->id}}">Delete</a> -->
+                  <div class="table-grp-btn">
+                     <a href="{{ URL::to('admin/edit-product',$product->id) }}" class="btn btn-xs btn-info edit-icon-btn"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                     <!-- <a href="{{ URL::to('supplier/product_edit',$product->id) }}" class="btn btn-xs btn-info">Edit</a> -->
+                     <a onclick="return confirm('Are you sure want to delete the Product?')" class="btn btn-xs btn-danger delete-icon-btn" href="{{ URL::to('admin/productdelete/'.$product->id) }}" class="btn btn-xs btn-info"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                     <!-- <a class="btn btn-xs btn-danger delete_product" data-product_id="{{$product->id}}">Delete</a> -->
+                  </div>
                </td>
             </tr>
             @endforeach
-            @if(count($products) > 0) 
+            <!-- @if(count($products) > 0) 
                {!!$products->render()!!}
-            @endif
+            @endif -->
          </tbody>
       </table>
-                            </div>
-                        </div>
-                        <!-- END EXAMPLE TABLE PORTLET-->
-                    </div>
-                </div>
-
-
 @if(count($products) > 0) 
    {!!$products->render()!!}
 @endif
-
+         </div>
+      </div>
+      <!-- END EXAMPLE TABLE PORTLET-->
+  </div>
+</div>
 
 
 

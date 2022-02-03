@@ -97,10 +97,10 @@
                         {!! Form::text('email',$email_search,['class'=>'form-control text-primary','placeholder'=>'Search By Email']) !!}
                      </div>
                      {!! Form::token() !!}
-                     <div class="form-group">
+                     <div class="form-group flex-none ">
                         <input type="submit" class="btn btn-success trade_search_btn btn-primary" value="SEARCH"/>
                      </div>
-                     <div class="form-group">
+                     <div class="form-group flex-none ">
                         <button type="button" class="btn btn-success resetval green-btn">RESET</button>
                      </div>
                     
