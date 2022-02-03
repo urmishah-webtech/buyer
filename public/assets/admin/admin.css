@@ -24,6 +24,7 @@ a:hover {color: #0069d9; }
 .green-btn i, .btn-primary i, .yellow-btn i {margin: 0; padding-right: 5px !important;}
 
 .justify-content-start {justify-content: start !important; }
+.flex-none {flex: initial !important;}
 
 /*full screen css*/
 .full-width .navbar-fixed-top {max-width: 100%; }
@@ -149,8 +150,8 @@ form.sidebar-search input {background: #262837; border: none; padding: 7px 12px;
 .portlet.box>.portlet-body {padding: 20px 25px;}
 .pagination-main {display: none; }
 .table-toolbar form.navbar-form {display: flex; flex-wrap: wrap; margin: 0 !important; }
-form.navbar-form .form-group {margin-right: 10px; margin-bottom: 10px !important;}
-.form-group select.form-control, .form-group input.form-control, .form-group textarea.form-control {min-height: 42px; border-color: #e2e5ec; border-radius: 4px !important; color: #2a3242; border: 1px solid #e2e5ec; padding: 10px 16px; font-size: 14px; font-weight: 400; line-height: 18px; }
+form.navbar-form .form-group {margin-right: 10px; margin-bottom: 10px !important;flex: 1 1 auto;}
+.form-group select.form-control, .form-group input.form-control, .form-group textarea.form-control {min-height: 42px; border-color: #e2e5ec; border-radius: 4px !important; color: #2a3242; border: 1px solid #e2e5ec; padding: 10px 16px; font-size: 14px; font-weight: 400; line-height: 18px; width: 100%; }
 .form-group select.form-control::placeholder, .form-group input.form-control::placeholder {color: #898b92; font-size: 13px; }
 
 table.admin-table {border: none; }
