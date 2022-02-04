@@ -3,17 +3,7 @@
 <link property='stylesheet' href="{!! asset('assets/fontend/css/select2.min.css') !!}" rel="stylesheet">
 @endsection-->
 @section('title', 'Admin Dashboard')
-<style>
-   form.navbar-form .form-group {
-      padding-top: 30;
-   }
-   #supplier_list{
-       max-height: 1000%;
-    overflow-y: scroll;
-   }
-</style> 
 @section('content')
-<hr class=".text-danger">
 
    @if (session()->has('flash_message'))
          <div  id ="successMessage" class="alert alert-success"  style="width:400px;">
@@ -25,14 +15,32 @@
                 <p style="color:white;">{{ session('error_message') }}</p>
          </div>
     @endif
-    
-<div class="row">
+               <div class="page-bar page-top-bar">
+                  <ul class="page-breadcrumb" >
+                     <li>
+                         <i class="fa fa-home" style="color:black;"></i>
+                         <a href="{{URL::route('admin_dashboard')}}" >Home</a>
+                         <i class="fa fa-angle-right" style="color:black;"></i>
+                     </li>
+                     <li>
+                         <a href="{{URL('admin/dashboard/Classifieds (B2b)')}}">Classifieds (B2b)</a>
+                          <i class="fa fa-angle-right" style="color:black;"></i>
+                     </li>
+                     <li>
+                        Manage TradeShow
+                     </li>
+                  </ul>
+                  <div class="page-toolbar">
+                     <a href="{{URL('admin/dashboard/Classifieds (B2b)')}}" class="btn green-haze btn-circle pull-right back-btn"><i class="fa fa-backward"></i> Back</a>
+                  </div>
+               </div>
+                  <div class="row">
                     <div class="col-md-12">
                         <!-- BEGIN EXAMPLE TABLE PORTLET-->
                         <div class="portlet box grey-cascade">
-                            <div class="portlet-title" style="background-color:#082154;color:white;">
+                            <div class="portlet-title justify-content-start">
                                 <div class="caption">
-                                    <i class="fa fa-globe"></i>Manage TradeShow 
+                                    Manage TradeShow 
                                 </div>
 <!--                                <div class="tools">
                                     <a href="javascript:;" class="collapse">
@@ -41,11 +49,11 @@
                                     <a href="javascript:;" class="remove">
                                     </a>
                                 </div>-->
-<a href="{{URL('admin/dashboard/Classifieds (B2b)')}}" class="btn green-haze btn-circle pull-right" style="margin-right:50px;margin-top: 5px;"><i class="fa fa-backward"></i> Back</a>
                             </div>
                             <div class="portlet-body">
                                 <div class="table-toolbar">
-                                    <div class="col-xs-11 col-xs-offset-1">
+                                 <div class="row">
+                                    <div class="col-12">
                                         
       <input type="hidden" name="url" value="{{ URL::to('/') }}">
       <form class="navbar-form navbar-left trade_search_form" method="POST" action="{{ URL::to('admin/tradeshow/search',null) }}" role="search">
@@ -90,20 +98,20 @@
             </div>
          <!--{!! Form::token() !!}-->
          <div class="form-group">
-            <input  type="submit" class="btn btn-success pull-right trade_search_btn" value="SEARCH" />
+            <input  type="submit" class="btn btn-success pull-right trade_search_btn btn-primary" value="SEARCH" />
          </div>
          <div class="form-group">
-               <button type="button" class="btn btn-success resetval">RESET</button>
+               <button type="button" class="btn btn-success resetval green-btn">RESET</button>
          </div>
             <!--<a style="display:none;margin-top: 32px;margin-right: 10px;" href="{{ URL::to('admin/tradeshow-show',null) }}" class="btn btn-success btn-default pull-left show_trade_list">Trade list</a>-->
             <div class="form-group">
-            <a href="{{ URL::to('admin/tradeshow-add',null) }}" class="btn btn-success pull-right">Add Trade</a>
+            <a href="{{ URL::to('admin/tradeshow-add',null) }}" class="btn btn-success pull-right yellow-btn">Add Trade</a>
             </div>
       </form>
-      
+      </div>
    </div>
                                 </div>
-                                <table class="table table-striped table-bordered table-hover th-bg" id="sample_1">
+      <table class="table table-striped table-bordered table-hover th-bg admin-table" id="sample_1">
          <thead>
             <tr>
                <th>Title</th>
@@ -121,8 +129,10 @@
                <td>{{ $data->country->name }}</td>
                <td>{{ date('d-M-Y',strtotime(@$data->tradeshow_description->created_at)) }}</td>
                <td  style="white-space: nowrap;">
-                   <a href="{{ URL::to('admin/tradeshow-edit',$data->id) }}" class="btn btn-xs btn-info">Edit</a>
-                  <a onclick="confirm('Are you sure, you want to delete the Trade details?')" href="{{ URL::to('admin/tradeshow-delete',$data->id) }}" class="btn btn-xs btn-danger trade_delete">Delete</a>
+                  <div class="table-grp-btn">
+                     <a href="{{ URL::to('admin/tradeshow-edit',$data->id) }}" class="btn btn-xs btn-info edit-icon-btn"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                     <a onclick="confirm('Are you sure, you want to delete the Trade details?')" href="{{ URL::to('admin/tradeshow-delete',$data->id) }}" class="btn btn-xs btn-danger trade_delete delete-icon-btn"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                  </div>
                </td>
             </tr>
             @endforeach

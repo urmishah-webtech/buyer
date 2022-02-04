@@ -17,14 +17,14 @@
 <!--<div class=" page-bar page-title"  style="background-color:#082154;color:white;">-->
 <!--        <h3 style="margin: 5px;">Add Category</h3>-->
 <!--    </div>-->
-    <div class="portlet box grey-cascade">
+    <!-- <div class="portlet box grey-cascade">
         <div class="portlet-title" style="background-color:#082154;color:white;">
             <div class="caption">
                 <i class="fa fa-globe"></i>Add Category
             </div>
         </div>
-    </div>
-    <div class="page-bar">
+    </div> -->
+    <div class="page-bar page-top-bar">
         
         <ul class="page-breadcrumb" >
             <li>
@@ -43,7 +43,7 @@
         </ul>
         <div class="page-toolbar">
            
-            <a href="{{URL('admin/dashboard/Classifieds (B2b)')}}" class="btn green-haze btn-circle pull-right" style="margin-right:50px;"><i class="fa fa-backward"></i> Back</a>
+            <a href="{{URL('admin/dashboard/Classifieds (B2b)')}}" class="btn green-haze btn-circle pull-right back-btn"><i class="fa fa-backward"></i> Back</a>
         </div>
     </div>
 
@@ -69,16 +69,15 @@
          </div>
     @endif
       {!! Form::open(array('route'=>array('admin.category.store'),'id'=>'form1','class'=>'form-horizontal form-row-seperated','files'=>true)) !!}
-      <div class="portlet light">
+      <div class="portlet box grey-cascade">
          <div class="portlet-title">
             <div class="caption">
-               <i class="fa fa-cubes"></i>
-               <span class="caption-subject font-green-sharp bold uppercase"> Add Category </span>
+               Add Category
             </div>
             <div class="actions btn-set">
                {{-- <button class="btn btn-default btn-circle "><i class="fa fa-reply"></i> Reset</button> --}}
-               <a href="{{ URL::to('admin/category-list') }}" class="btn btn-default btn-success btn-circle" style="color: #fffcfb;">Category List</a>
-                       <button class="btn green-haze btn-circle" type="button" id="next_button" data-tab=""><i class="fa fa-check"></i> Next</button>
+               <a href="{{ URL::to('admin/category-list') }}" class="btn yellow-btn">Category List</a>
+               <button class="btn green-haze btn-circle black-btn" type="button" id="next_button" data-tab=""><i class="fa fa-check"></i> Next</button>
                  <button class="btn green-haze btn-circle" id="save_button" style="display:none;"><i class="fa fa-check"></i> Save</button>
                  <button class="btn green-haze btn-circle" id="save_button1" style="display:none;"><i class="fa fa-check-circle"></i> Save & Continue Edit</button>
                <!--<span onClick="return form_validate('form1');" class="btn green-haze btn-circle" id="save_button" style="display:none;"><i class="fa fa-check"></i> Save </span>-->
@@ -133,12 +132,12 @@
 			   
 			   
                   <div class="tab-pane active" id="tab_general">
-                     <div class="form-body col-lg-12"  style="margin-top: 30px">
+                     <div class="form-body col-lg-12">
                         <div class="form-group">
                            <label class="col-md-2 control-label">Category Name: <span class="required">
                                  * </span>
                            </label>
-                           <div class="col-md-8">
+                           <div class="col-md-9">
                               <input type="text" class="form-control" id="name" name="name" placeholder="">
                            </div>
                         </div>
@@ -147,7 +146,7 @@
                            <label class="col-md-2 control-label">Slug: <span class="required">
                                  * </span>
                            </label>
-                           <div class="col-md-8">
+                           <div class="col-md-9">
                               <input type="text" class="form-control" id="slug" name="slug" placeholder="">
                            </div>
                         </div>
@@ -156,7 +155,7 @@
                            <label class="col-md-2 control-label">Tag: <span class="required">
                                  * </span>
                            </label>
-                           <div class="col-md-8">
+                           <div class="col-md-9">
                               <input type="text" class="form-control" id="tag" name="tag" placeholder="">
                            </div>
                         </div>
@@ -165,7 +164,7 @@
                            <label class="col-md-2 control-label">Description: <span class="required">
                                  * </span>
                            </label>
-                           <div class="col-md-8">
+                           <div class="col-md-9">
                               <textarea class="form-control" id="description" name="description"></textarea>
                            </div>
                         </div>
@@ -174,7 +173,7 @@
                            <label class="col-md-2 control-label">Parent Category: <span class="required">
                                  * </span>
                            </label>
-                           <div class="col-md-8">
+                           <div class="col-md-9">
                               <div class="form-control height-auto parent_id_div">
                                  <div class="pre-scrollable" style="height:275px;" data-always-visible="1">
                                     <ul class="list-unstyled">
@@ -203,15 +202,15 @@
                            <label class="col-md-2 control-label">SEO keyword: <span class="required">
                                  * </span>
                            </label>
-                           <div class="col-md-8">
+                           <div class="col-md-9">
                               <textarea class="form-control" name="seo" id="seo"></textarea>
                            </div>
                         </div>
                         <div class="form-group">
-                           <label class="col-md-2 control-label">Top: <span class="required">
+                           <label class="col-md-2 control-label align-center">Top: <span class="required">
                                  * </span>
                            </label>
-                           <div class="col-md-8">
+                           <div class="col-md-9">
                               <div class="input-group">
                                  <div class="icheck-inline">
                                     <label>
@@ -223,10 +222,10 @@
                            </div>
                         </div>
                         <div class="form-group">
-                           <label class="col-md-2 control-label">Status: <span class="required">
+                           <label class="col-md-2 control-label align-center">Status: <span class="required">
                                  * </span>
                            </label>
-                           <div class="col-md-8">
+                           <div class="col-md-9">
 
                               <div class="input-group">
                                  <div class="icheck-inline">
@@ -248,7 +247,7 @@
                      <div class="form-body ">
                         <div class="col-lg-12 form-group" style="margin-top: 30px">
                            <label class="col-md-2 control-label">Meta Title:</label>
-                           <div class="col-md-8">
+                           <div class="col-md-9">
                               <input type="text" class="form-control maxlength-handler" name="meta_title" id="meta_title" maxlength="100" placeholder="">
                               <span class="help-block">
                                  max 100 chars </span>
@@ -256,7 +255,7 @@
                         </div>
                         <div class="col-lg-12 form-group">
                            <label class="col-md-2 control-label">Meta Keywords:</label>
-                           <div class="col-md-8">
+                           <div class="col-md-9">
                               <textarea class="form-control maxlength-handler" rows="4" id="meta_keywords" name="meta_keywords" maxlength="200"></textarea>
                               <span class="help-block">
                                  max 200 chars </span>
@@ -264,7 +263,7 @@
                         </div>
                         <div class="col-lg-12 form-group">
                            <label class="col-md-2 control-label">Meta Description:</label>
-                           <div class="col-md-8">
+                           <div class="col-md-9">
                               <textarea class="form-control maxlength-handler" rows="8" id="meta_description" name="meta_description" maxlength="1000"></textarea>
                               <span class="help-block">
                                  max 1000 chars </span>
