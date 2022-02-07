@@ -4,7 +4,7 @@
                       css start
 ********************************************************/
 /*Globl css*/
-body, html {font-family: Poppins, Helvetica, sans-serif !important; }
+body, html, .label {font-family: Poppins, Helvetica, sans-serif !important; }
 a, button, i {transition: all 0.3s; -webkit-transition: all 0.3s;}
 a {color: #377dff; }
 a:hover {color: #0069d9; }
@@ -183,6 +183,7 @@ table.admin-table td.join-date-filed {width: 110px; min-width: 110px; }
 select.sortproduct_option {border-color: #e2e5ec; color: #2a3242; min-height: 36px; padding: 8px 15px; border-radius: 4px !important; cursor: pointer; }
 
 .active-btn {background-color: #0abb75; color: #fff !important; padding: 2px 6px; border-radius: 4px !important; }
+.success-btn { background-color: #0abb75; color: #fff !important; padding: 2px 6px !important; border-radius: 4px !important; font-size: 12px !important; text-transform: capitalize; font-weight: 400 !important;}
 .active-btn:hover {background-color: #07ab6a; }
 .deactive-btn {background-color: #ef486a; color: #fff !important; padding: 2px 6px; border-radius: 4px !important; }
 .deactive-btn:hover {background-color: #eb2e54; }
@@ -190,7 +191,7 @@ div.checker span {background: none; border: 1px solid #d1d7e2 !important; positi
 div.checker span input {cursor: pointer;}
 div.checker span.checked::before {content: ""; position: absolute; width: 5px; height: 10px; border-width: 0 2px 2px 0 !important; -webkit-transform: rotate(45deg ); transform: rotate(45deg ); border: solid #377DFF; left: 5px; top: 1px; }
 
-.pagination {margin: 20px 0 0; display: flex; align-items: center; }
+.pagination {margin: 20px 0 0; display: flex; align-items: center; width: 100%;}
 .pagination>li.page-item {margin: 0 2px; display: inline-block; }
 .pagination>li>a, .pagination>li>span {padding: 0; margin-left: 0; line-height: normal; color: #111723; background-color: transparent; border: none; width: 36px; height: 36px; border-radius: 100% !important; display: flex; align-items: center; justify-content: center; cursor: pointer !important; font-size: 14px; }
 .pagination>.active>a, .pagination>.active>a:focus, .pagination>.active>a:hover, .pagination>.active>span, .pagination>.active>span:focus, .pagination>.active>span:hover, 
@@ -213,7 +214,7 @@ div.checker span.checked::before {content: ""; position: absolute; width: 5px; h
 .portlet.light .portlet-body .page-bar {margin: 0; padding: 15px 25px; border-bottom: 1px solid #ebedf2; }
 .portlet.light .portlet-body ul.page-breadcrumb {padding: 0; font-size: 16px; font-weight: 500; line-height: 19px; color: #1b1b28; }
 .portlet.light .portlet-body .form-body {padding: 20px 25px; display: inline-block; width: 100%;}
-.portlet.light .portlet-body .form-body .form-group {display: flex; flex-wrap: wrap; }
+.portlet.light .portlet-body .form-body .form-group {display: flex; flex-wrap: wrap;margin-left: 0; margin-right: 0; }
 .portlet.light .portlet-body .form-body .form-group label {text-align: left; font-size: 13px; font-weight: 400; color: #1b1b28; }
 
 
@@ -222,54 +223,24 @@ div.checker span.checked::before {content: ""; position: absolute; width: 5px; h
 .table-grp-btn a {margin: 0 2px !important; }
 
 /*Add Category page css*/
-.tabbable .nav-tabs {
-    margin: 0 -15px 15px;
-    border: none;
-}
-.tabbable .nav-tabs>li {
-    margin: 0 15px;
-}
-.tabbable .nav-tabs>li>a {
-    border: none !important;
-    padding: 0 0 5px;
-    margin: 0;
-    background: transparent;
-    color: #555;
-    font-weight: 500;
-    position: relative;
-}
-.tabbable .nav-tabs>li>a::before {
-    content: "";
-    width: 0;
-    height: 2px;
-    background: #181827;
-    position: absolute;
-    bottom: 0;
-    transition: all 0.3s; 
-    -webkit-transition: all 0.3s;
-}
-.tabbable .nav-tabs>li.active>a, .tabbable .nav-tabs>li.active>a:focus, .tabbable .nav-tabs>li.active>a:hover, .tabbable .nav-tabs>li>a:hover {
-    color: #181827;
-}
-.tabbable .nav-tabs>li.active>a::before, .tabbable .nav-tabs>li.active>a:focus:before, .tabbable .nav-tabs>li.active>a:hover:before, .tabbable .nav-tabs>li>a:hover:before {
-    width: 100%;
-}
-.tabbable .tab-content>.active {
-    display: inline-block;
-    width: 100%;
-    box-shadow: 0px 0px 6px 2px rgb(0 0 0 / 15%);
-    border-radius: 5px !important;
-    padding: 30px
-}
-.tabbable .tab-content .control-label {
-    padding: 0;
-    margin: 0;
-    display: flex;
-}
-.tabbable .tab-content .icheck-inline {
-    margin: 0;
-}
-.tabbable .tab-content .icheck-inline label {
-    padding: 0;
-    margin-bottom: 0 !important;
-}
+.tabbable .nav-tabs {margin: 0 -15px 15px; border: none; }
+.tabbable .nav-tabs>li {margin: 0 15px; }
+.tabbable .nav-tabs>li>a {border: none !important; padding: 0 0 5px; margin: 0; background: transparent; color: #555; font-weight: 500; position: relative; }
+.tabbable .nav-tabs>li>a::before {content: ""; width: 0; height: 2px; background: #181827; position: absolute; bottom: 0; transition: all 0.3s; -webkit-transition: all 0.3s; }
+.tabbable .nav-tabs>li.active>a, .tabbable .nav-tabs>li.active>a:focus, .tabbable .nav-tabs>li.active>a:hover, .tabbable .nav-tabs>li>a:hover {color: #181827; }
+.tabbable .nav-tabs>li.active>a::before, .tabbable .nav-tabs>li.active>a:focus:before, .tabbable .nav-tabs>li.active>a:hover:before, .tabbable .nav-tabs>li>a:hover:before {width: 100%; }
+.tabs-sec.tabbable .tab-content>.active {display: inline-block; width: 100%; box-shadow: 0 2px 5px 2px rgb(0 0 0 / 10%); border-radius: 5px !important; padding: 30px }
+.tabbable .tab-content .control-label {padding: 0; margin: 0; display: flex; }
+.tabbable .tab-content .icheck-inline {margin: 0; }
+.tabbable .tab-content .icheck-inline label {padding: 0; margin-bottom: 0 !important;}
+
+/*Manage Categories Page Css*/
+.table-new .table-scrollable {border: none; margin: 0 !important; padding-top: 15px; }
+.table-new div#sample_11_info {margin-bottom: 15px; }
+.table-new #sample_11_wrapper .col-md-6.col-sm-12 {width: 100%; }
+.table-new #sample_11_wrapper .col-md-6.col-sm-12:first-child {display: none; }
+.table-new div#sample_11_filter {display: inline-block; width: 50%; }
+.table-new div.dataTables_filter label {float: none; display: flex;padding: 0; margin: 0; }
+.table-new div#sample_11_filter input {min-height: 42px; border-color: #e2e5ec; border-radius: 4px !important; color: #2a3242; border: 1px solid #e2e5ec; padding: 10px 16px; font-size: 14px; font-weight: 400; line-height: 18px; width: 100% !important; margin-left: 15px; }
+.table-new .btn-group.postion-btn {position: absolute; right: 35px; top: 90px; }
+.table-new .table-toolbar.table-header {margin: 0; }
