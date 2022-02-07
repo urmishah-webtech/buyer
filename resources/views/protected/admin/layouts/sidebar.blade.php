@@ -41,7 +41,7 @@ $file_name = Session::get('content');
             </a>
          </li> -->
          <li>
-            <a <?php if($file_name=='User Management' ){ echo 'class="active"'; } ?> href="{{URL('admin/dashboard/User Management')}}">
+            <a <?php if($file_name=='User Management' ){ echo 'class="active"'; } ?> href="{{URL('/admin/profiles')}}">
                <i class="fa fa-user" aria-hidden="true"></i>
                <span class="title">User Management</span>
                <span class="selected "></span>

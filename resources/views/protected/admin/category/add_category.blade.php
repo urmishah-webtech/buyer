@@ -112,7 +112,7 @@
          </div>
 
          <div class="portlet-body">
-            <div class="tabbable">
+            <div class="tabbable tabs-sec">
                <ul class="nav nav-tabs" style="display: flex;">
                   <li class="active" id="check_tab1">
                      <a href="tab_general" data-toggle="tab">

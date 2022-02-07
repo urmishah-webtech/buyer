@@ -4,13 +4,34 @@
 <!-- BEGIN PAGE CONTENT-->
 <!-- <div class="mkn_loader" style="position: fixed;left:0px;top: 0px;width: 100%;height:100%;z-index: 99999999;background: url(/uploads/page-loader.gif) 50% 50% no-repeat rgb(249,249,249);background-size: 45px;"></div> -->
 @php $category_sort = count($categories); @endphp
+<div class="page-bar page-top-bar">
+   <ul class="page-breadcrumb" >
+      <li>
+          <i class="fa fa-home" style="color:black;"></i>
+          <a href="{{URL::route('admin_dashboard')}}" >Home</a>
+          <i class="fa fa-angle-right" style="color:black;"></i>
+      </li>
+     
+      <li>
+          <a href="{{URL('admin/dashboard/Classifieds (B2b)')}}">Classifieds (B2b)</a>
+           <i class="fa fa-angle-right" style="color:black;"></i>
+      </li>
+      <li>
+          Manage Categories
+      </li>
+   </ul>
+   <div class="page-toolbar">
+      <a href="{{URL('admin/dashboard/Classifieds (B2b)')}}" class="btn green-haze btn-circle pull-right back-btn"><i class="fa fa-backward"></i> Back</a>
+   </div>
+ </div>
+
 <div class="row">
    <div class="col-md-12">
       <!-- BEGIN EXAMPLE TABLE PORTLET-->
       <div class="portlet box grey-cascade">
-         <div class="portlet-title"  style="background-color:#082154;">
+         <div class="portlet-title justify-content-start">
             <div class="caption">
-               <i class="fa fa-globe"></i>Manage Categories
+               Manage Categories
             </div>
 <!--            <div class="tools">
                 <a href="javascript:;" class="collapse">
@@ -20,19 +41,17 @@
                </a> 
                
             </div>-->
-            <a href="{{URL('admin/dashboard/Classifieds (B2b)')}}" class="btn green-haze btn-circle pull-right" style="margin-right:50px;margin-top: 5px;"><i class="fa fa-backward"></i> Back</a>
+            <!-- <a href="{{URL('admin/dashboard/Classifieds (B2b)')}}" class="btn green-haze btn-circle pull-right" style="margin-right:50px;margin-top: 5px;"><i class="fa fa-backward"></i> Back</a> -->
          </div>
-         <div class="portlet-body">
-            <div class="table-toolbar">
+         <div class="portlet-body table-new">
+            <div class="table-toolbar table-header">
                <div class="row">
-                  <div class="col-md-4" style="position:absolute;top:80px;right:0px;">
-                     <div class="btn-group" >
-                        <a id="sample_editable_1_new" href="{{ URL::to('admin/Category-add',null)}}" class="btn green">Add New
-                           <!-- Add New <i class="fa fa-plus"></i> -->
-                        </a>
-                     </div>
+                  <div class="btn-group postion-btn">
+                     <a id="sample_editable_1_new" href="{{ URL::to('admin/Category-add',null)}}" class="btn-primary">Add New
+                        <!-- Add New <i class="fa fa-plus"></i> -->
+                     </a>
                   </div>
-                  <div class="col-md-4">
+                  <!-- <div class="col-md-4"> -->
                      <!-- <input type="text" class="light-table-filter" data-table="order-table" placeholder="search..." style=" padding: 2px 5px;font-size: 13px;"> -->
                      {{-- <div class="btn-group pull-right">
                         <button class="btn dropdown-toggle" data-toggle="dropdown">Tools <i class="fa fa-angle-down"></i>
@@ -52,10 +71,10 @@
                             </li>
                         </ul>
                      </div> --}}
-                  </div>
+                  <!-- </div> -->
                </div>
             </div>
-            <table class="table table-striped table-bordered table-hover order-table th-bg" id="sample_11">
+            <table class="table table-striped table-bordered table-hover order-table th-bg admin-table" id="sample_11">
                <thead>
                   <tr>
                      <th> Name </th>
@@ -79,10 +98,10 @@
                         {{ $data->category_name->h1 ?? '' }}
                      </td> -->
                      <td>
-                        <span class="label label-sm label-success"> Approved </span>
+                        <span class="label label-sm label-success success-btn"> Approved </span>
                      </td>
                      <td class="sortproduct_td text-center">
-                        <select name="sortcategory_option" data-id="{{ $data->id }}" class="sortcategory_option">
+                        <select name="sortcategory_option" data-id="{{ $data->id }}" class="sortcategory_option sortproduct_option">
                            @if($category_sort > 0)
                               @for ($i=0; $i < $category_sort; $i++)
                                  @if ($i == trim($data->sort_order))
@@ -95,7 +114,9 @@
                         </select>
                      </td>
                      <td>
-                        <a href="{{ URL::to('admin/category-edit',$data->id) }}" class="btn btn-xs btn-info">Edit</a>
+                        <div class="table-grp-btn">
+                           <a href="{{ URL::to('admin/category-edit',$data->id) }}" class="btn btn-xs btn-info edit-icon-btn"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                        </div>
                      </td>
                   </tr>
                   @endforeach
