@@ -7,18 +7,12 @@
     <!-- <hr class=".text-danger"> -->
     
         @if (session()->has('flash_message'))
-            <div  id ="successMessage" class="alert alert-success"  style="width:400px;">
+            <div  id ="successMessage" class="alert alert-success">
                 <p style="color:white;">{{ session('flash_message') }}</p>
             </div>
         @endif
-        <div class="portlet box grey-cascade">
-            <div class="portlet-title" style="background-color:#082154;color:white;">
-                <div class="caption">
-                    <i class="fa fa-globe"></i>Content Description Lists
-                </div>
-            </div>
-        </div>
-        <div class="page-bar page-breadcrumb-bar">
+        
+        <div class="page-bar page-top-bar">
             <ul class="page-breadcrumb" >
                 <li>
                     <i class="fa fa-home" style="color:black;"></i>
@@ -35,16 +29,21 @@
                 </li>
             </ul>
             <div class="page-toolbar">
-                <a href="{{URL('admin/dashboard/Content Management')}}" class="btn green-haze btn-circle pull-right" style="margin-right:50px;"><i class="fa fa-backward"></i> Back</a>
+                <a href="{{URL('admin/dashboard/Content Management')}}" class="btn green-haze btn-circle pull-right back-btn"><i class="fa fa-backward"></i> Back</a>
             </div>
         </div>
-
                 <!-- END PAGE HEADER-->
         <!-- BEGIN PAGE CONTENT-->
         <div class="row">
             <div class="col-md-12">
+
                         <!-- BEGIN EXAMPLE TABLE PORTLET-->
                         <div class="portlet box grey-cascade">
+                                <div class="portlet-title justify-content-start">
+                                    <div class="caption">
+                                        Content Description Lists
+                                    </div>
+                                </div>
                             <!-- <div class="portlet-title" style="background-color:#082154;color:white;">
                                 <div class="caption">
                                     <i class="fa fa-globe"></i>Content Descriptions lists
@@ -56,7 +55,7 @@
                                 
           
       <!--</h3>-->
-      <table id ="datavalue" class="order-table table table-striped table-bordered table-hover th-bg">
+      <table id ="datavalue" class="order-table table table-striped table-bordered table-hover th-bg admin-table">
          <thead>
                     <tr>
                         <th>Description</th>
@@ -72,12 +71,13 @@
                             <!-- <td>{{ substr($desc->description,0,50) }}</td> -->
                             <td>{{str_limit(strip_tags($desc->description),100,'...')}}</td>
                             <td>{{ $desc->bdtdc_category['name'] }}</td>
-                            <td style="white-space: nowrap;">{{ $desc->bdtdc_page['name'] }}</td>
-                            <td style="white-space: nowrap;">{{ date('d-M-Y',strtotime($desc->created_at)) }}</td>
-                            <td style="white-space: nowrap;">
-                                <a href="{{ URL::to('admin/description-edit',$desc->id) }}" class="btn btn-xs btn-info">Edit</a>
-                                <a onclick="return confirm('Are you sure want to delete the particular content description?')" href="{{ URL::to('admin/description-delete',$desc->id) }}" class="btn btn-xs btn-danger">Delete</a>
-
+                            <td>{{ $desc->bdtdc_page['name'] }}</td>
+                            <td>{{ date('d-M-Y',strtotime($desc->created_at)) }}</td>
+                            <td>
+                                <div class="table-grp-btn">
+                                    <a href="{{ URL::to('admin/description-edit',$desc->id) }}" class="btn btn-xs btn-info edit-icon-btn"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                                    <a onclick="return confirm('Are you sure want to delete the particular content description?')" href="{{ URL::to('admin/description-delete',$desc->id) }}" class="btn btn-xs btn-danger delete-icon-btn"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                                </div>
                             </td>
                         </tr>
                     @endforeach

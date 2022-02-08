@@ -3,6 +3,25 @@
 @section('title', 'View Profile')
 
 @section('content')
+    <div class="page-bar page-top-bar">
+        
+        <ul class="page-breadcrumb" >
+            <li>
+                <i class="fa fa-home" style="color:black;"></i>
+                <a href="{{URL::route('admin_dashboard')}}" >Home</a>
+                <i class="fa fa-angle-right" style="color:black;"></i>
+            </li>
+           
+            <li>
+                <a href="{{URL('/admin/profiles')}}">User Management</a>
+                 <i class="fa fa-angle-right" style="color:black;"></i>
+            </li>
+            <li>
+                User Profile
+            </li>
+        </ul>
+        <a href="{{URL('admin/description-manage')}}" class="btn green-haze btn-circle pull-right back-btn"><i class="fa fa-backward"></i> Back</a>
+    </div>
 <div class="card user-prof">
     <h3>{{ $user->first_name }}'s Profile</h3>
         <table class="profile-table" style="width:100%">

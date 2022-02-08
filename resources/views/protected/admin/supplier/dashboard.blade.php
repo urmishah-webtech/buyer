@@ -13,7 +13,7 @@
       <div class="portlet box grey-cascade">
          <div class="portlet-title">
             <div class="caption">
-               <i class="fa fa-globe"></i>Manage Seller Product
+               Manage Seller Product
             </div>
             <div class="tools">
                <a href="javascript:;" class="collapse">
@@ -23,7 +23,7 @@
             </div>
          </div>
          <div class="portlet-body">
-            <div class="table-toolbar">
+            <!-- <div class="table-toolbar">
                @if ($message = Session::get('success'))
                      <div class="alert alert-success" style="font-color:white">
                         <p>{{ $message }}</p>
@@ -58,22 +58,22 @@
                </div>
                <div>
                </div>
-            </div>
-            <table style="margin-top:5%;background: #fff;" class="table ">
+            </div> -->
+            <table class="table admin-table">
                               <thead>
-                                 <tr class="" style="background-color:#E4EAF1; font-weight:bold">
-                                    <td><label style="font-weight:bold;padding: 0px; margin-top: -5px;" title="Select all products"> Product Name</label></td>
-                                    <td>Model</td>
-                                    <td>Brand Name</td>
-                                    <td>Category Name</td>
-                                    <td>Live Status</td>
-                                    <td>Action</td>
+                                 <tr class="">
+                                    <th>Product Name</th>
+                                    <th>Model</th>
+                                    <th>Brand Name</th>
+                                    <th>Category Name</th>
+                                    <th>Live Status</th>
+                                    <th>Action</th>
                                  </tr>
                               </thead>
                               <tbody>
                                  @if($supplier_product)
                                     @foreach($supplier_product as $sp)
-                                       <tr class="text-muted" style="border-bottom:1px solid #ddd!important">
+                                       <tr class="text-muted">
                                           @if($sp->pro_to_cat_name)
                                              <td class="text-left"> <a title="{{$sp->pro_to_cat_name->name}}" itemprop="url" class="text-muted" target="_blank" href="{!! URL::to('product-details/'.preg_replace('/[^A-Za-z0-9\.-]/', '-',$sp->pro_to_cat_name->name).'='.mt_rand(100000000, 999999999).$sp->product_id) !!}">{{ substr($sp->pro_to_cat_name->name,0,30) }}</a></td>
                                           @else

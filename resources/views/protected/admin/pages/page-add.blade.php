@@ -3,9 +3,9 @@
 @section('title', 'Admin Dashboard')
 
 @section('content')
-    <div class="col-xs-12">
+    <!-- <div class="col-xs-12">
         
-    </div>
+    </div> -->
 <!--<a href="{{URL('admin/dashboard/Content Management')}}" class="btn green-haze btn-circle pull-right" style="margin-right:50px;"><i class="fa fa-backward"></i> Back</a>-->
 <!--    <h3 class="page-title">
         Add Page <small></small>

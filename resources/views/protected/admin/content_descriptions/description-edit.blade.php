@@ -10,19 +10,19 @@
 <!--    <h3 class="page-title">
         Content Description Edit 
     </h3>-->
-    <div class="portlet box grey-cascade">
+    <!-- <div class="portlet box grey-cascade">
         <div class="portlet-title" style="background-color:#082154;color:white;">
             <div class="caption">
                 <i class="fa fa-globe"></i>Edit Content Description 
             </div>
         </div>
-    </div>
+    </div> -->
     @if (session()->has('flash_message'))
             <div class="alert alert-success">
                 <p style="color:white;">{{ session()->get('flash_message') }}</p>
             </div>
     @endif
-    <div class="page-bar" >
+    <div class="page-bar page-top-bar" >
         <ul class="page-breadcrumb">
             <li>
                 <i class="fa fa-home" style="color:black;"></i>
@@ -59,7 +59,7 @@
                     </li>
                 </ul>
             </div> --}}
-            <a href="{{URL('admin/description-manage')}}" class="btn green-haze btn-circle pull-right" style="margin-right:50px;"><i class="fa fa-backward"></i> Back</a>
+            <a href="{{URL('admin/description-manage')}}" class="btn green-haze btn-circle pull-right back-btn"><i class="fa fa-backward"></i> Back</a>
         </div>
     </div>
     <!-- END PAGE HEADER-->
@@ -68,41 +68,39 @@
         <div class="col-md-12">
             {!! Form::open(array('route'=>array('admin.description-update', $description[0]->id),'id'=>'form1','class'=>'form-horizontal  form-row-seperated','files'=>true)) !!}
             @csrf
-            <div class="portlet light">
-                <div class="portlet-title">
-                    <div class="caption">
-                        <i class="icon-basket font-green-sharp"></i>
-										<span class="caption-subject font-green-sharp bold uppercase">
-										Edit Content Description </span>
-                    </div>
-                    <div class="actions btn-set">
-                        
-                        <button name="save" value="1" class="btn green-haze btn-circle"><i class="fa fa-check"></i> Save</button>
-                        <button name="save" value="2" class="btn green-haze btn-circle"><i class="fa fa-check-circle"></i> Save & Continue Edit</button>
-                        <a href="{{url('/admin/description-manage')}}" class="btn green-haze btn-circle pull-right" style="margin-right:50px;"><i class="fa fa-list"></i> View Content Description List</a>
-                        {{-- <div class="btn-group">
-                            <a class="btn yellow btn-circle" href="javascript:;" data-toggle="dropdown">
-                                <i class="fa fa-share"></i> More <i class="fa fa-angle-down"></i>
-                            </a>
-                            <ul class="dropdown-menu pull-right">
-                                <li>
-                                    <a href="javascript:;">
-                                        Duplicate </a>
-                                </li>
-                                <li>
-                                    <a href="javascript:;">
-                                        Delete </a>
-                                </li>
-                                <li class="divider">
-                                </li>
-                                <li>
-                                    <a href="javascript:;">
-                                        Print </a>
-                                </li>
-                            </ul>
-                        </div> --}}
-                    </div>
+            <div class="portlet-title">
+                <div class="caption">
+					Edit Content Description
                 </div>
+                <div class="actions btn-set">
+                    
+                    <button name="save" value="1" class="btn green-haze btn-circle green-btn"><i class="fa fa-check"></i> Save</button>
+                    <button name="save" value="2" class="btn green-haze btn-circle btn-primary"><i class="fa fa-check-circle"></i> Save & Continue Edit</button>
+                    <a href="{{url('/admin/description-manage')}}" class="btn green-haze btn-circle pull-right yellow-btn"><i class="fa fa-list"></i> View Content Description List</a>
+                    {{-- <div class="btn-group">
+                        <a class="btn yellow btn-circle" href="javascript:;" data-toggle="dropdown">
+                            <i class="fa fa-share"></i> More <i class="fa fa-angle-down"></i>
+                        </a>
+                        <ul class="dropdown-menu pull-right">
+                            <li>
+                                <a href="javascript:;">
+                                    Duplicate </a>
+                            </li>
+                            <li>
+                                <a href="javascript:;">
+                                    Delete </a>
+                            </li>
+                            <li class="divider">
+                            </li>
+                            <li>
+                                <a href="javascript:;">
+                                    Print </a>
+                            </li>
+                        </ul>
+                    </div> --}}
+                </div>
+            </div>
+            <div class="portlet light">
                 @if (count($errors) > 0)
                                 <div class="alert alert-danger">
                                     <ul>
@@ -132,7 +130,7 @@
                                 <div class="page-bar">
                                     <ul class="page-breadcrumb">
                                         <li>
-                                            <b>Content-Description Information:</b>
+                                            Content Description Information:
                                         </li>
                                     </ul>
                                 </div>
@@ -141,7 +139,7 @@
                                         <label class="col-md-2 control-label">Title: <span class="required">
 														* </span>
                                         </label>
-                                        <div class="col-md-10">
+                                        <div class="col-md-9">
                                             <!-- <input type="text" class="form-control" name="desc_name" value="{{ $description[0]->description }}" placeholder="Description Name"> -->
                                             <input id="editor1" class="form-control" name="title_name" value="<?php echo strip_tags(old('title_name', $description[0]->title))  ?>" placeholder="Title Name">
                                         </div>
@@ -150,7 +148,7 @@
                                         <label class="col-md-2 control-label">Description: <span class="required">
 														* </span>
                                         </label>
-                                        <div class="col-md-10">
+                                        <div class="col-md-9">
                                             <!-- <input type="text" class="form-control" name="desc_name" value="{{ $description[0]->description }}" placeholder="Description Name"> -->
                                             <textarea id="editor" class="form-control" name="desc_name" value="<?php echo strip_tags($description[0]->description) ?>" placeholder="Description Name"><?php echo strip_tags(old('desc_name',$description[0]->description)) ?></textarea>
                                         </div>
@@ -160,7 +158,7 @@
                                         <label class="col-md-2 control-label">Page Category Name: <span class="required">
 														* </span>
                                         </label>
-                                        <div class="col-md-10">
+                                        <div class="col-md-9">
                                             <select class="form-control" name="page_category_id" id="sel1">
                                                 <option value="0">Select any</option>
                                                 @foreach($pages as $p)
@@ -179,7 +177,7 @@
                                         <label class="col-md-2 control-label">Content Category Name: <span class="required">
 														* </span>
                                         </label>
-                                        <div class="col-md-10">
+                                        <div class="col-md-9">
                                             <select class="form-control" name="content_category_id" id="sel1">
                                                 <option value="0">Select any</option>
                                                 @foreach($contents as $c)
@@ -197,7 +195,7 @@
                                         <label class="col-md-2 control-label">Meta Key: <span class="required">
 														* </span>
                                         </label>
-                                        <div class="col-md-10">
+                                        <div class="col-md-9">
                                             <input type="text" class="form-control" name="meta_key" value="{{old('meta_key', $description[0]->meta_key) }}" placeholder="Meta Key">
                                         </div>
                                     </div>
@@ -206,7 +204,7 @@
                                         <label class="col-md-2 control-label">Meta Description: <span class="required">
 														* </span>
                                         </label>
-                                        <div class="col-md-10">
+                                        <div class="col-md-9">
                                             <input type="text" class="form-control" name="meta_description" value="{{old('meta_description', $description[0]->meta_description) }}" placeholder="Meta Key Description">
                                         </div>
                                     </div>
