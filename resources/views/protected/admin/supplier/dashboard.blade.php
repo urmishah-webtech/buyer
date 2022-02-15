@@ -96,19 +96,25 @@
                                           @endif
                                           <td>@if($sp->bdtdcProduct)
                                              @if($sp->bdtdcProduct->is_active == 0)
-                                                <i title="Make Publish" class="fa fa-lock fa-lg btn btn-danger btn-xs live_status" data-product_status ="{{ $sp->bdtdcProduct->is_active }}" data-product_id ="{{ $sp->product_id }}"></i>
+                                                <a title="Make Publish" class="btn btn-danger btn-xs live_status delete-icon-btn" data-product_status ="{{ $sp->bdtdcProduct->is_active }}" data-product_id ="{{ $sp->product_id }}">
+                                                   <i class="fa fa-lock fa-lg"></i>
+                                                </a>
                                              @elseif($sp->bdtdcProduct->is_active == 1)
-                                                <i title="Make Unpublish" class="fa fa-unlock fa-lg btn btn-success btn-xs live_status" data-product_status ="{{ $sp->bdtdcProduct->is_active }}" data-product_id ="{{ $sp->product_id }}"></i>
+                                                <a title="Make Unpublish" class="btn btn-success btn-xs live_status view-icon-btn view-icon-btn" data-product_status ="{{ $sp->bdtdcProduct->is_active }}" data-product_id ="{{ $sp->product_id }}">
+                                                   <i class="fa fa-unlock fa-lg"></i>
+                                                </a>
                                              @endif
                                              @else
                                                 i title="Make Publish" class="fa fa-lock fa-lg btn btn-danger btn-xs"></i>
                                              @endif
                                           </td>
                                           <td>
-                                             <a title="Edit product"  itemprop="url"  href="{{ URL::to('/admin/profiles/sellerproduct_edit',$sp->product_id) }}" class="btn btn-primary btn-xs"><i class="fa fa-pencil-square-o"></i></a>
-                                             <a onclick="return confirm('Are you sure want to delete the Product?')" title="Delete product"  itemprop="url" href="{{ URL::to('/admin/profiles/sellerproduct_delete',$sp->product_id) }}" class="btn btn-danger btn-xs delete_product"><i class="fa fa-times"></i></a>
-                                             <!-- <a itemprop="url"  href="#animatedModal" data-url ="{{ URL::to('supplier/product_edit',$sp->id) }}" class="btn btn-primary btn-xs product_edit"><i class="fa fa-pencil-square-o"></i></a> -->
-                                             <!-- <a title="Delete product"  itemprop="url" data-product_id ="{{ $sp->product_id }}" class="btn btn-danger btn-xs delete_product"><i class="fa fa-times"></i></a> -->
+                                             <div class="table-grp-btn">
+                                                <a title="Edit product"  itemprop="url"  href="{{ URL::to('/admin/profiles/sellerproduct_edit',$sp->product_id) }}" class="btn btn-primary btn-xs edit-icon-btn"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                                                <a onclick="return confirm('Are you sure want to delete the Product?')" title="Delete product"  itemprop="url" href="{{ URL::to('/admin/profiles/sellerproduct_delete',$sp->product_id) }}" class="btn btn-danger btn-xs delete_product delete-icon-btn"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                                                <!-- <a itemprop="url"  href="#animatedModal" data-url ="{{ URL::to('supplier/product_edit',$sp->id) }}" class="btn btn-primary btn-xs product_edit"><i class="fa fa-pencil-square-o"></i></a> -->
+                                                <!-- <a title="Delete product"  itemprop="url" data-product_id ="{{ $sp->product_id }}" class="btn btn-danger btn-xs delete_product"><i class="fa fa-times"></i></a> -->
+                                             </div>
                                           </td>
                                        </tr>
                                     @endforeach

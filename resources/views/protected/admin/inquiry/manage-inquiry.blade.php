@@ -19,9 +19,9 @@ table.removecheckbox div.checker input,table.removecheckbox input[type="search"]
                     <div class="col-md-12">
                         <!-- BEGIN EXAMPLE TABLE PORTLET-->
                         <div class="portlet box grey-cascade">
-                            <div class="portlet-title" style="background-color:#082154;color:white;">
+                            <div class="portlet-title justify-content-start" style="background-color:#082154;color:white;">
                                 <div class="caption">
-                                    <i class="fa fa-globe"></i>Managed Table
+                                    Managed Table
                                 </div>
 <!--                                <div class="tools">
                                     <a href="javascript:;" class="collapse">
@@ -33,26 +33,26 @@ table.removecheckbox div.checker input,table.removecheckbox input[type="search"]
                                     <a href="javascript:;" class="remove">
                                     </a>
                                 </div>-->
-                                <a href="{{URL('admin/dashboard/Menu')}}" class="btn green-haze btn-circle pull-right" style="margin-right:50px;margin-top: 5px;"><i class="fa fa-backward"></i> Back</a>
+                                <!-- <a href="{{URL('admin/dashboard/Menu')}}" class="btn green-haze btn-circle pull-right" style="margin-right:50px;margin-top: 5px;"><i class="fa fa-backward"></i> Back</a> -->
                             </div>
                             <div class="portlet-body">
                                 <div class="table-toolbar">
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="btn-group">
-                                                <button id="sample_editable_1_new" class="btn green" data-toggle="modal" data-target="#inq_home_create_modal" >
+                                                <button id="sample_editable_1_new" class="btn green-btn" data-toggle="modal" data-target="#inq_home_create_modal" >
                                                 Add New <i class="fa fa-plus"></i>
                                                 </button>
                                             </div>
                                             <div class="btn-group">
-                                                <button id="sample_editable_1_new" class="btn red delete_all">
+                                                <button id="sample_editable_1_new" class="btn red delete_all red-btn">
                                                 Delete <i class="fa fa-trash"></i>
                                                 </button>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="btn-group pull-right">
-                                                <button class="btn dropdown-toggle" data-toggle="dropdown">Tools <i class="fa fa-angle-down"></i>
+                                                <button class="btn dropdown-toggle black-btn" data-toggle="dropdown">Tools <i class="fa fa-angle-down"></i>
                                                 </button>
                                                 <ul class="dropdown-menu pull-right">
                                                     <li>
@@ -95,51 +95,63 @@ table.removecheckbox div.checker input,table.removecheckbox input[type="search"]
                                             </ul>
                                         </div>
                                     @endif
-                                    <div style="margin-top:35px;padding:5px;">
+                                    <div class="search-manage-bar">
                                         <div class="row">
                                             <input type="hidden" name="search_str" value="{{$search_str}}">
                                             <input type="hidden" name="search_inq_type" value="{{$search_inq_type}}">
                                             <input type="hidden" name="search_sender" value="{{$search_sender}}">
                                             <input type="hidden" name="search_receiver" value="{{$search_receiver}}">
                                             <input type="hidden" name="search_status" value="{{$search_status}}">
-                                            <div class="col-md-6 text-left">
-                                                <input type="text" name="search" placeholder="Product Name/Title">  
-                                                <button id="search_submit" class="btn btn-xs green">
-                                                        Search
-                                                </button>
+                                            <div class="col-md-6 text-left search-bar-box">
+                                                <div class="form-group">
+                                                    <input class="form-control" type="text" name="search" placeholder="Product Name/Title">  
+                                                    <button id="search_submit" class="btn btn-primary">
+                                                            Search
+                                                    </button>
+                                                </div>
                                             </div>
                                             <div class="col-md-6 text-right">
-                                                <select name="inquiry_type" id="inquiry_type">
-                                                    <option value="all">All Inquiry</option>
-                                                    <option value="quotation">Quotation</option>
-                                                    <option value="inquiry-single">Inquiry (Single)</option>
-                                                    <option value="inquiry-multiple">Inquiry (Multiple)</option>
-                                                    <option value="inquiry-both">Inquiry (Both)</option>
-                                                </select> 
-                                                <select name="sender" id="sender">
-                                                    <option value="all">All Sender</option>
-                                                    @if($user)
-                                                        @foreach($user as $u)
-                                                            <option title="{{trim($u->first_name)}} {{trim($u->last_name)}}" value="{{$u->id}}">{{substr(trim($u->first_name),0,10)}}</option>
-                                                        @endforeach
-                                                    @endif
-                                                </select> 
-                                                <select name="receiver" id="receiver">
-                                                    <option value="all">All Receiver</option>
-                                                    @if($user)
-                                                        @foreach($user as $u)
-                                                            <option title="{{trim($u->first_name)}} {{trim($u->last_name)}}" value="{{$u->id}}">{{substr(trim($u->first_name),0,10)}}</option>
-                                                        @endforeach
-                                                    @endif
-                                                </select> 
-                                                <select name="status" id="status">
-                                                    <option value="0">All Status</option>
-                                                    <option value="1">Pending</option>
-                                                    <option value="2">Approved</option>
-                                                    <option value="3">Rejected</option>
-                                                    <option value="4">Completed</option>
-                                                    <option value="5">Closed</option>
-                                                </select>
+                                                <div class="navbar-form half-size-form">
+                                                    <div class="form-group">
+                                                        <select name="inquiry_type" id="inquiry_type" class="form-control">
+                                                            <option value="all">All Inquiry</option>
+                                                            <option value="quotation">Quotation</option>
+                                                            <option value="inquiry-single">Inquiry (Single)</option>
+                                                            <option value="inquiry-multiple">Inquiry (Multiple)</option>
+                                                            <option value="inquiry-both">Inquiry (Both)</option>
+                                                        </select> 
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <select name="sender" id="sender" class="form-control">
+                                                            <option value="all">All Sender</option>
+                                                            @if($user)
+                                                                @foreach($user as $u)
+                                                                    <option title="{{trim($u->first_name)}} {{trim($u->last_name)}}" value="{{$u->id}}">{{substr(trim($u->first_name),0,10)}}</option>
+                                                                @endforeach
+                                                            @endif
+                                                        </select> 
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <select name="receiver" id="receiver" class="form-control">
+                                                            <option value="all">All Receiver</option>
+                                                            @if($user)
+                                                                @foreach($user as $u)
+                                                                    <option title="{{trim($u->first_name)}} {{trim($u->last_name)}}" value="{{$u->id}}">{{substr(trim($u->first_name),0,10)}}</option>
+                                                                @endforeach
+                                                            @endif
+                                                        </select> 
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <select name="status" id="status" class="form-control">
+                                                            <option value="0">All Status</option>
+                                                            <option value="1">Pending</option>
+                                                            <option value="2">Approved</option>
+                                                            <option value="3">Rejected</option>
+                                                            <option value="4">Completed</option>
+                                                            <option value="5">Closed</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -170,12 +182,14 @@ table.removecheckbox div.checker input,table.removecheckbox input[type="search"]
                                     </div>
                                 </div>
                                 <div class="table-responsive" id="customers">
-                                    <table id="example" class="table table-striped table-bordered table-hover th-bg removecheckbox" cellspacing="0" cellpadding="0">
+                                    <table id="example" class="table table-striped table-bordered table-hover th-bg removecheckbox admin-table" cellspacing="0" cellpadding="0">
                                         <thead>
                                 
                                             <tr>
-                                                <th>
-                                                    <label><input type="checkbox" name="check_all" id="selectAll"></label>
+                                                <th class="table-checkbox">
+                                                    <div class="checker">
+                                                        <span><input type="checkbox" name="check_all" id="selectAll"></span>
+                                                    </div>
                                                 </th>
                                                 <th>
                                                     ID
@@ -235,7 +249,9 @@ table.removecheckbox div.checker input,table.removecheckbox input[type="search"]
 
                                                     <tr class="">
                                                         <td class="check_single_td">
-                                                            <label><input type="checkbox" name="check_single" class="sub_chk" data-id="{{$i->id}}"></label>
+                                                            <div class="checker">
+                                                                <span><input type="checkbox" name="check_single checkboxes" class="sub_chk" data-id="{{$i->id}}"></span>
+                                                            </div>
                                                         </td>
                                                         <td class="id_td">
                                                             {{$i->id}}
@@ -313,20 +329,22 @@ table.removecheckbox div.checker input,table.removecheckbox input[type="search"]
                                                         </td>
                                                         <td>
                                                             @if($i->home_inquiry)
-                                                                <button class="btn btn-xs btn-info inq_home_update" data-toggle="modal" data-target="#inq_home_update_modal" data-inqid="{{$i->id}}" data-img="{{$i->home_inquiry->images}}" data-showimg="{{$i->home_inquiry->show}}" data-inqsort="{{$i->home_inquiry->sort}}" style="margin-bottom: 10%;">Update</button>
+                                                                <button class="info-btn" data-toggle="modal" data-target="#inq_home_update_modal" data-inqid="{{$i->id}}" data-img="{{$i->home_inquiry->images}}" data-showimg="{{$i->home_inquiry->show}}" data-inqsort="{{$i->home_inquiry->sort}}" style="margin-bottom: 10%;">Update</button>
                                                             @else
-                                                                <button class="btn btn-xs btn-success inq_home_create" data-toggle="modal" data-target="#inq_home_create_modal" data-inqid="{{$i->id}}" style="margin-bottom: 10%;">Create</button>
+                                                                <button class="active-btn" data-toggle="modal" data-target="#inq_home_create_modal" data-inqid="{{$i->id}}" style="margin-bottom: 10%;">Create</button>
                                                             @endif
                                                         </td>
                                                         <td>
                                                             {{ date('d/m/Y', strtotime($i->created_at)) }}
                                                         </td>
                                                         <td  style="white-space: nowrap;">
-                                                            <button class="btn btn-xs btn-success inq_details" data-toggle="modal" data-target="#message_view_modal" data-inqid="{{$i->id}}" style="margin-bottom: 10%;">Details</button> 
-                                                            <a href="{{URL::to('admin/edit-inquiry',$i->id)}}" class="btn btn-xs btn-info flip edit_panel" style="margin-bottom: 10%;background-color: #428BCA;">Edit</a>
-                                                            <a class="btn btn-xs btn-info panel done_panel" style="background-color: #428BCA;margin-bottom: 10%;display:none;" edit_id="" update_id="<?php echo $i->id;?>">Done</a><br>
-                                                            <a class="btn btn-xs btn-info panel cancel_panel" style="background-color: #428BCA;display:none;">Cancel</a>
-                                                            <button class="btn btn-xs btn-danger inq_delete" data-delete-id="{{ $i->id }}" style="margin-bottom: 10%;">Delete</button>
+                                                            <div class="table-grp-btn">
+                                                                <button class="btn btn-xs btn-success inq_details details-icon-btn" data-toggle="modal" data-target="#message_view_modal" data-inqid="{{$i->id}}"><i class="fa fa-info" aria-hidden="true"></i></button> 
+                                                                <a href="{{URL::to('admin/edit-inquiry',$i->id)}}" class="btn btn-xs btn-info flip edit-icon-btn"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                                                                <a class="btn btn-xs btn-info panel done_panel" style="background-color: #428BCA;margin-bottom: 10%;display:none;" edit_id="" update_id="<?php echo $i->id;?>">Done</a><br>
+                                                                <a class="btn btn-xs btn-info panel cancel_panel" style="background-color: #428BCA;display:none;">Cancel</a>
+                                                                <button class="btn btn-xs btn-danger inq_delete delete-icon-btn" data-delete-id="{{ $i->id }}"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+                                                            </div>
                                                         </td>
                                                     </tr>
                                                 @endforeach
@@ -351,23 +369,22 @@ table.removecheckbox div.checker input,table.removecheckbox input[type="search"]
       <div class="modal-content">
         <div class="modal-header" style="background:#45B6AF;">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title text-center"><b>Inquiry Details</b></h4>
+          <h4 class="modal-title text-center">Inquiry Details</h4>
         </div>
-        <div class="modal-body replace_details" style="min-height: 100px;">
+        <div class="modal-body replace_details">
 
         <div class="loader" style="position:fixed;background: url(/uploads/page-loader.gif) 50% 50% no-repeat;z-index:999;width:100%;height:59px;background-size:41px;"></div>
 
           <div class="row">
-              <div class="col-md-6">
-                    <h5 class="text-center">Inquiry/Product Title:</h5>
+              <div class="col-md-6" style="border-right: 1px solid #eee;">
+                    <h5 class="text-left">Inquiry/Product Title:</h5>
                     <p class="text-left"><a href="#">new product</a></p>
               </div>
               <div class="col-md-6">
-                    <h5 class="text-center">Inquiry/Product Source:</h5>
+                    <h5 class="text-right">Inquiry/Product Source:</h5>
                     <p class="text-right"><a href="#">new product</a></p>
               </div>
           </div>
-          <hr />
           <div class="row">
               <div class="col-md-6 text-left" style="border-right: 1px solid #eee;">
                   <h5>Inquiry Product Owner Info:</h5>
@@ -380,12 +397,10 @@ table.removecheckbox div.checker input,table.removecheckbox input[type="search"]
                   <p><a href="#">Lu Ican Company/Only Buyer Profile</a></p>
               </div>
           </div>
-          <hr />
           <div>
               <h5 class="text-center">Message:</h5>
               <div>new message</div>
           </div>
-          <hr />
           <div>
               <h5 class="text-center">Inquiry/Product Images:</h5>
               <div>
@@ -394,7 +409,6 @@ table.removecheckbox div.checker input,table.removecheckbox input[type="search"]
                     <a href="http://absolutelybest.bdtdc.com/bdtdc-product-image/Agriculture%20&%20Food/Seafood/product_photo_6_83_0eX9zOdzTz.jpg" target="_blank"><img src="http://absolutelybest.bdtdc.com/bdtdc-product-image/Agriculture%20&%20Food/Seafood/product_photo_6_83_0eX9zOdzTz.jpg" height="100" width="100" alt=""></a> 
               </div>
           </div>
-          <hr />
           <div class="row">
               <div class="col-md-6 text-left" style="border-right: 1px solid #eee;">
                   <h5>Destination Port:</h5>
@@ -405,7 +419,6 @@ table.removecheckbox div.checker input,table.removecheckbox input[type="search"]
                   <p>Paypal</p>
               </div>
           </div>
-          <hr />
           <div class="row">
               <div class="col-md-4 text-left" style="border-right: 1px solid #eee;">
                   <h5>Quantity:</h5>
@@ -424,7 +437,7 @@ table.removecheckbox div.checker input,table.removecheckbox input[type="search"]
           
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
+          <button type="button" class="btn red-btn" data-dismiss="modal">Close</button>
         </div>
       </div>
       
@@ -439,7 +452,7 @@ table.removecheckbox div.checker input,table.removecheckbox input[type="search"]
       <div class="modal-content">
         <div class="modal-header" style="background:#45B6AF;">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title text-center"><b>Make Home Inquiry</b></h4>
+          <h4 class="modal-title text-center">Make Home Inquiry</h4>
         </div>
         <div class="modal-body" style="min-height: 100px;">
 
@@ -450,26 +463,26 @@ table.removecheckbox div.checker input,table.removecheckbox input[type="search"]
                     <input type="hidden" id="inquiry_id_create" name="inquiry_id" value="0">
                     {!!Form::label('images', 'Choose Your Home Inquiry Image', array('class' => 'control-label'))!!} : 
                     {{-- {!!Form::file('images','', array('class' => 'form-control')) !!} --}}
-                    <br>
-
                     <label>Show this image? <input type="checkbox" name="show_image"></label>
-                    
-                    <br>
+                    <label>
                     {!!Form::label('sort', 'Sort', array('class' => 'control-label'))!!} : 
                     {!!Form::selectRange('sort', 0, 30)!!}
+                    <label>
                 </div>
                 <div class="col-md-5">
-                    <h5 class="text-center"><b>Image Preview</b></h5>
-                    <div class="text-center">
-                        <img class="product_preview" style="width:100px;height:100px;" src="http://apps.bditdc.com/uploads/no_image.jpg">
+                    <div class="modal-img-box">
+                        <h5 class="text-center">Image Preview</h5>
+                        <div class="text-center">
+                            <img class="product_preview" src="http://apps.bditdc.com/uploads/no_image.jpg">
+                        </div>
                     </div>
                 </div>
             </div>
 
         </div>
         <div class="modal-footer">
-          {!!Form::submit('Submit',array('class'=>'btn btn-success'))!!}
-          <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
+          {!!Form::submit('Submit',array('class'=>'btn green-btn'))!!}
+          <button type="button" class="btn red-btn" data-dismiss="modal">Close</button>
         </div>
       </div>
       {!!Form::close()!!}
@@ -484,7 +497,7 @@ table.removecheckbox div.checker input,table.removecheckbox input[type="search"]
       <div class="modal-content">
         <div class="modal-header" style="background:#45B6AF;">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title text-center"><b>Update Home Inquiry</b></h4>
+          <h4 class="modal-title text-center">Update Home Inquiry</h4>
         </div>
         <div class="modal-body" style="min-height: 100px;">
 
@@ -496,12 +509,8 @@ table.removecheckbox div.checker input,table.removecheckbox input[type="search"]
                     <label>Choose Your Home Inquiry Image : 
                     <input type="file" name="images" id="update_image">
                     </label>
-                    
-                    <br>
 
                     <label>Show this image? : <input type="checkbox" id="update_show_image" name="show_image"></label>
-                    
-                    <br>
 
                     <label>Sort : 
                         <select name="sort" id="update_sort">
@@ -515,17 +524,19 @@ table.removecheckbox div.checker input,table.removecheckbox input[type="search"]
                     
                 </div>
                 <div class="col-md-5">
-                    <h5 class="text-center"><b>Image Preview</b></h5>
-                    <div class="text-center">
-                        <img id="product_preview_update" style="width:100px;height:100px;" src="http://apps.bditdc.com/uploads/no_image.jpg">
+                    <div class="modal-img-box">
+                        <h5 class="text-center">Image Preview</h5>
+                        <div class="text-center">
+                            <img id="product_preview_update" src="http://apps.bditdc.com/uploads/no_image.jpg">
+                        </div>
                     </div>
                 </div>
             </div>
 
         </div>
         <div class="modal-footer">
-          {!!Form::submit('Submit',array('class'=>'btn btn-success'))!!}
-          <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
+          {!!Form::submit('Submit',array('class'=>'btn green-btn'))!!}
+          <button type="button" class="btn red-btn" data-dismiss="modal">Close</button>
         </div>
       </div>
       {!!Form::close()!!}
@@ -558,35 +569,50 @@ table.removecheckbox div.checker input,table.removecheckbox input[type="search"]
                         <div class="portlet box grey-cascade">
                             <div class="portlet-title" style="background-color:#082154;color:white;">
                                 <div class="caption">
-                                    <i class="fa fa-globe"></i>Please Verify Your Password
+                                    Please Verify Your Password
                                 </div>
                                 <div class="tools">
-                                    <a href="javascript:;" class="collapse">
-                                    </a>
                                     <a href="#portlet-config" data-toggle="modal" class="config">
                                     </a>
                                     <a href="javascript:;" class="reload">
                                     </a>
                                     <a href="javascript:;" class="remove">
                                     </a>
+                                    <a href="javascript:;" class="collapse">
+                                    </a>
                                 </div>
                             </div>
-                            <div class="portlet-body">
-                               <!--<p>Please Verify Your Password</p>-->
-                            <form class="form-inline" method="POST">
-                                {!!csrf_field()!!}
-                                <div class="form-group">
-                                    <label for="password">Password:</label>
-                                    <input type="password" class="form-control" name="password" id="password"> 
-                                </div> 
-                                <button type="submit" class="btn green-haze passwordsubmit">Submit</button>
-                                <br>
-                                <div class="form-group">
-                                    <label style="visibility: hidden;">Password:</label>
-                                    <span style="color:red;">{{ $errors->first('password') }}</span>
-                                    <span style="color:red;">{{ $errors->first('invalid') }}</span>
-                                </div> 
-                            </form>
+                            <div class="portlet light margin-b0">
+                                <div class="portlet-body">
+                                   <!--<p>Please Verify Your Password</p>-->
+                                    <form class="form-body" method="POST">
+                                        {!!csrf_field()!!}
+                                        <div class="row form-group">
+                                            <label class="col-md-2 control-label" for="password">
+                                                Password:
+                                            </label>
+                                            <div class="col-md-9">
+                                                <input type="password" class="form-control" name="password" id="password"> 
+                                            </div>
+                                        </div> 
+                                        <div class="row form-group">
+                                            <div class="col-md-2 control-label">
+                                            </div>
+                                            <div class="col-md-9">
+                                                <button type="submit" class="btn green-haze btn-circle green-btn">Submit</button>
+                                            </div>
+                                        </div>
+                                        <!-- <div class="row form-group">
+                                            <div class="col-md-2">
+                                            </div>
+                                            <div class="col-9">
+                                                <label style="visibility: hidden;">Password:</label>
+                                                <span style="color:red;">{{ $errors->first('password') }}</span>
+                                                <span style="color:red;">{{ $errors->first('invalid') }}</span>
+                                            </div>
+                                        </div>  -->
+                                    </form>
+                                </div>
                             </div>
                         </div>
                         <!-- END EXAMPLE TABLE PORTLET-->

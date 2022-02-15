@@ -29,22 +29,25 @@
       color:#fff;
    }
 </style>
-
+<!-- 
 <h3 class="page-title">
    Notice Create <small>create & edit notice</small>
-</h3>
-<div class="page-bar">
+</h3> -->
+<div class="page-bar page-top-bar">
    <ul class="page-breadcrumb">
       <li>
-         <i class="fa fa-home"></i>
+         <i class="fa fa-home" style="color:black;"></i>
          <a href="{{URL::route('admin_dashboard')}}">Home</a>
-         <i class="fa fa-angle-right"></i>
+         <i class="fa fa-angle-right" style="color:black;"></i>
       </li>
 
       <li>
          <a href="#">Notice Add</a>
       </li>
    </ul>
+   <div class="page-toolbar">
+      <a href="{{URL('admin/description-manage')}}" class="btn green-haze btn-circle pull-right back-btn"><i class="fa fa-backward"></i> Back</a>
+   </div>
 </div>
 <!-- END PAGE HEADER-->
 <!-- BEGIN PAGE CONTENT-->
@@ -52,27 +55,28 @@
    <div class="col-md-12">
       {!! Form::open(array('route'=>array('admin.notice_store'),'class'=>'form-horizontal form-row-seperated','files'=>true)) !!}
       <div class="portlet light">
-         <div class="portlet-title">
-            <div class="caption">
-               <i class="icon-basket font-green-sharp"></i>
-               <span class="caption-subject font-green-sharp bold uppercase">
-                  Add Notice </span>
-            </div>
-            <div class="actions btn-set">
-               <button class="btn green-haze btn-circle" type="submit"><i class="fa fa-check"></i> Save</button>
-               <!-- <button class="btn green-haze btn-circle"><i class="fa fa-check-circle"></i> Save & Continue Edit</button> -->
-            </div>
-         </div>
-         @if (count($errors) > 0)
-         <div class="alert alert-danger">
-            <ul>
-               @foreach ($errors->all() as $error)
-               <li>{{ $error }}</li>
-               @endforeach
-            </ul>
-         </div>
-         @endif
          <div class="portlet-body">
+            <div class="page-bar">
+               <div class="portlet-title margin-b0">
+                  <div class="caption">
+                        Add Notice
+                  </div>
+                  <div class="actions btn-set">
+                     <button class="btn green-haze btn-circle green-btn" type="submit"><i class="fa fa-check"></i> Save</button>
+                     <!-- <button class="btn green-haze btn-circle"><i class="fa fa-check-circle"></i> Save & Continue Edit</button> -->
+                  </div>
+               </div>
+            </div>
+            @if (count($errors) > 0)
+            <div class="alert alert-danger">
+               <ul>
+                  @foreach ($errors->all() as $error)
+                  <li>{{ $error }}</li>
+                  @endforeach
+               </ul>
+            </div>
+            @endif
+         
             <div class="form-body">
                <div class="form-group">
                   <label class="col-md-2 control-label">Notice Type: <span class="required">
@@ -140,7 +144,7 @@
                   <label class="col-md-2 control-label">Attachment:
                   </label>
                   <div class="col-md-10">
-                     <input class="btn btn-primary" type="file" id="files" name="attachment"><br/>
+                     <input type="file" id="files" name="attachment"><br/>
 
                      <div id="selectedFiles"></div>
                   </div>

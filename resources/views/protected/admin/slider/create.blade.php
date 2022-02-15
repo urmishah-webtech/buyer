@@ -30,21 +30,24 @@
    }
 </style>
 
-<h3 class="page-title">
+<!-- <h3 class="page-title">
    Slider Add
-</h3>
-<div class="page-bar">
+</h3> -->
+<div class="page-bar page-top-bar">
    <ul class="page-breadcrumb">
       <li>
-         <i class="fa fa-home"></i>
+         <i class="fa fa-home" style="color:black;"></i>
          <a href="{{URL::route('admin_dashboard')}}">Home</a>
-         <i class="fa fa-angle-right"></i>
+         <i class="fa fa-angle-right" style="color:black;"></i>
       </li>
 
       <li>
          <a href="#">Slider Add</a>
       </li>
    </ul>
+   <div class="page-toolbar">
+      <a href="{{URL('admin/description-manage')}}" class="btn green-haze btn-circle pull-right back-btn"><i class="fa fa-backward"></i> Back</a>
+   </div>
 </div>
 <!-- END PAGE HEADER-->
 <!-- BEGIN PAGE CONTENT-->
@@ -53,14 +56,15 @@
       {!! Form::open(array('route'=>array('admin.slider_store'),'class'=>'form-horizontal form-row-seperated','files'=>true)) !!}
       @csrf
       <div class="portlet light">
-         <div class="portlet-title">
-            <div class="caption">
-               <i class="icon-basket font-green-sharp"></i>
-               <span class="caption-subject font-green-sharp bold uppercase">
-                  Add Slider </span>
-            </div>
-            <div class="actions btn-set">
-               <button class="btn green-haze btn-circle" type="submit"><i class="fa fa-check"></i> Save</button>
+         <div class="portlet-body">
+         <div class="page-bar">
+            <div class="portlet-title margin-b0">
+               <div class="caption">
+                     Add Slider
+               </div>
+               <div class="actions btn-set">
+                  <button class="btn green-haze btn-circle green-btn" type="submit"><i class="fa fa-check"></i> Save</button>
+               </div>
             </div>
          </div>
          @if (count($errors) > 0)
@@ -102,12 +106,13 @@
                   <label class="col-md-2 control-label">Slider Image:
                   </label>
                   <div class="col-md-10">
-                     <input class="btn btn-primary" type="file" id="files" name="slider_image"><br/>
+                     <input type="file" id="files" name="slider_image"><br/>
 
                      <div id="selectedFiles"></div>
                   </div>
                </div>
             </div>
+         </div>
          </div>
       </div>
       </form>

@@ -12,7 +12,7 @@ $user_id = Sentinel::getUser()->id; ?>
 @else
 <div class="row">
     <div class="col-md-6" style="border-right: 1px solid #eee;">
-          <h5 class="text-center">Inquiry/Product Title:</h5>
+          <h5 class="text-left">Inquiry/Product Title:</h5>
           <?php
           $product_name_title = 'No title found';
             if($inquiry->is_join_quotation == 1){
@@ -32,7 +32,7 @@ $user_id = Sentinel::getUser()->id; ?>
           @endif
     </div>
     <div class="col-md-6">
-          <h5 class="text-center">Inquiry/Product Source:</h5>
+          <h5 class="text-right">Inquiry/Product Source:</h5>
         @if($inquiry->is_RFQ == 1)
           <p class="text-right"><a title="{{$product_name_title}}" target="_blank" href="{{URL::to('product-sourcing/view',$inquiry->id)}}">{{$product_name_title}}.</a></p>
         @else
@@ -53,7 +53,7 @@ $user_id = Sentinel::getUser()->id; ?>
 @endif
 <hr />
 <div class="row">
-    <div class="col-md-6 text-left">
+    <div class="col-md-6 text-left" style="border-right: 1px solid #eee;">
         <h5>Inquiry Sender Info:</h5>
         @if($inquiry->inq_sender_user)
             @if($inquiry->sender_company)
@@ -80,7 +80,7 @@ $user_id = Sentinel::getUser()->id; ?>
           @endif
         @endif
     </div>
-    <div class="col-md-6 text-right" style="border-right: 1px solid #eee;">
+    <div class="col-md-6 text-right">
         <h5>Inquiry Product Owner Info:</h5>
         @if($inquiry->product_owner_user)
             @if($inquiry->product_owner_company)
@@ -116,7 +116,7 @@ $user_id = Sentinel::getUser()->id; ?>
 <hr />
 <div>
     <h5 class="text-center">Inquiry/Product Images:</h5>
-    <div>
+    <div class="ip-img-row">
       @if($inquiry->is_join_quotation != 1)
         @if(count($inquiry->inq_products_images_all) > 0)
           @foreach($inquiry->inq_products_images_all as $image)
@@ -162,7 +162,7 @@ $user_id = Sentinel::getUser()->id; ?>
     </div>
 </div>
 <hr />
-<div class="row">
+<div class="row col-3-row">
     <div class="col-md-4 text-left" style="border-right: 1px solid #eee;">
         <h5>Quantity:</h5>
         <p>{{$inquiry->quantity}}</p>
@@ -194,22 +194,25 @@ $user_id = Sentinel::getUser()->id; ?>
 @if($product)
 <form action="{{ URL::to('post_conversation',null) }}" method="post" class="form conversation_form">
 {!! csrf_field() !!}
-    <div class="col-sm-12 padding_0">
-        <p style="font-size:15px;font-weight:bold;color:#666" class="pull-left">Product</p>
-        <a href="#" class="btn btn-sm btn-warning pull-right">Modify & Submit</a>
-        <div class="container_of_inquery_action_btn">
-        @if($user_id == $product->sender)
-            <a class="pull-right text-danger inquery_action" href="#" ca_inquery_id="{{ $product->id }}" style="margin-top:.5%;margin-right:2%" ca_action="single_trush"><i class="fa fa-trash"></i> Trush</a>
-        @else
-            <a class="pull-right text-danger inquery_action" href="#" ca_inquery_id="{{ $product->id }}" style="margin-top:.5%;margin-right:2%" ca_action="single_spam"><i class="fa fa-thumbs-down"></i> Spam</a>
-            <a class="pull-right text-danger inquery_action" href="#" ca_inquery_id="{{ $product->id }}" style="margin-top:.5%;margin-right:2%" ca_action="single_flag"><i class="fa fa-flag-checkered"></i> Flag</a>
-        @endif
+    <div class="row">
+        <div class="col-sm-12 padding_0 pd-ms-row">
+            <h5 class="pull-left">Product</h5>
+            <div class="pd-ms-row-btn">
+                <a href="#" class="btn btn-sm btn-warning pull-right green-btn">Modify & Submit</a>
+                <div class="container_of_inquery_action_btn">
+                @if($user_id == $product->sender)
+                    <a class="pull-right text-danger inquery_action" href="#" ca_inquery_id="{{ $product->id }}" style="margin-top:.5%;margin-right:2%" ca_action="single_trush"><i class="fa fa-trash"></i> Trush</a>
+                @else
+                    <a class="pull-right text-danger inquery_action" href="#" ca_inquery_id="{{ $product->id }}" style="margin-top:.5%;margin-right:2%" ca_action="single_spam"><i class="fa fa-thumbs-down"></i> Spam</a>
+                    <a class="pull-right text-danger inquery_action" href="#" ca_inquery_id="{{ $product->id }}" style="margin-top:.5%;margin-right:2%" ca_action="single_flag"><i class="fa fa-flag-checkered"></i> Flag</a>
+                @endif
+                </div>
+            </div>
         </div>
-
     </div>
-    <table class="table" style="background:#F0F0F0">
-        <thead style="border:1px solid #ddd!important">
-            <tr class="text-muted" style="font-weight:bold">
+    <table class="table idm-table">
+        <thead>
+            <tr class="text-muted">
                 <td>Product Information</td>
                 <td>Quantity</td>
                 <td>Unit</td>
@@ -217,18 +220,21 @@ $user_id = Sentinel::getUser()->id; ?>
                 <td>Total</td>
             </tr>
         </thead>
-        <tbody style="border:1px solid #dce2e6!important">
-            <tr style="font-size:13px">
+        <tbody>
+            <tr>
                 <input type="hidden" name="product_owner_id" value="{{ $product->product_owner_id }}">
                 <input type="hidden" name="inquery_id" value="{{ $product->id }}">
                 <input type="hidden" name="product_id" value="{{ $product->product_id }}">
-                <td><a href="{{ URL::to('product-details/'.preg_replace('/[^A-Za-z0-9\. -]/', ' ',$product->name).'='.mt_rand(100000000, 999999999).$product->product_id) }}" target="_blank" style="border:1px solid #ddd;padding:0%" class="col-xs-2 padding_0">
-                @if($product->images)
-                <img src="{{ URL::to($product->images) }}" alt="{{$product->name}}" class="img-responsive" style="height:52px;width:100%">
-                @else
-                <img src="{{ URL::asset('uploads/no-image.jpg') }}" alt="no image" class="img-responsive" style="height:52px;width:100%">
-                @endif
-                </a><a href="{{ URL::to('product-details/'.preg_replace('/[^A-Za-z0-9\. -]/', ' ',$product->name).'='.mt_rand(100000000, 999999999).$product->product_id) }}" target="_blank" class="col-xs-9 btn-link">{{ $product->name }}</a></td>
+                <td>
+                    <a href="{{ URL::to('product-details/'.preg_replace('/[^A-Za-z0-9\. -]/', ' ',$product->name).'='.mt_rand(100000000, 999999999).$product->product_id) }}" target="_blank" class=" idm-table-img">
+                        @if($product->images)
+                        <img src="{{ URL::to($product->images) }}" alt="{{$product->name}}" class="img-responsive">
+                        @else
+                        <img src="{{ URL::asset('uploads/no-image.jpg') }}" alt="no image" class="img-responsive">
+                        @endif
+                    </a>
+                    <a href="{{ URL::to('product-details/'.preg_replace('/[^A-Za-z0-9\. -]/', ' ',$product->name).'='.mt_rand(100000000, 999999999).$product->product_id) }}" target="_blank" class=" btn-link idm-table-text">{{ $product->name }}</a>
+                </td>
                 <?php
                 $previous_qp_data = BdtdcInqueryMessage::where('inquery_id',$product->id)
                                 ->where('product_id',$product->product_id)
@@ -244,17 +250,17 @@ $user_id = Sentinel::getUser()->id; ?>
                 <td><input type="text" name="total" class="form-control total"></td>
             </tr>
             <tr>
-                <td colspan="4">
+                <td colspan="5">
                     <?php
                         $person_who_wrote  = ($user_id == $product->sender) ? "<span style='color:#666;font-weight:bold'>You</span>" : "<span style='color:red;font-weight:bold'>Supplier</span>";
                         if($user_id == $product->sender){
-                            ?><span class="badge" style="background: #F1F1F1;color: #666;font-weight: bold">You wrote </span><?php
+                            ?><span class="badge primary-bag">You wrote </span><?php
                         }else{ ?>
-                                <span class="badge" style="background: #F1F1F1;color: darkred;font-weight: bold">{{$product->s_first_name}} {{$product->s_last_name}} wrote </span>
+                                <span class="badge primary-bag">{{$product->s_first_name}} {{$product->s_last_name}} wrote </span>
                             <?php
                         }
                     ?>
-                    <span class="badge pull-right">at {{ $product->created_at }}</span><div class="prev_msg">{!! nl2br($product->message) !!}</div>
+                    <span class="badge pull-right yellow-bag">at {{ $product->created_at }}</span><div class="prev_msg">{!! nl2br($product->message) !!}</div>
                     @if($attached_docs)
                     @if(count($attached_docs) > 0)
                     <div>
@@ -337,10 +343,11 @@ $user_id = Sentinel::getUser()->id; ?>
         </table>
         <?php $_id++ ?>
     @endforeach
-
-    <div class="col-sm-12 padding_0">
-        <textarea name="messages" id="" cols="30" rows="2" placeholder="New message" class="form-control"></textarea>
-        <input type="submit" value="Send" class="btn btn-sm btn-primary submit_single_msg"/>
+    <div class="row idm-msg">
+        <div class="col-sm-12 padding_0">
+            <textarea name="messages" id="" cols="30" rows="2" placeholder="New message" class="form-control"></textarea>
+            <input type="submit" value="Send" class="btn btn-sm btn-primary submit_single_msg"/>
+        </div>
     </div>
 </form>
 @else

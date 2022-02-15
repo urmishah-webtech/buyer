@@ -30,21 +30,24 @@
    }
 </style>
 
-<h3 class="page-title">
+<!-- <h3 class="page-title">
    Slider Update
-</h3>
-<div class="page-bar">
+</h3> -->
+<div class="page-bar page-top-bar">
    <ul class="page-breadcrumb">
       <li>
-         <i class="fa fa-home"></i>
+         <i class="fa fa-home" style="color:black;"></i>
          <a href="{{URL::route('admin_dashboard')}}">Home</a>
-         <i class="fa fa-angle-right"></i>
+         <i class="fa fa-angle-right" style="color:black;"></i>
       </li>
 
       <li>
          <a href="#">Slider Update</a>
       </li>
    </ul>
+   <div class="page-toolbar">
+      <a href="{{URL('admin/description-manage')}}" class="btn green-haze btn-circle pull-right back-btn"><i class="fa fa-backward"></i> Back</a>
+   </div>
 </div>
 <!-- END PAGE HEADER-->
 <!-- BEGIN PAGE CONTENT-->
@@ -53,61 +56,63 @@
       <form action="{{ URL::to('admin/sliderUpdate', $slider->id) }}" method="post" enctype="multipart/form-data" class="form-horizontal form-row-seperated" accept-charset="UTF-8">
          @csrf
       <div class="portlet light">
-         <div class="portlet-title">
-            <div class="caption">
-               <i class="icon-basket font-green-sharp"></i>
-               <span class="caption-subject font-green-sharp bold uppercase">
-                  Update Slider </span>
-            </div>
-            <div class="actions btn-set">
-               <button class="btn green-haze btn-circle" type="submit"><i class="fa fa-check"></i> Update </button>
-               <!-- <button class="btn green-haze btn-circle"><i class="fa fa-check-circle"></i> Save & Continue Edit</button> -->
-            </div>
-         </div>
-         @if (count($errors) > 0)
-         <div class="alert alert-danger">
-            <ul>
-               @foreach ($errors->all() as $error)
-               <li>{{ $error }}</li>
-               @endforeach
-            </ul>
-         </div>
-         @endif
          <div class="portlet-body">
-            <div class="form-body">
-               <input type="hidden" name="slider_id" value="{{$slider->id}}">
-               <div class="form-group">
-                  <label class="col-md-2 control-label">Heading: <span class="required">
-                     * </span>
-                  </label>
-                  <div class="col-md-10">
-                     <input type="text" class="form-control" name="heading" value="{{$slider->heading}}" placeholder="Title" maxlength="254">
+            <div class="page-bar">
+               <div class="portlet-title margin-b0">
+                  <div class="caption">
+                        Update Slider
+                  </div>
+                  <div class="actions btn-set">
+                     <button class="btn green-haze btn-circle btn-primary " type="submit"> Update </button>
+                     <!-- <button class="btn green-haze btn-circle"><i class="fa fa-check-circle"></i> Save & Continue Edit</button> -->
                   </div>
                </div>
-               <div class="form-group">
-                  <label class="col-md-2 control-label">Paragraph: <span class="required">
-                     * </span>
-                  </label>
-                  <div class="col-md-10">
-                     <textarea type="text" class="form-control" name="paragraph" maxlength="10000" rows="3" placeholder="Details">{{$slider->paragraph}}</textarea>
+            </div>
+            @if (count($errors) > 0)
+            <div class="alert alert-danger">
+               <ul>
+                  @foreach ($errors->all() as $error)
+                  <li>{{ $error }}</li>
+                  @endforeach
+               </ul>
+            </div>
+            @endif
+            <div class="portlet-body">
+               <div class="form-body">
+                  <input type="hidden" name="slider_id" value="{{$slider->id}}">
+                  <div class="form-group">
+                     <label class="col-md-2 control-label">Heading: <span class="required">
+                        * </span>
+                     </label>
+                     <div class="col-md-10">
+                        <input type="text" class="form-control" name="heading" value="{{$slider->heading}}" placeholder="Title" maxlength="254">
+                     </div>
                   </div>
-               </div>
-               <div class="form-group">
-                  <label class="col-md-2 control-label">URL: <span class="required">
-                     * </span>
-                  </label>
-                  <div class="col-md-10">
-                     <input type="text" class="form-control" name="url" value="{{$slider->url}}" placeholder="URL" maxlength="1000">
+                  <div class="form-group">
+                     <label class="col-md-2 control-label">Paragraph: <span class="required">
+                        * </span>
+                     </label>
+                     <div class="col-md-10">
+                        <textarea type="text" class="form-control" name="paragraph" maxlength="10000" rows="3" placeholder="Details">{{$slider->paragraph}}</textarea>
+                     </div>
                   </div>
-               </div>
-               <div class="form-group">
-                  <label class="col-md-2 control-label">Slider Image:
-                  </label>
-                  <div class="col-md-10">
-                     <input class="btn btn-primary" type="file" id="files" name="slider_image"><br/>
+                  <div class="form-group">
+                     <label class="col-md-2 control-label">URL: <span class="required">
+                        * </span>
+                     </label>
+                     <div class="col-md-10">
+                        <input type="text" class="form-control" name="url" value="{{$slider->url}}" placeholder="URL" maxlength="1000">
+                     </div>
+                  </div>
+                  <div class="form-group">
+                     <label class="col-md-2 control-label">Slider Image:
+                     </label>
+                     <div class="col-md-10">
+                        <input type="file" id="files" name="slider_image"><br/>
 
-                     <div id="selectedFiles">
-                        <embed src="{{ asset('slider_image/'.$slider->slider_image) }}" width="100" height="100" />
+                        <div id="selectedFiles">
+                           <embed src="{{ asset('slider_image/'.$slider->slider_image) }}" width="100" height="100" />
+                        </div>
                      </div>
                   </div>
                </div>

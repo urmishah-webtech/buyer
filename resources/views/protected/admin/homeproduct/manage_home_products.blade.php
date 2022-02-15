@@ -26,9 +26,12 @@
                     <div class="col-md-12">
                         <!-- BEGIN EXAMPLE TABLE PORTLET-->
                         <div class="portlet box grey-cascade">
-                            <div class="portlet-title" style="background-color:#082154;color:white;">
+                            <div class="portlet-title">
                                 <div class="caption">
-                                    <i class="fa fa-globe"></i>Manage Home Product
+                                    Manage Home Product
+                                </div>
+                                <div class="actions btn-set">
+                                    <button type="button" class="btn green-btn" data-toggle="modal" data-target="#homepageModal">Add New <i class="fa fa-plus"></i></button>
                                 </div>
 <!--                                <div class="tools">
                                     <a href="javascript:;" class="collapse">
@@ -37,10 +40,10 @@
                                     <a href="javascript:;" class="remove">
                                     </a>
                                 </div>-->
-<a href="{{URL('admin/dashboard/Menu')}}" class="btn green-haze btn-circle pull-right" style="margin-right:50px;margin-top: 5px;"><i class="fa fa-backward"></i> Back</a>
+<!-- <a href="{{URL('admin/dashboard/Menu')}}" class="btn green-haze btn-circle pull-right" style="margin-right:50px;margin-top: 5px;"><i class="fa fa-backward"></i> Back</a> -->
                             </div>
                             <div class="portlet-body">
-                                <div class="table-toolbar">
+                                <!-- <div class="table-toolbar">
                                 @if (Session::has('success'))
                                    <div class="alert alert-success">{{ Session::get('success') }}</div>
                                 @endif
@@ -58,9 +61,7 @@
                                 @endif
                                     <div class="row">
                                         <div class="col-md-6">
-                                            <div class="btn-group">
-                                            	<button type="button" class="btn green" data-toggle="modal" data-target="#homepageModal">Add New <i class="fa fa-plus"></i></button>
-                                            </div>
+                                            
                                         </div>
                                         <div class="col-md-6">
                                             {{-- <div class="btn-group pull-right">
@@ -83,8 +84,8 @@
                                             </div> --}}
                                         </div>
                                     </div>
-                                </div>
-                                <table class="table table-striped table-bordered table-hover th-bg" id="sample_1">
+                                </div> -->
+                                <table class="table table-striped table-bordered table-hover th-bg admin-table" id="sample_1">
                                 <thead>
                            
 
@@ -101,16 +102,16 @@
                                     <th>
                                     	Product Name
                                     </th>
-                                    <th>
+                                    <th class="text-center">
                                         Wholesale
                                     </th>
-                                    <th>
+                                    <th class="text-center">
                                         Hot Product
                                     </th>
-                                    <th>
+                                    <th class="text-center">
                                         Bangladeshi Product
                                     </th>
-                                    <th>
+                                    <th class="text-center">
                                         Sort
                                     </th>
                                     <th>
@@ -183,7 +184,7 @@
                                     </td>
 
                                     <td class="sortproduct_td text-center">
-                                        <select name="sortproduct_option" data-id="{{ $h_pro->id }}" class="sortproduct_option">
+                                        <select id="sort" name="sortproduct_option" data-id="{{ $h_pro->id }}" class="sortproduct_option">
                                             @if($total_hp > 0)
                                                 <?php
                                                 // echo $h_pro->sort;
@@ -199,10 +200,14 @@
                                         </select>
                                     </td>
 
-                                    <td class="port_td text-center">
-                                        <!-- <i class="fa fa-pencil-square-o" title="Edit" style="color:green;cursor:pointer;font-size: 20px;"></i> -->
-                                        <!-- <a href="{{'/edit_home_product/'.$h_pro->id}}"><i class="fa fa-edit"></i></a> -->
-                                        <i class="fa fa-times delete_home_product" data-deleteid="{{ $h_pro->id }}" title="Remove" style="color:red;cursor:pointer;font-size: 20px;"></i>
+                                    <td class="port_td">
+                                        <div class="table-grp-btn">
+                                            <!-- <i class="fa fa-pencil-square-o" title="Edit" style="color:green;cursor:pointer;font-size: 20px;"></i> -->
+                                            <!-- <a href="{{'/edit_home_product/'.$h_pro->id}}"><i class="fa fa-edit"></i></a> -->
+                                            <button class="delete-icon-btn" data-deleteid="{{ $h_pro->id }}" title="Remove" >
+                                                <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                            </button>
+                                        </div>
                                     </td>
                                 </tr>
                                 @endforeach
@@ -248,7 +253,7 @@
             @endif
       		<div class="form-group">
 			  <label for="supplier_list">Search Supplier By Name Or ID:</label>
-			  <select class="form-control" name="supplier_list" id="supplier_list" style="width: 185px !important">
+			  <select class="form-control" name="supplier_list" id="supplier_list">
 			    <option value="all" selected>From Any Supplier</option>
 			    @if($bdtdc_supplier)
 			    	@foreach($bdtdc_supplier as $bdtdc_user)
@@ -266,7 +271,7 @@
 			<div class="row removecheckbox">
 				<div class="col-md-8">
                     <label><input type="file" name="home_image" id="home_image"></label><br>
-                    <label>Sort: <select name="sortproduct_opt">
+                    <label>Sort: <select id="sort" name="sortproduct_opt">
                         @if($total_hp > 0)
                             <?php
                             // echo $h_pro->sort;
@@ -297,9 +302,9 @@
 			
       </div>
       <div class="modal-footer">
-              <button type="button" class="btn btn-danger" data-dismiss="modal" style="margin-left: 125px;">Close</button>
-        <button type="reset" class="btn btn-warning resetvalue">Reset</button>
-        <button type="submit" class="btn btn-success add_home_p">Submit</button>
+              <button type="button" class="btn red-btn" data-dismiss="modal" style="margin-left: 125px;">Close</button>
+        <button type="reset" class="btn btn-primary resetvalue">Reset</button>
+        <button type="submit" class="btn green-btn add_home_p">Submit</button>
        
       </div>
       {!! Form::close() !!}

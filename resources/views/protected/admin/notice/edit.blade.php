@@ -30,21 +30,24 @@
    }
 </style>
 
-<h3 class="page-title">
+<!-- <h3 class="page-title">
    Notice Update
-</h3>
-<div class="page-bar">
+</h3> -->
+<div class="page-bar page-top-bar">
    <ul class="page-breadcrumb">
       <li>
-         <i class="fa fa-home"></i>
+         <i class="fa fa-home" style="color:black;"></i>
          <a href="{{URL::route('admin_dashboard')}}">Home</a>
-         <i class="fa fa-angle-right"></i>
+         <i class="fa fa-angle-right" style="color:black;"></i>
       </li>
 
       <li>
          <a href="#">Notice Update</a>
       </li>
    </ul>
+   <div class="page-toolbar">
+      <a href="{{URL('admin/description-manage')}}" class="btn green-haze btn-circle pull-right back-btn"><i class="fa fa-backward"></i> Back</a>
+   </div>
 </div>
 <!-- END PAGE HEADER-->
 <!-- BEGIN PAGE CONTENT-->
@@ -52,111 +55,113 @@
    <div class="col-md-12">
       <form action="{{ URL::to('admin/noticeUpdate', $notice->id) }}" method="post" enctype="multipart/form-data" class="form-horizontal form-row-seperated" accept-charset="UTF-8">
          @csrf
-      <div class="portlet light">
-         <div class="portlet-title">
-            <div class="caption">
-               <i class="icon-basket font-green-sharp"></i>
-               <span class="caption-subject font-green-sharp bold uppercase">
-                  Update Notice </span>
-            </div>
-            <div class="actions btn-set">
-               <button class="btn green-haze btn-circle" type="submit"><i class="fa fa-check"></i> Update </button>
-               <!-- <button class="btn green-haze btn-circle"><i class="fa fa-check-circle"></i> Save & Continue Edit</button> -->
-            </div>
-         </div>
-         @if (count($errors) > 0)
-         <div class="alert alert-danger">
-            <ul>
-               @foreach ($errors->all() as $error)
-               <li>{{ $error }}</li>
-               @endforeach
-            </ul>
-         </div>
-         @endif
-         <div class="portlet-body">
-            <div class="form-body">
-               <div class="form-group">
-                  <label class="col-md-2 control-label">Notice Type: <span class="required">
-                     * </span>
-                  </label>
-                  <div class="col-md-10">
-                     <select class="form-control notice_type" name="notice_type" id="notice_type" required>
-                        <option value="">Please Select</option>
-                        <option value="1" @if($notice->notice_type == 1) selected @endif >General</option>
-                        <option value="2" @if($notice->notice_type == 2) selected @endif >User Role</option>
-                        <option value="3" @if($notice->notice_type == 3) selected @endif >User</option>
-                     </select>
+         <div class="portlet box grey-cascade">
+            <div class="portlet light margin-b0">
+               <div class="portlet-body">
+                  <div class="page-bar">
+                     <div class="portlet-title margin-b0">
+                        <div class="caption">
+                           Update Notice
+                        </div>
+                        <div class="actions btn-set">
+                           <button class="btn btn-primary" type="submit"> Update </button>
+                           <!-- <button class="btn green-haze btn-circle"><i class="fa fa-check-circle"></i> Save & Continue Edit</button> -->
+                        </div>
+                     </div>
                   </div>
-               </div>
-               <input type="hidden" name="notice_id" value="{{$notice->id}}">
-               <div id="selected_list" class="com-md-10 col-md-offset-2">
-                  @if($notice->notice_type == 2)
-                     @foreach($notice->notice_details as $rowdata)
-                     <div class="col-md-3"><input type="hidden" name="user_role_id[]" value="{{$rowdata->get_user_role_info->id}}"><p>{{$rowdata->get_user_role_info->name}} &nbsp;<span class="btn btn-danger btn-xs btn-circle" onclick="this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode); return false;">x</span></p></div>
-                     @endforeach
-                  @elseif($notice->notice_type == 3)
-                     @foreach($notice->notice_details as $rowdata)
-                     <div class="col-md-3"><input type="hidden" name="user_id[]" value="{{$rowdata->get_user_info->id}}"><p>{{$rowdata->get_user_info->first_name}} {{$rowdata->get_user_info->last_name}} &nbsp;<span class="btn btn-danger btn-xs btn-circle" onclick="this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode); return false;">x</span></p></div>
-                     @endforeach
+                  @if (count($errors) > 0)
+                  <div class="alert alert-danger">
+                     <ul>
+                        @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                        @endforeach
+                     </ul>
+                  </div>
                   @endif
-               </div>
-               <div class="clearfix"></div>
-               <div class="form-group user-role-div @if($notice->notice_type != 2) hidden @endif">
-                  <label class="col-md-2 control-label">User Role: <span class="required">
-                     * </span>
-                  </label>
-                  <div class="col-md-10">
-                     <select class="form-control" name="user_role" id="user_role">
-                        <option value="">Please Select</option>
-                        @foreach ($roles as $rowdata)
-                        <option value="{{$rowdata->id}}" value2="{{$rowdata->name}}">{{$rowdata->name}}</option>
-                        @endforeach
-                     </select>
-                  </div>
-               </div>
-               <div class="form-group user-div @if($notice->notice_type != 3) hidden @endif">
-                  <label class="col-md-2 control-label">User: <span class="required">
-                     * </span>
-                  </label>
-                  <div class="col-md-10">
-                     <select class="form-control" name="user" id="user">
-                        <option value="">Please Select</option>
-                        @foreach ($users as $rowdata)
-                        <option value="{{$rowdata->id}}" value2="{{$rowdata->first_name}} {{$rowdata->last_name}}">{{$rowdata->first_name}} {{$rowdata->last_name}}</option>
-                        @endforeach
-                     </select>
-                  </div>
-               </div>
-               <div class="form-group">
-                  <label class="col-md-2 control-label">Title: <span class="required">
-                     * </span>
-                  </label>
-                  <div class="col-md-10">
-                     <input type="text" class="form-control" name="title" value="{{$notice->title}}" placeholder="Title" maxlength="254">
-                  </div>
-               </div>
-               <div class="form-group">
-                  <label class="col-md-2 control-label">Details: <span class="required">
-                     * </span>
-                  </label>
-                  <div class="col-md-10">
-                     <textarea type="text" class="form-control" name="details" maxlength="10000" rows="3" placeholder="Details">{{$notice->details}}</textarea>
-                  </div>
-               </div>
-               <div class="form-group">
-                  <label class="col-md-2 control-label">Attachment:
-                  </label>
-                  <div class="col-md-10">
-                     <input class="btn btn-primary" type="file" id="files" name="attachment"><br/>
+                  <div class="form-body">
+                     <div class="row form-group">
+                        <label class="col-md-2 control-label">Notice Type: <span class="required">
+                           * </span>
+                        </label>
+                        <div class="col-md-9">
+                           <select class="form-control notice_type" name="notice_type" id="notice_type" required>
+                              <option value="">Please Select</option>
+                              <option value="1" @if($notice->notice_type == 1) selected @endif >General</option>
+                              <option value="2" @if($notice->notice_type == 2) selected @endif >User Role</option>
+                              <option value="3" @if($notice->notice_type == 3) selected @endif >User</option>
+                           </select>
+                        </div>
+                     </div>
+                     <input type="hidden" name="notice_id" value="{{$notice->id}}">
+                     <div id="selected_list" class="com-md-9 col-md-offset-3">
+                        @if($notice->notice_type == 2)
+                           @foreach($notice->notice_details as $rowdata)
+                           <div class="col-md-3"><input type="hidden" name="user_role_id[]" value="{{$rowdata->get_user_role_info->id}}"><p>{{$rowdata->get_user_role_info->name}} &nbsp;<span class="btn btn-danger btn-xs btn-circle" onclick="this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode); return false;">x</span></p></div>
+                           @endforeach
+                        @elseif($notice->notice_type == 3)
+                           @foreach($notice->notice_details as $rowdata)
+                           <div class="col-md-3"><input type="hidden" name="user_id[]" value="{{$rowdata->get_user_info->id}}"><p>{{$rowdata->get_user_info->first_name}} {{$rowdata->get_user_info->last_name}} &nbsp;<span class="btn btn-danger btn-xs btn-circle" onclick="this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode); return false;">x</span></p></div>
+                           @endforeach
+                        @endif
+                     </div>
+                     <div class="clearfix"></div>
+                     <div class="form-group user-role-div @if($notice->notice_type != 2) hidden @endif">
+                        <label class="col-md-2 control-label">User Role: <span class="required">
+                           * </span>
+                        </label>
+                        <div class="col-md-9">
+                           <select class="form-control" name="user_role" id="user_role">
+                              <option value="">Please Select</option>
+                              @foreach ($roles as $rowdata)
+                              <option value="{{$rowdata->id}}" value2="{{$rowdata->name}}">{{$rowdata->name}}</option>
+                              @endforeach
+                           </select>
+                        </div>
+                     </div>
+                     <div class="form-group user-div @if($notice->notice_type != 3) hidden @endif">
+                        <label class="col-md-2 control-label">User: <span class="required">
+                           * </span>
+                        </label>
+                        <div class="col-md-9">
+                           <select class="form-control" name="user" id="user">
+                              <option value="">Please Select</option>
+                              @foreach ($users as $rowdata)
+                              <option value="{{$rowdata->id}}" value2="{{$rowdata->first_name}} {{$rowdata->last_name}}">{{$rowdata->first_name}} {{$rowdata->last_name}}</option>
+                              @endforeach
+                           </select>
+                        </div>
+                     </div>
+                     <div class="form-group">
+                        <label class="col-md-2 control-label">Title: <span class="required">
+                           * </span>
+                        </label>
+                        <div class="col-md-9">
+                           <input type="text" class="form-control" name="title" value="{{$notice->title}}" placeholder="Title" maxlength="254">
+                        </div>
+                     </div>
+                     <div class="form-group">
+                        <label class="col-md-2 control-label">Details: <span class="required">
+                           * </span>
+                        </label>
+                        <div class="col-md-9">
+                           <textarea type="text" class="form-control" name="details" maxlength="10000" rows="3" placeholder="Details">{{$notice->details}}</textarea>
+                        </div>
+                     </div>
+                     <div class="form-group">
+                        <label class="col-md-2 control-label">Attachment:
+                        </label>
+                        <div class="col-md-9">
+                           <input type="file" id="files" name="attachment"><br/>
 
-                     <div id="selectedFiles">
-                        <embed src="{{ asset('notice_docs/'.$notice->attachment) }}" width="100" height="100" />
+                           <div id="selectedFiles">
+                              <embed src="{{ asset('notice_docs/'.$notice->attachment) }}" width="100" height="100" />
+                           </div>
+                        </div>
                      </div>
                   </div>
                </div>
             </div>
          </div>
-      </div>
       </form>
    </div>
 </div>

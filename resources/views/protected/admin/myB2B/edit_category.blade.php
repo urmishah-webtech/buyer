@@ -14,14 +14,7 @@
     <!--<div class=" page-bar page-title"  style="background-color:#082154;color:white;">-->
     <!--    <h3 style="margin: 5px;">Edit Category</h3>-->
     <!--</div>-->
-    <div class="portlet box grey-cascade">
-        <div class="portlet-title" style="background-color:#082154;color:white;">
-            <div class="caption">
-                <i class="fa fa-globe"></i>Edit Category
-            </div>
-        </div>
-    </div>
-    <div class="page-bar">
+    <div class="page-bar page-top-bar">
         
         <ul class="page-breadcrumb" >
             <li>
@@ -40,9 +33,16 @@
         </ul>
         <div class="page-toolbar">
            
-            <a href="{{URL('admin/category-list')}}" class="btn green-haze btn-circle pull-right" style="margin-right:50px;"><i class="fa fa-backward"></i> Back</a>
+            <a href="{{URL('admin/category-list')}}" class="btn green-haze btn-circle pull-right back-btn"><i class="fa fa-backward"></i> Back</a>
         </div>
     </div>
+    <!-- <div class="portlet box grey-cascade">
+        <div class="portlet-title" style="background-color:#082154;color:white;">
+            <div class="caption">
+                <i class="fa fa-globe"></i>Edit Category
+            </div>
+        </div>
+    </div> -->
                 
                 <!-- END PAGE HEADER-->
                 <!-- BEGIN PAGE CONTENT-->
@@ -51,42 +51,40 @@
                        <!--  <form class="form-horizontal form-row-seperated" action="#"> -->
 		<form action="{{ URL::to('admin/category-update',$categories->id) }}" method="post" enctype="multipart/form-data" accept-charset="UTF-8" class="form-horizontal  form-row-seperated" files="true">
         {!! csrf_field() !!}
-                            <div class="portlet light">
-                                <div class="portlet-title">
-                                    <div class="caption">
-                                        <i class="fa fa-cubes"></i>
-                                        <span class="caption-subject font-green-sharp bold uppercase">
-                                        Edit Category </span>
-                                    </div>
-                                    <div class="actions btn-set">
-                                        <button class="btn green-haze btn-circle"><i class="fa fa-check-circle"></i> Save & Continue Edit</button>
-                                        {{-- <div class="btn-group">
-                                            <a class="btn yellow btn-circle" href="javascript:;" data-toggle="dropdown">
-                                            <i class="fa fa-share"></i> More <i class="fa fa-angle-down"></i>
-                                            </a>
-                                            <ul class="dropdown-menu pull-right">
-                                                <li>
-                                                    <a href="javascript:;">
-                                                    Duplicate </a>
-                                                </li>
-                                                <li>
-                                                    <a href="javascript:;">
-                                                    Delete </a>
-                                                </li>
-                                                <li class="divider">
-                                                </li>
-                                                <li>
-                                                    <a href="javascript:;">
-                                                    Print </a>
-                                                </li>
-                                            </ul>
-                                        </div> --}}
-                                    </div>
+                            <div class="portlet-title">
+                                <div class="caption">
+                                    Edit Category
                                 </div>
+                                <div class="actions btn-set">
+                                    <button class="btn green-haze btn-circle"><i class="fa fa-check-circle"></i> Save & Continue Edit</button>
+                                    {{-- <div class="btn-group">
+                                        <a class="btn yellow btn-circle" href="javascript:;" data-toggle="dropdown">
+                                        <i class="fa fa-share"></i> More <i class="fa fa-angle-down"></i>
+                                        </a>
+                                        <ul class="dropdown-menu pull-right">
+                                            <li>
+                                                <a href="javascript:;">
+                                                Duplicate </a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:;">
+                                                Delete </a>
+                                            </li>
+                                            <li class="divider">
+                                            </li>
+                                            <li>
+                                                <a href="javascript:;">
+                                                Print </a>
+                                            </li>
+                                        </ul>
+                                    </div> --}}
+                                </div>
+                            </div>
+                            <div class="portlet light">
                                     
                                 <div id="validation_error page-text"></div>    
 
-                                <div class="portlet-body">
+                                <div class="portlet-body tabs-sec">
                                     <div class="tabbable">
                                         <ul class="nav nav-tabs">
                                             <li class="active">
@@ -106,173 +104,167 @@
                                         </ul>
                                         <div class="tab-content no-space">
                                             <div class="tab-pane active" id="tab_general">
-                                                <div class="form-body">
-                                                    <div class="col-md-12 form-group" style="margin-top: 30px">
-                                                        <label class="col-md-2 control-label">Category Name: <span class="required">
-                                                        * </span>
-                                                        </label>
-                                                        <div class="col-md-8">
-                                                            <input type="text" class="form-control" id="name" name="name" value="{{$categories->category_name->name}}" placeholder="">
-                                                        </div>
-                                                       
+                                                <div class="col-md-12 form-group">
+                                                    <label class="col-md-2 control-label">Category Name: <span class="required">
+                                                    * </span>
+                                                    </label>
+                                                    <div class="col-md-9">
+                                                        <input type="text" class="form-control" id="name" name="name" value="{{$categories->category_name->name}}" placeholder="">
                                                     </div>
-                                                    <div class="col-md-12 form-group">
-                                                        <label class="col-md-2 control-label">Slug: <span class="required">
-                                                        * </span>
-                                                        </label>
-                                                        <div class="col-md-8">
-                                                            <input type="text" class="form-control" id="slug" name="slug" value="{{$categories->slug}}" placeholder="">
-                                                        </div>
-                                                       
+                                                   
+                                                </div>
+                                                <div class="col-md-12 form-group">
+                                                    <label class="col-md-2 control-label">Slug: <span class="required">
+                                                    * </span>
+                                                    </label>
+                                                    <div class="col-md-9">
+                                                        <input type="text" class="form-control" id="slug" name="slug" value="{{$categories->slug}}" placeholder="">
                                                     </div>
-                                                    <div class="col-md-12 form-group">
-                                                        <label class="col-md-2 control-label">Tag: <span class="required">
-                                                        * </span>
-                                                        </label>
-                                                        <div class="col-md-8">
-                                                            <input type="text" class="form-control" id="tag" name="tag" value="{{$categories->category_name->tag}}" placeholder="">
-                                                        </div>
-                                                       
+                                                   
+                                                </div>
+                                                <div class="col-md-12 form-group">
+                                                    <label class="col-md-2 control-label">Tag: <span class="required">
+                                                    * </span>
+                                                    </label>
+                                                    <div class="col-md-9">
+                                                        <input type="text" class="form-control" id="tag" name="tag" value="{{$categories->category_name->tag}}" placeholder="">
                                                     </div>
-                                                    <div class="col-md-12 form-group">
-                                                        <label class="col-md-2 control-label">Description: <span class="required">
-                                                        * </span>
-                                                        </label>
-                                                        <div class="col-md-8">
-                                                            <input type="text" class="form-control" id="description" value="{{$categories->category_name->description}}" name="description">
-                                                        </div>
+                                                   
+                                                </div>
+                                                <div class="col-md-12 form-group">
+                                                    <label class="col-md-2 control-label">Description: <span class="required">
+                                                    * </span>
+                                                    </label>
+                                                    <div class="col-md-9">
+                                                        <input type="text" class="form-control" id="description" value="{{$categories->category_name->description}}" name="description">
                                                     </div>
-                                                    <div class="col-md-12 form-group">
-                                                        <label class="col-md-2 control-label">Parent Category: <span class="required">
-                                                        * </span>
-                                                        </label>
-                                                        <div class="col-md-8">
-                                                           <div class="form-control height-auto parent_id_div">
-                                                                <div class="scroller" style="height:275px;" data-always-visible="1">
-                                                                    
+                                                </div>
+                                                <div class="col-md-12 form-group">
+                                                    <label class="col-md-2 control-label">Parent Category: <span class="required">
+                                                    * </span>
+                                                    </label>
+                                                    <div class="col-md-9">
+                                                       <div class="form-control height-auto parent_id_div">
+                                                            <div class="scroller" style="height:275px;" data-always-visible="1">
+                                                                
 
 
-                                                                    <ul class="list-unstyled">
-                                                                        @if($categories->parent_id==0)
-                                                                            <label><input checked=checked type="checkbox" class="parent_id" name="categories[]" value="0">Parent</label> 
-                                                                            @else
-                                                                          <label><input type="checkbox" class="parent_id" name="categories[]" value="0">Parent</label> 
-                                                                            <label>
-                                                                                @if($parent)
-                                                                                @foreach($parendetail as $parentdetails)
-                                                                                        <input type="checkbox" checked=checked class="parent_id" name="categories[]" value="{{$parentdetails->id}}"> {{$parentdetails->category_name->name}}
-                                                                                @endforeach
-                                                                                @else
-                                                                                @endif
-                                                                            </label>          
-                                                                        @endif
-                                                                       
-                                                                        @if($cats)
-                                                                            @foreach($cats as $cat)
-                                                                            <label><input type="checkbox" class="parent_id" name="categories[]" value="<?php echo $cat['id']; ?>">{{ $cat->category_name->name ?? '' }}</label>                                  
+                                                                <ul class="list-unstyled">
+                                                                    @if($categories->parent_id==0)
+                                                                        <label><input checked=checked type="checkbox" class="parent_id" name="categories[]" value="0">Parent</label> 
+                                                                        @else
+                                                                      <label><input type="checkbox" class="parent_id" name="categories[]" value="0">Parent</label> 
+                                                                        <label>
+                                                                            @if($parent)
+                                                                            @foreach($parendetail as $parentdetails)
+                                                                                    <input type="checkbox" checked=checked class="parent_id" name="categories[]" value="{{$parentdetails->id}}"> {{$parentdetails->category_name->name}}
                                                                             @endforeach
-                                                                        @endif
-                                                                        
-                                                                       
-                                                                       
-                                                                    </ul>
-                                                                </div>
+                                                                            @else
+                                                                            @endif
+                                                                        </label>          
+                                                                    @endif
+                                                                   
+                                                                    @if($cats)
+                                                                        @foreach($cats as $cat)
+                                                                        <label><input type="checkbox" class="parent_id" name="categories[]" value="<?php echo $cat['id']; ?>">{{ $cat->category_name->name ?? '' }}</label>                                  
+                                                                        @endforeach
+                                                                    @endif
+                                                                    
+                                                                   
+                                                                   
+                                                                </ul>
                                                             </div>
-                                                            <span class="help-block">
-                                                            select only one category </span>
                                                         </div>
+                                                        <span class="help-block">
+                                                        select only one category </span>
                                                     </div>
-                                                    <div class="col-md-12 form-group">
-                                                        <label class="col-md-2 control-label">SEO keyword: <span class="required">
-                                                        * </span>
-                                                        </label>
-                                                        <div class="col-md-8">
-                                                           <input type="text" class="form-control" name="seo" id="seo" value="{{$categories->category_name->meta_keyword}}">
-                                                        </div>
+                                                </div>
+                                                <div class="col-md-12 form-group">
+                                                    <label class="col-md-2 control-label">SEO keyword: <span class="required">
+                                                    * </span>
+                                                    </label>
+                                                    <div class="col-md-9">
+                                                       <input type="text" class="form-control" name="seo" id="seo" value="{{$categories->category_name->meta_keyword}}">
                                                     </div>
-                                                    <div class="col-md-12 form-group">
-                                                        <label class="col-md-2 control-label">Top: <span class="required">
-                                                        * </span>
-                                                        </label>
-                                                        <div class="col-md-8">
-                                                           <div class="input-group">
-                                                                        <div class="icheck-inline">
-                                                                            <label>
-                                                                            <input type="radio" name="top" value="1" class="icheck" checked> YES </label>
-                                                                            <label>
-                                                                            <input type="radio" name="top"  value="0" class="icheck"> No </label>
-                                                                        </div>
+                                                </div>
+                                                <div class="col-md-12 form-group">
+                                                    <label class="col-md-2 control-label">Top: <span class="required">
+                                                    * </span>
+                                                    </label>
+                                                    <div class="col-md-9">
+                                                       <div class="input-group">
+                                                                    <div class="icheck-inline">
+                                                                        <label>
+                                                                        <input type="radio" name="top" value="1" class="icheck" checked> YES </label>
+                                                                        <label>
+                                                                        <input type="radio" name="top"  value="0" class="icheck"> No </label>
                                                                     </div>
-                                                        </div>
+                                                                </div>
                                                     </div>
-                                                    <div class="col-md-12 form-group">
-                                                        <label class="col-md-2 control-label">Status: <span class="required">
-                                                        * </span>
-                                                        </label>
-                                                        <div class="col-md-8">
-                                                          
-                                                            <div class="input-group">
-                                                                        <div class="icheck-inline">
-                                                                            <label>
-                                                                            <input type="radio" name="status" value="1" class="icheck" checked> Published </label>
-                                                                           <label>
-                                                                            <input type="radio" name="status"  value="0" class="icheck"> UnPublished </label>
-                                                                        </div>
+                                                </div>
+                                                <div class="col-md-12 form-group">
+                                                    <label class="col-md-2 control-label">Status: <span class="required">
+                                                    * </span>
+                                                    </label>
+                                                    <div class="col-md-9">
+                                                      
+                                                        <div class="input-group">
+                                                                    <div class="icheck-inline">
+                                                                        <label>
+                                                                        <input type="radio" name="status" value="1" class="icheck" checked> Published </label>
+                                                                       <label>
+                                                                        <input type="radio" name="status"  value="0" class="icheck"> UnPublished </label>
                                                                     </div>
+                                                                </div>
 
-                                                        </div>
                                                     </div>
-
                                                 </div>
                                             </div>       
                                                
 
                                             <div class="tab-pane" id="tab_meta">
-                                                <div class="form-body">
-                                                    <div class="col-md-12 form-group" style="margin-top: 30px">
-                                                        <label class="col-md-2 control-label">Headline:</label>
-                                                        <div class="col-md-10">
-                                                            <input type="text" class="form-control maxlength-handler" name="h1" id="h1" maxlength="150" value="{{$categories->category_name->h1}}">
-                                                            <span class="help-block">
-                                                            max 150 chars </span>
-                                                        </div>
+                                                <div class="col-md-12 form-group">
+                                                    <label class="col-md-2 control-label">Headline:</label>
+                                                    <div class="col-md-10">
+                                                        <input type="text" class="form-control maxlength-handler" name="h1" id="h1" maxlength="150" value="{{$categories->category_name->h1}}">
+                                                        <span class="help-block">
+                                                        max 150 chars </span>
                                                     </div>
+                                                </div>
 
-                                                    <div class="col-md-12 form-group">
-                                                        <label class="col-md-2 control-label">Meta Title:</label>
-                                                        <div class="col-md-10">
-                                                            <input type="text" class="form-control maxlength-handler" name="meta_title" id="meta_title" maxlength="150" value="{{$categories->category_name->meta_title}}">
-                                                            <span class="help-block">
-                                                            max 150 chars </span>
-                                                        </div>
+                                                <div class="col-md-12 form-group">
+                                                    <label class="col-md-2 control-label">Meta Title:</label>
+                                                    <div class="col-md-10">
+                                                        <input type="text" class="form-control maxlength-handler" name="meta_title" id="meta_title" maxlength="150" value="{{$categories->category_name->meta_title}}">
+                                                        <span class="help-block">
+                                                        max 150 chars </span>
                                                     </div>
-                                                    <div class="col-md-12 form-group">
-                                                        <label class="col-md-2 control-label"> Meta Keywords:</label>
-                                                        <div class="col-md-10">
-                                                            <input type="text" class="form-control maxlength-handler" rows="4" id="meta_keywords" name="meta_keywords" maxlength="500" value="{{$categories->category_name->meta_keyword}}">
-                                                            <span class="help-block">
-                                                            max 500 chars </span>
-                                                        </div>
+                                                </div>
+                                                <div class="col-md-12 form-group">
+                                                    <label class="col-md-2 control-label"> Meta Keywords:</label>
+                                                    <div class="col-md-10">
+                                                        <input type="text" class="form-control maxlength-handler" rows="4" id="meta_keywords" name="meta_keywords" maxlength="500" value="{{$categories->category_name->meta_keyword}}">
+                                                        <span class="help-block">
+                                                        max 500 chars </span>
                                                     </div>
-                                                    <div class="col-md-12 form-group">
-                                                        <label class="col-md-2 control-label">Meta Description:</label>
-                                                        <div class="col-md-10">
-                                                            <input type="text" class="form-control maxlength-handler" rows="8" id="meta_description" name="meta_description" maxlength="1000" value="{{$categories->category_name->meta_description}}">
-                                                            <span class="help-block">
-                                                            max 1000 chars </span>
-                                                        </div>
+                                                </div>
+                                                <div class="col-md-12 form-group">
+                                                    <label class="col-md-2 control-label">Meta Description:</label>
+                                                    <div class="col-md-10">
+                                                        <input type="text" class="form-control maxlength-handler" rows="8" id="meta_description" name="meta_description" maxlength="1000" value="{{$categories->category_name->meta_description}}">
+                                                        <span class="help-block">
+                                                        max 1000 chars </span>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="tab-pane" id="tab_images">
-                                                <div class="panel panel-success" style="margin-top: 70px ">
+                                                <div class="panel panel-success">
                                                   <div class="panel-heading">
                                                       <h3 class="panel-title">Operations</h3>
                                                   </div>
-                                                  <div class="panel-body">
                                                                <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
                                                     <!--<div class="row fileupload-buttonbar">-->
-                                                        <div class="col-lg-12">
+                                                        <div class="row fileupload-buttonbar">
                                                            <!-- The fileinput-button span is used to style the file input field as button -->
                                                            <!-- <span class="btn green fileinput-button">
                                                             <i class="fa fa-plus"></i>
@@ -325,9 +317,8 @@
                                                    <!-- </div>-->
                                                     <!-- The table listing the files available for upload/download -->
                                                     
-                                                     </div>
                                                 </div>
-                                                <div class="panel panel-success" style="margin-top: 100px;">
+                                                <div class="panel panel-success  panel-success-note">
                                                         <div class="panel-heading">
                                                             <h3 class="panel-title">Notes</h3>
                                                         </div>

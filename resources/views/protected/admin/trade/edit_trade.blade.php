@@ -9,14 +9,7 @@
                 <p style="color:white;">{{ session('flash_message') }}</p>
          </div>
     @endif
-    <div class="portlet box grey-cascade">
-        <div class="portlet-title" style="background-color:#082154;color:white;">
-            <div class="caption">
-                <i class="fa fa-globe"></i>Edit Trade Show
-            </div>
-        </div>
-    </div>
-    <div class="page-bar">
+    <div class="page-bar page-top-bar">
         
         <ul class="page-breadcrumb" >
             <li>
@@ -35,9 +28,17 @@
         </ul>
         <div class="page-toolbar">
            
-            <a href="{{URL('admin/tradeshow-show')}}" class="btn green-haze btn-circle pull-right" style="margin-right:50px;"><i class="fa fa-backward"></i> Back</a>
+            <a href="{{URL('admin/tradeshow-show')}}" class="btn green-haze btn-circle pull-right back-btn" ><i class="fa fa-backward"></i> Back</a>
         </div>
     </div>
+<!--     <div class="portlet box grey-cascade">
+        <div class="portlet-title" style="background-color:#082154;color:white;">
+            <div class="caption">
+                <i class="fa fa-globe"></i>Edit Trade Show
+            </div>
+        </div>
+    </div> -->
+    
     
     
                 <!-- END PAGE HEADER-->
@@ -49,49 +50,46 @@
                        
                         {!! Form::open(array('route'=>array('admin.tradeshow-update',$pre_trade_data->description->tradeshow_id),'id'=>'form1','class'=>'form-horizontal  form-row-seperated trade_edit_form','files'=>true)) !!}
 
-                            <div class="portlet light">
-                                <div class="portlet-title">
-                                    <div class="caption">
-                                        <i class="fa fa-cubes"></i>
-                                        <span class="caption-subject font-green-sharp bold uppercase">
-                                            Trade-Show Edit 
-                                        </span>
-                                        <!--<span class="caption-helper">Edit</span>-->
-                                    </div>
-                                    <div class="actions btn-set">
-                                        <a href="{{ URL::to('admin/tradeshow-show') }}" class="btn btn-default btn-success btn-circle" style="color: #fffcfb;">Trade List</a>
-                                        <!-- <span onClick="return form_validate('form1');" class="btn green-haze btn-circle"><i class="fa fa-check"></i> Save</span> -->
-                                        <button class="btn green-haze btn-circle"><i class="fa fa-check"></i> Save</button>
-                                        <button class="btn green-haze btn-circle"><i class="fa fa-check-circle"></i> Save & Continue Edit</button>
-                                        {{-- <div class="btn-group">
-                                            <a class="btn yellow btn-circle" href="javascript:;" data-toggle="dropdown">
-                                            <i class="fa fa-share"></i> More <i class="fa fa-angle-down"></i>
-                                            </a>
-                                            <ul class="dropdown-menu pull-right">
-                                                <li>
-                                                    <a href="javascript:;">
-                                                    Duplicate </a>
-                                                </li>
-                                                <li>
-                                                    <a href="javascript:;">
-                                                    Delete </a>
-                                                </li>
-                                                <li class="divider">
-                                                </li>
-                                                <li>
-                                                    <a href="javascript:;">
-                                                    Print </a>
-                                                </li>
-                                            </ul>
-                                        </div> --}}
-                                    </div>
+                            <div class="portlet-title">
+                                <div class="caption">
+                                   Trade Show Edit 
+                                    <!--<span class="caption-helper">Edit</span>-->
                                 </div>
+                                <div class="actions btn-set">
+                                    <!-- <span onClick="return form_validate('form1');" class="btn green-haze btn-circle"><i class="fa fa-check"></i> Save</span> -->
+                                    <button class="btn green-haze btn-circle green-btn"><i class="fa fa-check"></i> Save</button>
+                                    <button class="btn green-haze btn-circle btn-primary"><i class="fa fa-check-circle"></i> Save & Continue Edit</button>
+                                    <a href="{{ URL::to('admin/tradeshow-show') }}" class="btn green-haze btn-circle pull-right yellow-btn"><i class="fa fa-list"></i>Trade List</a>
+                                    {{-- <div class="btn-group">
+                                        <a class="btn yellow btn-circle" href="javascript:;" data-toggle="dropdown">
+                                        <i class="fa fa-share"></i> More <i class="fa fa-angle-down"></i>
+                                        </a>
+                                        <ul class="dropdown-menu pull-right">
+                                            <li>
+                                                <a href="javascript:;">
+                                                Duplicate </a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:;">
+                                                Delete </a>
+                                            </li>
+                                            <li class="divider">
+                                            </li>
+                                            <li>
+                                                <a href="javascript:;">
+                                                Print </a>
+                                            </li>
+                                        </ul>
+                                    </div> --}}
+                                </div>
+                            </div>
+                            <div class="portlet box grey-cascade">
                                     
                                 <div id="validation_error">
 
                                 </div>
 
-                                <div class="portlet-body">
+                                <div class="portlet-body tabs-sec">
                                     <div class="tabbable">
                                         <ul class="nav nav-tabs">
                                             <li class="active">
@@ -110,107 +108,105 @@
                                         </ul>
                                         <div class="tab-content no-space">
                                             <div class="tab-pane active" id="tab_general">
-                                                <div class="form-body">
-                                                    <div class="col-md-12 form-group" style="margin-top: 30px">
-                                                        <label class="col-md-2 control-label">Country Name: <span class="required">
-                                                        * </span>
-                                                        </label>
-                                                        <div class="col-md-4">
-                                                            <select class="form-control country_id" name="country_id" id="location_of_reg" style="/*width:38%;*/padding-bottom:1%;font-size:12px;padding-top:0%">
-                                                                  <option value="{{ $pre_trade_data->country_id }}">{{ $pre_trade_data->trade_country->name }}</option>
-                                                                  @foreach($country as $single_country)
-                                                                  <option value="{{$single_country->id}}" >{{$single_country->name}}</option>
-                                                                  @endforeach
-                                                            </select>
-                                                            
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-12 form-group">
-                                                        <label class="col-md-2 control-label">Location: <span class="required">
-                                                        * </span>
-                                                        </label>
-                                                        <div class="col-md-4">
-                                                            {!! Form::text('location',$pre_trade_data->location,['class'=>'form-control','placeholder'=>'location']) !!}
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-md-12 form-group">
-                                                        <label class="col-md-2 control-label">Date: <span class="required">
-                                                        * </span>
-                                                        </label>
-                                                        <div class="col-md-4">
-                                                            {!! Form::date('date',$pre_trade_data->date,['class'=>'form-control date','placeholder'=>'Date']) !!}
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-md-12 form-group">
-                                                        <label class="col-md-2 control-label">Duration: <span class="required">
-                                                        * </span>
-                                                        </label>
-                                                            <div style="margin-left:1.5%;margin-left:-1px;" class=" form-group col-md-2 ">
-                                                                    {!! Form::text('start_time',explode(',',$pre_trade_data->duration)[0],['class'=>'form-control text-primary','placeholder'=>'Start Time (Ex: 10:52:AM)']) !!}
-                                                            </div>
-                                                            <!-- <div class="form-group col-md-2" style="box-shadow: none;background:     transparent;">
-                                                                <input style="box-shadow: none;background: transparent;" readonly type="text" class="btn btn-xs" value=":">
-                                                            </div> -->
-                                                            <div  style="margin-left:1.5%;margin-left:-1px;" class=" form-group col-md-2 ">
-                                                                {!! Form::text('end_time',explode(',',$pre_trade_data->duration)[1],['class'=>'form-control text-primary','placeholder'=>'End-time (Ex: 10:52:AM)']) !!}
-                                                            </div>
+                                                <div class="col-md-12 form-group">
+                                                    <label class="col-md-2 control-label">Country Name: <span class="required">
+                                                    * </span>
+                                                    </label>
+                                                    <div class="col-md-9">
+                                                        <select class="form-control country_id" name="country_id" id="location_of_reg" style="/*width:38%;*/padding-bottom:1%;font-size:12px;padding-top:0%">
+                                                              <option value="{{ $pre_trade_data->country_id }}">{{ $pre_trade_data->trade_country->name }}</option>
+                                                              @foreach($country as $single_country)
+                                                              <option value="{{$single_country->id}}" >{{$single_country->name}}</option>
+                                                              @endforeach
+                                                        </select>
                                                         
                                                     </div>
-
-
-                                                    <div class="col-md-12 form-group">
-                                                        <label class="col-md-2 control-label">Venue: <span class="required">
-                                                        * </span>
-                                                        </label>
-                                                        <div class="col-md-4">
-                                                            {!! Form::text('venue',$pre_trade_data->venue,['class'=>'form-control','placeholder'=>'vanue']) !!}
-                                                        </div>
+                                                </div>
+                                                <div class="col-md-12 form-group">
+                                                    <label class="col-md-2 control-label">Location: <span class="required">
+                                                    * </span>
+                                                    </label>
+                                                    <div class="col-md-9">
+                                                        {!! Form::text('location',$pre_trade_data->location,['class'=>'form-control','placeholder'=>'location']) !!}
                                                     </div>
-                                                    <div class="col-md-12 form-group">
-                                                        <label class="col-md-2 control-label">Parent Category: <span class="required">
-                                                        * </span>
-                                                        </label>
-                                                        <div class="col-md-4">
-                                                           <div class="form-control height-auto parent_id_div">
-                                                                <div class="scroller" style="height:275px;" data-always-visible="1">
+                                                </div>
 
+                                                <div class="col-md-12 form-group">
+                                                    <label class="col-md-2 control-label">Date: <span class="required">
+                                                    * </span>
+                                                    </label>
+                                                    <div class="col-md-9">
+                                                        {!! Form::date('date',$pre_trade_data->date,['class'=>'form-control date','placeholder'=>'Date']) !!}
+                                                    </div>
+                                                </div>
 
-                                                                    <ul class="list-unstyled">
-                                                                        <?php if ($categorys) {?>
-
-                                                                        <label><input type="checkbox" class="parent_id" name="categories[]" value="0">Parent</label>
-                                                                             <?php foreach ($categorys as $category) {?>
-
-
-                                                                        <li>
-                                                                        
-
-                                                                            <label><input type="checkbox" class="parent_id" name="categories[]"  value="<?php echo $category['category_id'] ;?>"><?php echo $category['name'] ; ?></label>
-
-                                                                             <?php if ($category['category_childrens']) { ?>
-                                                                                 <?php foreach (array_chunk($category['category_childrens'], ceil(count($category['category_childrens']))) as $category_childrens) { ?>
-                                                                            <ul class="list-unstyled">
-                                                                            <?php foreach ($category_childrens as $category_children) { ?>
-                                                                                <li>
-                                                                                    <label><input type="checkbox"  class="chield_id" name="categories[]" value="<?php echo $category_children['category_id'] ;?>"> <?php echo $category_children['child_name']; ?></label>
-                                                                                </li>
-                                                                               <?php } ?>
-                                                                            </ul>
-                                                                            <?php } ?>
-                                                                            <?php } ?>
-
-                                                                        </li>
-                                                                        <?php } ?>
-                                                                        <?php } ?>
-
-                                                                    </ul>
-                                                                </div>
-                                                            </div>
-                                                            <span class="help-block">
-                                                            select only one category </span>
+                                                <div class="col-md-12 form-group">
+                                                    <label class="col-md-2 control-label">Duration: <span class="required">
+                                                    * </span>
+                                                    </label>
+                                                        <div style="margin-left:1.5%;margin-left:-1px;" class=" form-group col-md-2 ">
+                                                                {!! Form::text('start_time',explode(',',$pre_trade_data->duration)[0],['class'=>'form-control text-primary','placeholder'=>'Start Time (Ex: 10:52:AM)']) !!}
                                                         </div>
+                                                        <!-- <div class="form-group col-md-2" style="box-shadow: none;background:     transparent;">
+                                                            <input style="box-shadow: none;background: transparent;" readonly type="text" class="btn btn-xs" value=":">
+                                                        </div> -->
+                                                        <div  style="margin-left:1.5%;margin-left:-1px;" class=" form-group col-md-2 ">
+                                                            {!! Form::text('end_time',explode(',',$pre_trade_data->duration)[1],['class'=>'form-control text-primary','placeholder'=>'End-time (Ex: 10:52:AM)']) !!}
+                                                        </div>
+                                                    
+                                                </div>
+
+
+                                                <div class="col-md-12 form-group">
+                                                    <label class="col-md-2 control-label">Venue: <span class="required">
+                                                    * </span>
+                                                    </label>
+                                                    <div class="col-md-9">
+                                                        {!! Form::text('venue',$pre_trade_data->venue,['class'=>'form-control','placeholder'=>'vanue']) !!}
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12 form-group">
+                                                    <label class="col-md-2 control-label">Parent Category: <span class="required">
+                                                    * </span>
+                                                    </label>
+                                                    <div class="col-md-9">
+                                                       <div class="form-control height-auto parent_id_div">
+                                                            <div class="scroller" style="height:275px;" data-always-visible="1">
+
+
+                                                                <ul class="list-unstyled">
+                                                                    <?php if ($categorys) {?>
+
+                                                                    <label><input type="checkbox" class="parent_id" name="categories[]" value="0">Parent</label>
+                                                                         <?php foreach ($categorys as $category) {?>
+
+
+                                                                    <li>
+                                                                    
+
+                                                                        <label><input type="checkbox" class="parent_id" name="categories[]"  value="<?php echo $category['category_id'] ;?>"><?php echo $category['name'] ; ?></label>
+
+                                                                         <?php if ($category['category_childrens']) { ?>
+                                                                             <?php foreach (array_chunk($category['category_childrens'], ceil(count($category['category_childrens']))) as $category_childrens) { ?>
+                                                                        <ul class="list-unstyled">
+                                                                        <?php foreach ($category_childrens as $category_children) { ?>
+                                                                            <li>
+                                                                                <label><input type="checkbox"  class="chield_id" name="categories[]" value="<?php echo $category_children['category_id'] ;?>"> <?php echo $category_children['child_name']; ?></label>
+                                                                            </li>
+                                                                           <?php } ?>
+                                                                        </ul>
+                                                                        <?php } ?>
+                                                                        <?php } ?>
+
+                                                                    </li>
+                                                                    <?php } ?>
+                                                                    <?php } ?>
+
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                        <span class="help-block">
+                                                        select only one category </span>
                                                     </div>
                                                 </div>
                                             </div>       
@@ -219,16 +215,16 @@
                                             <div class="tab-pane" id="tab_meta">
                                                 <div class="form-body" >
 
-                                                    <div class="col-md-12 form-group" style="margin-top: 30px">
+                                                    <div class="col-md-12 form-group">
                                                         <label class="col-md-2 control-label">Title:</label>
-                                                        <div class="col-md-4">
+                                                        <div class="col-md-9">
                                                             {!! Form::text('title',$pre_trade_data->description->title,['class'=>'form-control','placeholder'=>'Title']) !!}
                                                         </div>
                                                     </div>
 
                                                     <div class="col-md-12 form-group">
                                                         <label class="col-md-2 control-label">Description:</label>
-                                                        <div class="col-md-4">
+                                                        <div class="col-md-9">
                                                             <textarea class="form-control maxlength-handler" rows="8" id="meta_description" name="description" value="{{ $pre_trade_data->description->description }}" maxlength="1000">{{ $pre_trade_data->description->description }}</textarea>
                                                             <span class="help-block">
                                                             max 1000 chars </span>
@@ -237,14 +233,14 @@
 
                                                     <div class="col-md-12 form-group">
                                                         <label class="col-md-2 control-label">Meta Title:</label>
-                                                        <div class="col-md-4">
+                                                        <div class="col-md-9">
                                                             {!! Form::text('meta_title',$pre_trade_data->description->meta_title,['class'=>'form-control','placeholder'=>'Meta-Title']) !!}
                                                         </div>
                                                     </div>
 
                                                     <div class="col-md-12 form-group">
                                                         <label class="col-md-2 control-label">Meta Description:</label>
-                                                        <div class="col-md-4">
+                                                        <div class="col-md-9">
                                                             <textarea class="form-control maxlength-handler" rows="8" id="meta_description" name="meta_description" maxlength="1000">{{ $pre_trade_data->description->meta_description }}</textarea>
                                                             <span class="help-block">
                                                             max 1000 chars </span>
@@ -253,7 +249,7 @@
 
                                                     <div class="col-md-12 form-group">
                                                         <label class="col-md-2 control-label">Meta Keyword:</label>
-                                                        <div class="col-md-4">
+                                                        <div class="col-md-9">
                                                             {!! Form::text('meta_keyword',$pre_trade_data->description->meta_keyword,['class'=>'form-control','placeholder'=>'Meta-keyword']) !!}
                                                         </div>
                                                     </div>
@@ -262,13 +258,12 @@
                                             </div>
                                             <!---------------------- image INFORMATION ---------------->
                                             <div class="tab-pane" id="tab_images">
-                                                <div class="panel panel-success" style="margin-top: 60px;">
+                                                <div class="panel panel-success">
                                                   <div class="panel-heading">
                                                       <h3 class="panel-title">Operations</h3>
                                                   </div>
-                                                  <div class="panel-body">
                                                                <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
-                                                    <div class="col-md-12 row fileupload-buttonbar">
+                                                    <div class="row fileupload-buttonbar">
                                                         
                                                         <div class="col-md-6">
                                                             <!-- The fileinput-button span is used to style the file input field as button -->
@@ -286,16 +281,15 @@
                                                         </div>
                                                         <div class="col-md-6">
                                                             <h4>Image</h4>
-                                                            <img class="img-thumbnail" style="width:58%;height: 108px;margin-bottom: 2%;" src="{{ URL::to('uploads',$pre_trade_data->images) }}" alt="">
+                                                            <img class="img-thumbnail" src="{{ URL::to('uploads',$pre_trade_data->images) }}" alt="">
                                                         </div>
                                                        
                                                         
                                                     </div>
                                                     <!-- The table listing the files available for upload/download -->
                                                     
-                                                     </div>
                                                 </div>
-                                                <div class="panel panel-success" style="margin-top: 221px;">
+                                                <div class="panel panel-success panel-success-note">
                                                         <div class="panel-heading">
                                                             <h3 class="panel-title">Notes</h3>
                                                         </div>

@@ -69,41 +69,41 @@
          </div>
     @endif
       {!! Form::open(array('route'=>array('admin.category.store'),'id'=>'form1','class'=>'form-horizontal form-row-seperated','files'=>true)) !!}
-      <div class="portlet box grey-cascade">
-         <div class="portlet-title">
-            <div class="caption">
-               Add Category
-            </div>
-            <div class="actions btn-set">
-               {{-- <button class="btn btn-default btn-circle "><i class="fa fa-reply"></i> Reset</button> --}}
-               <a href="{{ URL::to('admin/category-list') }}" class="btn yellow-btn">Category List</a>
-               <button class="btn green-haze btn-circle black-btn" type="button" id="next_button" data-tab=""><i class="fa fa-check"></i> Next</button>
-                 <button class="btn green-haze btn-circle" id="save_button" style="display:none;"><i class="fa fa-check"></i> Save</button>
-                 <button class="btn green-haze btn-circle" id="save_button1" style="display:none;"><i class="fa fa-check-circle"></i> Save & Continue Edit</button>
-               <!--<span onClick="return form_validate('form1');" class="btn green-haze btn-circle" id="save_button" style="display:none;"><i class="fa fa-check"></i> Save </span>-->
-               <!--<button class="btn green-haze btn-circle" onClick="return form_validate('form1');" id="save_button1" style="display:none;"><i class="fa fa-check-circle"></i> Save & Continue Edit</button>-->
-               <!--<i data-target_navigation="#change_avatar" class="fa fa-arrow-circle-right fa-2x btn btn-primary btn-lg pull-right next_to_additional_info navigation_link" style="margin-top:1%"></i>-->
-               <!-- <button class="btn green-haze btn-circle"><i class="fa fa-check-circle"></i> Save & Continue Edit</button> -->
-               {{-- <div class="btn-group">
-                  <a class="btn yellow btn-circle" href="javascript:;" data-toggle="dropdown">
-                     <i class="fa fa-share"></i> More <i class="fa fa-angle-down"></i>
-                  </a>
-                  <ul class="dropdown-menu pull-right">
-                     <li>
-                        <a href="javascript:;">Duplicate </a>
-                     </li>
-                     <li>
-                        <a href="javascript:;">Delete </a>
-                     </li>
-                     <li class="divider">
-                     </li>
-                     <li>
-                        <a href="javascript:;">Print </a>
-                     </li>
-                  </ul>
-               </div> --}}
-            </div>
+      <div class="portlet-title">
+         <div class="caption">
+            Add Category
          </div>
+         <div class="actions btn-set">
+            {{-- <button class="btn btn-default btn-circle "><i class="fa fa-reply"></i> Reset</button> --}}
+            <button class="btn green-haze btn-circle black-btn" type="button" id="next_button" data-tab=""><i class="fa fa-check"></i> Next</button>
+            <a href="{{ URL::to('admin/category-list') }}" class="btn yellow-btn"><i class="fa fa-list"></i> Category List</a>
+              <button class="btn green-haze btn-circle" id="save_button" style="display:none;"><i class="fa fa-check"></i> Save</button>
+              <button class="btn green-haze btn-circle" id="save_button1" style="display:none;"><i class="fa fa-check-circle"></i> Save & Continue Edit</button>
+            <!--<span onClick="return form_validate('form1');" class="btn green-haze btn-circle" id="save_button" style="display:none;"><i class="fa fa-check"></i> Save </span>-->
+            <!--<button class="btn green-haze btn-circle" onClick="return form_validate('form1');" id="save_button1" style="display:none;"><i class="fa fa-check-circle"></i> Save & Continue Edit</button>-->
+            <!--<i data-target_navigation="#change_avatar" class="fa fa-arrow-circle-right fa-2x btn btn-primary btn-lg pull-right next_to_additional_info navigation_link" style="margin-top:1%"></i>-->
+            <!-- <button class="btn green-haze btn-circle"><i class="fa fa-check-circle"></i> Save & Continue Edit</button> -->
+            {{-- <div class="btn-group">
+               <a class="btn yellow btn-circle" href="javascript:;" data-toggle="dropdown">
+                  <i class="fa fa-share"></i> More <i class="fa fa-angle-down"></i>
+               </a>
+               <ul class="dropdown-menu pull-right">
+                  <li>
+                     <a href="javascript:;">Duplicate </a>
+                  </li>
+                  <li>
+                     <a href="javascript:;">Delete </a>
+                  </li>
+                  <li class="divider">
+                  </li>
+                  <li>
+                     <a href="javascript:;">Print </a>
+                  </li>
+               </ul>
+            </div> --}}
+         </div>
+      </div>
+      <div class="portlet box grey-cascade">
 
          <div id="validation_error">
             @if (session()->has('flash_message'))
@@ -111,8 +111,8 @@
             @endif
          </div>
 
-         <div class="portlet-body">
-            <div class="tabbable tabs-sec">
+         <div class="portlet-body tabs-sec">
+            <div class="tabbable ">
                <ul class="nav nav-tabs" style="display: flex;">
                   <li class="active" id="check_tab1">
                      <a href="tab_general" data-toggle="tab">
