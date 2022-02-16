@@ -69,13 +69,22 @@ jQuery(document).ready(function() {
 </script>
 <script type="text/javascript">
 // sidebar js
+      jQuery(function($) {
+          var path = window.location.href; // because the 'href' property of the DOM element is the absolute path
+          $('.page-sidebar-menu li a').each(function() {
+              $(this).removeClass('active');
+              if (this.href === path) {
+                  $(this).addClass('active');
+              }
+          });
+      });
       $(document).ready(function() {
          $('.page-sidebar-menu').each(function() {
             $(this).find('.sidebar-sub-menu').parent().addClass('dropdown-inner');
          });
-         $(".dropdown-inner > li > a").click(function(){
-            $(this).toggleClass("open-dropdown");
-         });
+         // $(".dropdown-inner > li > a").click(function(){
+         //    $(this).toggleClass("open-dropdown");
+         // });
       });
 
       // header js
@@ -90,6 +99,10 @@ jQuery(document).ready(function() {
             $('.dropdown-inner.active-submenu').not(this).removeClass('active-submenu');
             $(this).toggleClass('active-submenu');
          });
+         // if ( $('.sidebar-sub-menu li a').hasClass('active') ) {
+         //    alert("Hello! I am an alert box!!");
+         //    $('li.dropdown-inner').addClass('active-submenu');
+         // }
       });
 </script>
 @yield('script')

@@ -53,19 +53,17 @@
 <div class="row">
    <div class="col-md-12">
       <div class="portlet box grey-cascade">
-         <div class="portlet-body">
-            <div class="page-bar">
-               <div class="portlet-title margin-b0">
-                  <div class="caption">
-                        Slider List
-                  </div>
-                  <div class="actions btn-set">
-                     <!-- <button class="btn green-haze btn-circle" type="submit"><i class="fa fa-check"></i> Save</button> -->
-                     <a href="{{URL::route('admin.slider_add')}}" class="btn green-haze btn-circle btn-primary ">Add Slider</a>
-                     <!-- <button class="btn green-haze btn-circle"><i class="fa fa-check-circle"></i> Save & Continue Edit</button> -->
-                  </div>
-               </div>
+         <div class="portlet-title margin-b0">
+            <div class="caption">
+                  Slider List
             </div>
+            <div class="actions btn-set">
+               <!-- <button class="btn green-haze btn-circle" type="submit"><i class="fa fa-check"></i> Save</button> -->
+               <a href="{{URL::route('admin.slider_add')}}" class="btn green-haze btn-circle btn-primary ">Add Slider</a>
+               <!-- <button class="btn green-haze btn-circle"><i class="fa fa-check-circle"></i> Save & Continue Edit</button> -->
+            </div>
+         </div>
+         <div class="portlet-body">
             <div class="portlet-body">
                <table id="example" class="table table-striped table-bordered admin-table">
                   <thead>
