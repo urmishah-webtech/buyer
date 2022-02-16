@@ -163,7 +163,7 @@ form.sidebar-search input {background: #262837; border: none; padding: 7px 12px;
 
 /*User Management page css*/
 .portlet.box.grey-cascade {border-radius: 4px !important; overflow: hidden; background: #ffffff;}
-.portlet.box>.portlet-title {border-bottom: 1px solid #ebedf2 !important; min-height: auto; display: flex; align-items: center; padding: 10px 25px; background: transparent !important;}
+.portlet.box .portlet-title {border-bottom: 1px solid #ebedf2 !important; min-height: auto; display: flex; align-items: center; padding: 10px 25px; background: transparent !important;}
 .portlet>.portlet-title>.caption {float: left; display: inline-block; font-size: 18px; line-height: 18px; padding: 10px 0 !important; color: #1b1b28 !important; }
 .portlet>.portlet-title>.tools {padding: 0; }
 .portlet>.portlet-title>.tools {display: flex; align-items: center; justify-content: center; margin-left: auto;}
@@ -334,9 +334,7 @@ select#sort, select#update_sort {border-color: #e2e5ec; color: #2a3242; min-heig
 .pd-ms-row-btn {display: flex; flex-direction: row-reverse; margin-left: auto; }
 .container_of_inquery_action_btn, .container_of_inquery_action_btn a {display: flex; align-items: center; margin: 0 12px !important; }
 table.idm-table {font-size: 12px; font-weight: 400; background: #F1F3FA; }
-table.idm-table>tbody>tr>td, table.idm-table>thead>tr>td {
-    vertical-align: middle;
-}
+table.idm-table>tbody>tr>td, table.idm-table>thead>tr>td {vertical-align: middle; }
 table.idm-table thead td {font-weight: 500; color: #000; }
 .idm-table input.form-control {min-height: 42px; border-color: #e2e5ec; border-radius: 4px !important; color: #2a3242; border: 1px solid #e2e5ec; padding: 10px 16px; font-size: 12px; font-weight: 400; line-height: 18px; width: 100%; margin-bottom: 0; }
 .idm-table td .idm-table-img {font-size: 0; max-width: 40px !important; height: 40px !important; display: block; border: 1px solid #ddd; border-radius: 4px !important; overflow: hidden; margin-bottom: 5px; }
