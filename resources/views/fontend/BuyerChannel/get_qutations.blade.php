@@ -398,7 +398,7 @@
    }
 </script>
 
-<script>
+<!-- <script>
    f = document.getElementById("quatationForm");
    f.onsubmit=function(){
      if (!f.terms.checked){
@@ -406,7 +406,7 @@
        return false;
      }
    }
- </script>
+ </script> -->
 
 <script>
    var selDiv = "";

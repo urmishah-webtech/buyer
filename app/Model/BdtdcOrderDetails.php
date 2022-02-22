@@ -17,6 +17,10 @@ class BdtdcOrderDetails extends Model
     {
         return $this->hasOne('App\Model\BdtdcProductDescription','product_id','product_id');
     }
+    public function ordermultipleProductDetails()
+    {
+        return $this->hasMany('App\Model\BdtdcProductDescription','product_id','product_id');
+    }
     public function orderProductUnit(){
         return $this->hasOne('App\Model\BdtdcProductUnit','id','unit_id');
     }

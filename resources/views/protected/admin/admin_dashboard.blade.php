@@ -156,7 +156,7 @@
                   <div class="col-md-6">
                      <div class="dash-card">
                         <div class="card-header">
-                           <h4>Category wise product sale</h4>
+                           <h4>product wise sale</h4>
                         </div>
                         <div class="chart-body">
                            <ul class="chart-info">
@@ -172,7 +172,7 @@
                   <div class="col-md-6">
                      <div class="dash-card">
                         <div class="card-header">
-                           <h4>Category wise product stock</h4>
+                           <h4>product wise stock</h4>
                         </div>
                         <div class="chart-body">
                            <ul class="chart-info">
@@ -190,64 +190,30 @@
 
             <div class="top-products-sec dash-card">
                <div class="card-header">
-                  <h4>Top 12 Products</h4>
+                  <h4>Top  {{ count($mostsellingproduct) }} Products</h4>
                </div>
                <div class="card-body">
                   <div class="top-products-slider">
+                  @if($mostsellingproduct)
+                    @foreach($mostsellingproduct as $result)
                      <div>
                         <a class="top-pd">
+                           @if(!empty($result->image))
+                           <img src="{{ url($result->image) }}">
+                           @else
                            <img src="{{ url('assets/blank-img.jpg') }}">
+                           @endif
                            <div class="top-pd-details">
-                              <span class="pd-price">$600.000</span>
-                              <span class="pd-name">Analog Black Dial Men's Watch-32-BK-CK</span>
+                              <span class="pd-price">
+                                 {{$result->product_MOQ}}
+                                 <?php /* @if(!empty($result->product_MOQ)) <?php echo number_format($result->product_MOQ, 2, '.', ','); ?> @endif */ ?></span>
+                                 
+                              <span class="pd-name">{{$result->name}}</span>
                            </div>
                         </a>
                      </div>
-                     <div>
-                        <a class="top-pd">
-                           <img src="{{ url('assets/blank-img.jpg') }}">
-                           <div class="top-pd-details">
-                              <span class="pd-price">$600.000</span>
-                              <span class="pd-name">Analog Black Dial Men's Watch-32-BK-CK</span>
-                           </div>
-                        </a>
-                     </div>
-                     <div>
-                        <a class="top-pd">
-                           <img src="{{ url('assets/blank-img.jpg') }}">
-                           <div class="top-pd-details">
-                              <span class="pd-price">$600.000</span>
-                              <span class="pd-name">Analog Black Dial Men's Watch-32-BK-CK</span>
-                           </div>
-                        </a>
-                     </div>
-                     <div>
-                        <a class="top-pd">
-                           <img src="{{ url('assets/blank-img.jpg') }}">
-                           <div class="top-pd-details">
-                              <span class="pd-price">$600.000</span>
-                              <span class="pd-name">Analog Black Dial Men's Watch-32-BK-CK</span>
-                           </div>
-                        </a>
-                     </div>
-                     <div>
-                        <a class="top-pd">
-                           <img src="{{ url('assets/blank-img.jpg') }}">
-                           <div class="top-pd-details">
-                              <span class="pd-price">$600.000</span>
-                              <span class="pd-name">Analog Black Dial Men's Watch-32-BK-CK</span>
-                           </div>
-                        </a>
-                     </div>
-                     <div>
-                        <a class="top-pd">
-                           <img src="{{ url('assets/blank-img.jpg') }}">
-                           <div class="top-pd-details">
-                              <span class="pd-price">$600.000</span>
-                              <span class="pd-name">Analog Black Dial Men's Watch-32-BK-CK</span>
-                           </div>
-                        </a>
-                     </div>
+                     @endforeach
+                  @endif
                   </div>
                </div>
             </div>
@@ -793,5 +759,73 @@
 	   Index.initMiniCharts();
 	   Tasks.initDashboardWidget();
 	});
+
+   // Product number of sale chart js
+
+$(function () {
+    const ctx = document.getElementById('PdSaleChart');
+    const myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: [
+         <?php foreach ($mostsellingcategory as $key => $value): ?>
+            '{{$value->name}}',
+         <?php endforeach; ?>
+        ],
+        datasets: [{
+            label: '# of Sales',
+            data: [<?php foreach ($mostsellingcategory as $key => $value): ?>'{{$value->total}}',<?php endforeach; ?>],
+            backgroundColor: [
+                'rgb(85, 140, 242, 0.5)'
+            ],
+            borderColor: [
+                'rgb(85, 140, 242, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+      plugins: {
+        legend: {
+          display: false
+        }
+      }
+    }
+    });
+});
+
+// Product number of stock chart js
+
+$(function () {
+    const ctx = document.getElementById('PdStockChart');
+    const myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: [
+          <?php foreach ($mostsellingstock as $key => $result): ?>
+         '{{$result->name}}',
+         <?php endforeach; ?>
+        ],
+        datasets: [{
+            label: '# of Votes',
+            data: [<?php foreach ($mostsellingstock as $key => $value): ?>'{{$value->total}}',<?php endforeach; ?>],
+            backgroundColor: [
+                'rgb(253, 90, 167, 0.5)'
+            ],
+            borderColor: [
+                'rgb(253, 90, 167, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+      plugins: {
+        legend: {
+          display: false
+        }
+      }
+    }
+    });
+});
 </script>
 @stop

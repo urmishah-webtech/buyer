@@ -46,9 +46,8 @@
          <div class="portlet-body table-new">
             <div class="table-toolbar table-header">
                <div class="row">
-                  <div class="btn-group postion-btn">
+                  <div class="form-group">
                      <a id="sample_editable_1_new" href="{{ URL::to('admin/Category-add',null)}}" class="btn-primary">Add New
-                        <!-- Add New <i class="fa fa-plus"></i> -->
                      </a>
                   </div>
                   <!-- <div class="col-md-4"> -->

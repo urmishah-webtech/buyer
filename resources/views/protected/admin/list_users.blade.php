@@ -135,7 +135,7 @@
                      <tr class="odd gradeX">
                         <td><input type="checkbox" class="checkboxes" value="1" /></td>
                         <td>
-                           <a title="login as {{ $user->first_name }} {{ $user->last_name}}" href="{{URL::to('admin/make-me-login',$user->id)}}">{{ $user->first_name }} {{ $user->last_name}}</a>
+                           <a title="login as {{ $user->first_name }} {{ $user->last_name}}" href="{{ URL::to('admin/profiles/'.$user->id) }}">{{ $user->first_name }} {{ $user->last_name}}</a>
                         </td>
                         <td>
                            <a href="{{ URL::to('admin/profiles/sellerproduct/'.$user->id) }}">List Seller Product</a> <br>
