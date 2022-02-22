@@ -1,12 +1,11 @@
 </div>
-<section>
     <div class="topbar_sha">
             <div aria-label="Navigation" itemscope itemtype="http://schema.org/SiteNavigationElement" class="mainmenu header-topbar">
                 <div class="container">
                     <div class="row">
                         <div class="col-md-6 col-sm-6 col-xs-6">
                             <ul class="nav navbar-nav collapse navbar-collapse header-topbar-left" itemscope itemtype="http://schema.org/SiteNavigationElement">
-                                <li class="dropdown s990">
+                                <li class="dropdown s990 help-center-dropdown">
                                     <a href="#">Help Center<i class="fa fa-angle-down"></i></a>
                                     <ul role="menu" class="sub-menu submenu2" itemscope itemtype="http://schema.org/SiteNavigationElement">
                                         @foreach($pages as $page)
@@ -51,7 +50,7 @@
                                     <a itemprop="url" href="#">Welcome back</a>
                                     <span title=""></span> <span class="admin-dropdown">{{ Sentinel::getUser()->first_name }}</span> <span id="all_notification" ><i data-count="{{$all_notifications}}" class="glyphicon notification-icon"></i></span>
                                     <i class="fa fa-angle-down"></i></a>
-                                    <ul role="menu" class="sub-menu submenu2" itemscope itemtype="http://schema.org/SiteNavigationElement">
+                                    <ul role="menu" class="sub-menu submenu2 topbar-admin-dropdown" itemscope itemtype="http://schema.org/SiteNavigationElement">
                                         @if (Sentinel::check())
                                         <li>
                                             <a itemprop="url" href="{{ URL::to($dashboard_route,null)}}">Dashboard</a>
@@ -65,7 +64,7 @@
                                             <a itemprop="url" href="{{ URL::to('Mybuying-Request?status=0&unread=true&search=&d=0',null) }}">New Quote <span><i data-count="{{$quote_notifications}}" class="glyphicon notification-icon"></i></span></a>
                                         </li>
                                         <li class="pusher_notification_3">
-                                            <a itemprop="url" href="{{ URL::to('order-list',null) }}" class="join_btn"><i class="fa fa-users" aria-hidden="true"></i> Order <span><i data-count="{{$order_notifications}}" class="glyphicon notification-icon"></i></span></a>
+                                            <a itemprop="url" href="{{ URL::to('order-list',null) }}" class="join_btn"> Order <span><i data-count="{{$order_notifications}}" class="glyphicon notification-icon"></i></span></a>
                                         </li>
                                         <li class="sub-split">
                                             @if($role->role_id !=3)
@@ -228,4 +227,3 @@
             </div>
         </div>
     </div>
-</section>

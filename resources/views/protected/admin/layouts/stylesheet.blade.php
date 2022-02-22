@@ -26,7 +26,7 @@
 
 <link href="{!! asset('assets/admin/admin.css' )!!}" media="all" rel="stylesheet" type="text/css" />
 <link href="{!! asset('assets/admin/stylesheet.css' )!!}" media="all" rel="stylesheet" type="text/css" />
-
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
 
 <!-- // -->
 

@@ -35,8 +35,10 @@
 <script type="text/javascript" src="{!! asset('assets/global/plugins/select2/select2.min.js') !!}"></script>
 <script type="text/javascript" src="{!! asset('assets/global/plugins/datatables/media/js/jquery.dataTables.min.js') !!}"></script>
 <script type="text/javascript" src="{!! asset('assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js') !!}"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
 <script type="text/javascript" src="{!! asset('assets/dashboard/js/front_custom.js') !!}"></script>
 <script src="{{URL::asset('assets/fontend/js/animatedModal.min.js')}}"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 <!-- END PAGE LEVEL PLUGINS -->
 <!-- BEGIN PAGE LEVEL SCRIPTS -->
 
@@ -67,44 +69,7 @@ jQuery(document).ready(function() {
    
 });
 </script>
-<script type="text/javascript">
-// sidebar js
-      jQuery(function($) {
-          var path = window.location.href; // because the 'href' property of the DOM element is the absolute path
-          $('.page-sidebar-menu li a').each(function() {
-              $(this).removeClass('active');
-              if (this.href === path) {
-                  $(this).addClass('active');
-              }
-          });
-      });
-      $(document).ready(function() {
-         $('.page-sidebar-menu').each(function() {
-            $(this).find('.sidebar-sub-menu').parent().addClass('dropdown-inner');
-         });
-         // $(".dropdown-inner > li > a").click(function(){
-         //    $(this).toggleClass("open-dropdown");
-         // });
-      });
 
-      // header js
-      $(document).ready(function() {
-         $(".sidebar-toggle").click(function(){
-            $("body").toggleClass("full-width");
-         });
-      });
-
-      $(document).ready(function() {
-         $('.dropdown-inner').on('click', function(){
-            $('.dropdown-inner.active-submenu').not(this).removeClass('active-submenu');
-            $(this).toggleClass('active-submenu');
-         });
-         // if ( $('.sidebar-sub-menu li a').hasClass('active') ) {
-         //    alert("Hello! I am an alert box!!");
-         //    $('li.dropdown-inner').addClass('active-submenu');
-         // }
-      });
-</script>
 @yield('script')
 @section('scripts')
     {{--custom js goes here--}}

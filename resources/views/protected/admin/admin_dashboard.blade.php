@@ -9,43 +9,249 @@
       @if($rowdata->name == @$content)
          <div class="col-md-12 col-sm-6">
             <!-- BEGIN REGIONAL STATS PORTLET-->
-            <div class="portlet light ">
-                  <div class="portlet-title">
-                     <div class="caption">
-                           <span class="caption-subject font-red-sunglo bold uppercase">{!! $rowdata->icon1 !!} {{$rowdata->name}}</span>
-                     </div>
-                     <div class="actions">
-                        <a class="btn btn-circle btn-icon-only btn-default" href="javascript:;">
-                        <i class="icon-cloud-upload"></i>
-                        </a>
-                        <a class="btn btn-circle btn-icon-only btn-default" href="javascript:;">
-                        <i class="icon-wrench"></i>
-                        </a>
-                        <a class="btn btn-circle btn-icon-only btn-default fullscreen" href="javascript:;">
-                        </a>
-                        <a class="btn btn-circle btn-icon-only btn-default" href="javascript:;">
-                        <i class="icon-trash"></i>
-                        </a>
-                     </div>
-                  </div>
-                  <div class="portlet-body">
-                     <div class="resp-tabs-container dashboard-icon">
-                        <div>
-                           <fieldset>
-                              @foreach($rowdata->childrens as $child)
-                              <div class="tools-icon">
-                                 <a href="{{URL::to($child['slug'],null) }}">
-                                    <div class="{{ $child['css_class'] }}"> {!! $child->icon1 !!} </div>
-                                    {!! $child->icon2 !!} {{$child->name}}
-                                 </a>
+            <div class="admin-alert-alert">
+               <div class="alert alert-danger d-flex align-items-center">
+                  Please Configure SMTP Setting to work all email sending functionality,
+                  <a class="alert-link ml-2" href="http://localhost/script/script/install/admin/smtp-settings">Configure Now</a>
+              </div>
+            </div>
+            <div class="dashboard-pd-sec">
+               <div class="row">
+                  <div class="col-md-6">
+                     <div class="row dash-count">
+                        <div class="col-md-6">
+                           <div class="dash-count-box bg-grad-1">
+                              <div class="dash-count-content">
+                                 <div class="dash-count-title">
+                                    <span>Total</span>
+                                    <span>Customer</span>
+                                 </div>
+                                 <div class="pd-count">2</div>
                               </div>
-                              @endforeach
-                           </fieldset>
+                              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+                                 <path fill="rgba(255,255,255,0.3)" fill-opacity="1" d="M0,128L34.3,112C68.6,96,137,64,206,96C274.3,128,343,224,411,250.7C480,277,549,235,617,213.3C685.7,192,754,192,823,181.3C891.4,171,960,149,1029,117.3C1097.1,85,1166,43,1234,58.7C1302.9,75,1371,149,1406,186.7L1440,224L1440,320L1405.7,320C1371.4,320,1303,320,1234,320C1165.7,320,1097,320,1029,320C960,320,891,320,823,320C754.3,320,686,320,617,320C548.6,320,480,320,411,320C342.9,320,274,320,206,320C137.1,320,69,320,34,320L0,320Z"></path>
+                              </svg>
+                           </div>
+                        </div>
+                        <div class="col-md-6">
+                           <div class="dash-count-box bg-grad-2">
+                              <div class="dash-count-content">
+                                 <div class="dash-count-title">
+                                    <span>Total</span>
+                                    <span>Order</span>
+                                 </div>
+                                 <div class="pd-count">46</div>
+                              </div>
+                              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+                                 <path fill="rgba(255,255,255,0.3)" fill-opacity="1" d="M0,128L34.3,112C68.6,96,137,64,206,96C274.3,128,343,224,411,250.7C480,277,549,235,617,213.3C685.7,192,754,192,823,181.3C891.4,171,960,149,1029,117.3C1097.1,85,1166,43,1234,58.7C1302.9,75,1371,149,1406,186.7L1440,224L1440,320L1405.7,320C1371.4,320,1303,320,1234,320C1165.7,320,1097,320,1029,320C960,320,891,320,823,320C754.3,320,686,320,617,320C548.6,320,480,320,411,320C342.9,320,274,320,206,320C137.1,320,69,320,34,320L0,320Z"></path>
+                              </svg>
+                           </div>
+                        </div>
+                        <div class="col-md-6">
+                           <div class="dash-count-box bg-grad-3">
+                              <div class="dash-count-content">
+                                 <div class="dash-count-title">
+                                    <span>Total</span>
+                                    <span>Product category</span>
+                                 </div>
+                                 <div class="pd-count">249</div>
+                              </div>
+                              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+                                 <path fill="rgba(255,255,255,0.3)" fill-opacity="1" d="M0,128L34.3,112C68.6,96,137,64,206,96C274.3,128,343,224,411,250.7C480,277,549,235,617,213.3C685.7,192,754,192,823,181.3C891.4,171,960,149,1029,117.3C1097.1,85,1166,43,1234,58.7C1302.9,75,1371,149,1406,186.7L1440,224L1440,320L1405.7,320C1371.4,320,1303,320,1234,320C1165.7,320,1097,320,1029,320C960,320,891,320,823,320C754.3,320,686,320,617,320C548.6,320,480,320,411,320C342.9,320,274,320,206,320C137.1,320,69,320,34,320L0,320Z"></path>
+                              </svg>
+                           </div>
+                        </div>
+                        <div class="col-md-6">
+                           <div class="dash-count-box bg-grad-4">
+                              <div class="dash-count-content">
+                                 <div class="dash-count-title">
+                                    <span>Total</span>
+                                    <span>Product brand</span>
+                                 </div>
+                                 <div class="pd-count">100</div>
+                              </div>
+                              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+                                 <path fill="rgba(255,255,255,0.3)" fill-opacity="1" d="M0,128L34.3,112C68.6,96,137,64,206,96C274.3,128,343,224,411,250.7C480,277,549,235,617,213.3C685.7,192,754,192,823,181.3C891.4,171,960,149,1029,117.3C1097.1,85,1166,43,1234,58.7C1302.9,75,1371,149,1406,186.7L1440,224L1440,320L1405.7,320C1371.4,320,1303,320,1234,320C1165.7,320,1097,320,1029,320C960,320,891,320,823,320C754.3,320,686,320,617,320C548.6,320,480,320,411,320C342.9,320,274,320,206,320C137.1,320,69,320,34,320L0,320Z"></path>
+                              </svg>
+                           </div>
                         </div>
                      </div>
-                     <!-- END REGIONAL STATS PORTLET-->
                   </div>
+                  <div class="col-md-6">
+                     <div class="row">
+                        <div class="col-md-6">
+                           <div class="dash-card">
+                              <div class="card-header">
+                                 <h4>Products</h4>
+                              </div>
+                              <div class="chart-body">
+                                 <div class="first" width="400" height="400">
+                                    <canvas id="ProductsChart"></canvas>
+                                 </div>
+                                 <ul class="chart-info">
+                                    <li><span class="chart-info-color orange-color"></span><b>Total published products</b></li>
+                                    <li><span class="chart-info-color green-color"></span><b>Total sellers products</b></li>
+                                    <li><span class="chart-info-color blue-color"></span><b>Total admin products</b></li>
+                                 </ul>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="col-md-6">
+                           <div class="dash-card">
+                              <div class="card-header">
+                                 <h4>Sellers</h4>
+                              </div>
+                              <div class="chart-body">
+                                 <div class="seconds" width="400" height="400">
+                                    <canvas id="SellersChart" width="400" height="400"></canvas>
+                                 </div>
+                                 <ul class="chart-info">
+                                    <li><span class="chart-info-color orange-color"></span><b>Total sellers</b></li>
+                                    <li><span class="chart-info-color green-color"></span><b>Total approved sellers</b></li>
+                                    <li><span class="chart-info-color blue-color"></span><b>Total pending sellers</b></li>
+                                 </ul>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <!-- <div class="portlet-title">
+                  <div class="caption">
+                        <span class="caption-subject font-red-sunglo bold uppercase">{!! $rowdata->icon1 !!} {{$rowdata->name}}</span>
+                  </div>
+                  <div class="actions">
+                     <a class="btn btn-circle btn-icon-only btn-default" href="javascript:;">
+                     <i class="icon-cloud-upload"></i>
+                     </a>
+                     <a class="btn btn-circle btn-icon-only btn-default" href="javascript:;">
+                     <i class="icon-wrench"></i>
+                     </a>
+                     <a class="btn btn-circle btn-icon-only btn-default fullscreen" href="javascript:;">
+                     </a>
+                     <a class="btn btn-circle btn-icon-only btn-default" href="javascript:;">
+                     <i class="icon-trash"></i>
+                     </a>
+                  </div>
+               </div> -->
+               <!-- <div class="portlet-body">
+                  <div class="resp-tabs-container dashboard-icon">
+                     <div>
+                        <fieldset>
+                           @foreach($rowdata->childrens as $child)
+                           <div class="tools-icon">
+                              <a href="{{URL::to($child['slug'],null) }}">
+                                 <div class="{{ $child['css_class'] }}"> {!! $child->icon1 !!} </div>
+                                 {!! $child->icon2 !!} {{$child->name}}
+                              </a>
+                           </div>
+                           @endforeach
+                        </fieldset>
+                     </div>
+                  </div>
+               </div> -->
             </div>
+            <div class="dash-pd-sale-stock">
+               <div class="row">
+                  <div class="col-md-6">
+                     <div class="dash-card">
+                        <div class="card-header">
+                           <h4>Category wise product sale</h4>
+                        </div>
+                        <div class="chart-body">
+                           <ul class="chart-info">
+                              <li>
+                                 <span class="chart-info-color blue-color"></span>
+                                 <b>Number of sale</b>
+                              </li>
+                           </ul>
+                           <canvas id="PdSaleChart" width="500" height="455"></canvas>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="col-md-6">
+                     <div class="dash-card">
+                        <div class="card-header">
+                           <h4>Category wise product stock</h4>
+                        </div>
+                        <div class="chart-body">
+                           <ul class="chart-info">
+                              <li>
+                                 <span class="chart-info-color red-color"></span>
+                                 <b>Number of Stock</b>
+                              </li>
+                           </ul>
+                           <canvas id="PdStockChart" width="500" height="455"></canvas>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+
+            <div class="top-products-sec dash-card">
+               <div class="card-header">
+                  <h4>Top 12 Products</h4>
+               </div>
+               <div class="card-body">
+                  <div class="top-products-slider">
+                     <div>
+                        <a class="top-pd">
+                           <img src="{{ url('assets/blank-img.jpg') }}">
+                           <div class="top-pd-details">
+                              <span class="pd-price">$600.000</span>
+                              <span class="pd-name">Analog Black Dial Men's Watch-32-BK-CK</span>
+                           </div>
+                        </a>
+                     </div>
+                     <div>
+                        <a class="top-pd">
+                           <img src="{{ url('assets/blank-img.jpg') }}">
+                           <div class="top-pd-details">
+                              <span class="pd-price">$600.000</span>
+                              <span class="pd-name">Analog Black Dial Men's Watch-32-BK-CK</span>
+                           </div>
+                        </a>
+                     </div>
+                     <div>
+                        <a class="top-pd">
+                           <img src="{{ url('assets/blank-img.jpg') }}">
+                           <div class="top-pd-details">
+                              <span class="pd-price">$600.000</span>
+                              <span class="pd-name">Analog Black Dial Men's Watch-32-BK-CK</span>
+                           </div>
+                        </a>
+                     </div>
+                     <div>
+                        <a class="top-pd">
+                           <img src="{{ url('assets/blank-img.jpg') }}">
+                           <div class="top-pd-details">
+                              <span class="pd-price">$600.000</span>
+                              <span class="pd-name">Analog Black Dial Men's Watch-32-BK-CK</span>
+                           </div>
+                        </a>
+                     </div>
+                     <div>
+                        <a class="top-pd">
+                           <img src="{{ url('assets/blank-img.jpg') }}">
+                           <div class="top-pd-details">
+                              <span class="pd-price">$600.000</span>
+                              <span class="pd-name">Analog Black Dial Men's Watch-32-BK-CK</span>
+                           </div>
+                        </a>
+                     </div>
+                     <div>
+                        <a class="top-pd">
+                           <img src="{{ url('assets/blank-img.jpg') }}">
+                           <div class="top-pd-details">
+                              <span class="pd-price">$600.000</span>
+                              <span class="pd-name">Analog Black Dial Men's Watch-32-BK-CK</span>
+                           </div>
+                        </a>
+                     </div>
+                  </div>
+               </div>
+            </div>
+
          </div>
       @endif
    @endforeach
