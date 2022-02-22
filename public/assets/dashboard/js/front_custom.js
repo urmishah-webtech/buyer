@@ -3,6 +3,36 @@
  */
 
 
+// sidebar js
+        $(document).ready(function() {
+            $('.page-sidebar-menu').each(function() {
+                $(this).find('.sidebar-sub-menu').parent().addClass('dropdown-inner');
+            });
+        });
+        $(document).ready(function() {
+            $('.dropdown-inner').on('click', function(){
+                $('.dropdown-inner.active-submenu').not(this).removeClass('active-submenu');
+                $(this).toggleClass('active-submenu');
+            });
+        });
+      jQuery(function($) {
+          var path = window.location.href; // because the 'href' property of the DOM element is the absolute path
+          $('.page-sidebar-menu li a').each(function() {
+              $(this).removeClass('active');
+              if (this.href === path) {
+                $(this).addClass('active').closest('.dropdown-inner').addClass('active-submenu defult-active');
+              }
+          });
+      });
+
+      // header js
+      $(document).ready(function() {
+         $(".sidebar-toggle").click(function(){
+            $("body").toggleClass("full-width");
+         });
+      });
+
+
 function form_validate(form_id) {
     var error = 0;
     var msg = '';
@@ -162,4 +192,169 @@ function form_validate(form_id) {
         }
     });
 })();
+
+
+// Dashbord Product Chart js
+$(function () {
+const ctx = document.getElementById('ProductsChart');
+const myChart = new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+        labels: [
+            'Total published products', 
+            'Total sellers products', 
+            'Total admin products'
+        ],
+        datasets: [{
+            label: '# of Votes',
+            data: [145, 94, 51],
+            backgroundColor: [
+                '#FF1A85',
+                '#0FCCA6',
+                '#3859FF'
+            ],
+            borderWidth: 2,
+        }]
+    },
+    options: {
+      plugins: {
+        legend: {
+          display: false,
+          cutoutPercentage: 70
+        }
+      }
+    }
+});
+});
+
+// Dashbord Sellers Chart js
+$(function () {
+const ctx = document.getElementById('SellersChart');
+const myChart = new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+        labels: [
+            'Total sellers', 
+            'Total approved sellers', 
+            'Total pending sellers'
+        ],
+        datasets: [{
+            label: '# of Votes',
+            data: [11, 10, 1],
+            backgroundColor: [
+                '#FF1A85',
+                '#0FCCA6',
+                '#3859FF'
+            ],
+            borderWidth: 2
+        }]
+    },
+    options: {
+      plugins: {
+        legend: {
+          display: false
+        }
+      }
+    }
+});
+});
+
+// Product number of sale chart js
+
+$(function () {
+    const ctx = document.getElementById('PdSaleChart');
+    const myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: [
+            'Men clothing &amp; Fashion',
+            'Computer &amp; Accessories',
+            'Automobile &amp; Motorcycle',
+            'kids &amp; toy',
+            'sports &amp; autdoor',
+            'Jewelry &amp; watches',
+            'Cellphones &amp; Tabs',
+            'Beaty, Health &amp; Tabs',
+            'Beauty, Helth &amp; Hair',
+            'Home improvement &amp; Tools',
+            'Home decoration &amp; Appliance',
+            'Toy',
+            'Software'
+        ],
+        datasets: [{
+            label: '# of Votes',
+            data: [11, 18, 5, 1, 4, 0, 4, 5, 0, 0, 0, 0, 2],
+            backgroundColor: [
+                'rgb(85, 140, 242, 0.5)'
+            ],
+            borderColor: [
+                'rgb(85, 140, 242, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+      plugins: {
+        legend: {
+          display: false
+        }
+      }
+    }
+    });
+});
+
+
+// Product number of stock chart js
+
+$(function () {
+    const ctx = document.getElementById('PdStockChart');
+    const myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: [
+            'Men clothing &amp; Fashion',
+            'Computer &amp; Accessories',
+            'Automobile &amp; Motorcycle',
+            'kids &amp; toy',
+            'sports &amp; autdoor',
+            'Jewelry &amp; watches',
+            'Cellphones &amp; Tabs',
+            'Beaty, Health &amp; Tabs',
+            'Beauty, Helth &amp; Hair',
+            'Home improvement &amp; Tools',
+            'Home decoration &amp; Appliance',
+            'Toy',
+            'Software'
+        ],
+        datasets: [{
+            label: '# of Votes',
+            data: [20102, 19980, 7538, 6559, 20527, 0, 3998, 10998, 0, 2500, 0, 1, 0],
+            backgroundColor: [
+                'rgb(253, 90, 167, 0.5)'
+            ],
+            borderColor: [
+                'rgb(253, 90, 167, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+      plugins: {
+        legend: {
+          display: false
+        }
+      }
+    }
+    });
+});
+
+
+// home top product js
+$(document).ready(function(){
+    $(".top-products-slider").slick({
+        slidesToShow: 5,
+        slidesToScroll: 1,
+        infinite: false
+    });
+});
 
