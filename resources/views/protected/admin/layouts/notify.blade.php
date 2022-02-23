@@ -468,7 +468,7 @@
                         </div>
                     </div>
                     
-                    <div class="dropdown country-dropdown">
+                    <!-- <div class="dropdown country-dropdown">
                         <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <img src="http://localhost/script/script/install/public/assets/img/flags/en.png" height="11">
                         </button>
@@ -606,12 +606,12 @@
                                 </a>
                             </li>
                         </ul>
-                    </div>
+                    </div> -->
 
                     <li class="dropdown dropdown-user">
                         <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
                             <!-- <img alt="" class="img-circle" src="{{ asset('assets/admin/profile/',Sentinel::getUser()->profile_pic) }}"/> -->
-                            <img src="{{ url('assets/images/avatar-place.png') }}" class="img-circle">
+                            <img src="{{ url('assets/images/profile-img.jpg') }}" class="img-circle">
                             <div class="admin-name">
                                 <span>admin</span>
                                 <span class="username username-hide-on-mobile">
