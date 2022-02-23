@@ -34,7 +34,11 @@
             </li>
            
            <li>
-                <a href="{{URL('admin/dashboard/Content Management')}}">Content Management</a>
+                Content Management
+                 <i class="fa fa-angle-right" style="color:black"></i>
+            </li>
+            <li>
+                <a href="{{URL('admin/manage-seo')}}">Manage SEO</a>
                  <i class="fa fa-angle-right" style="color:black"></i>
             </li>
             <li>

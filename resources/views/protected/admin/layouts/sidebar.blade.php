@@ -18,8 +18,9 @@ $file_name = Session::get('content');
    <!-- DOC: Change data-auto-speed="200" to adjust the sub menu slide up/down speed -->
    <div class="page-sidebar navbar-collapse collapse">
       <div class="sidebar-logo">
-         <a href="#">
-            <img src="http://127.0.0.1:8000/assets/logo.png">
+         <a href="{{URL('admin/dashboard')}}">
+            <!-- <img src="http://127.0.0.1:8000/assets/logo.png"> -->
+            <img src="{{ url('assets/logo.png') }}">
          </a>
       </div>
       <form class="navbar-form sidebar-search">
@@ -40,6 +41,13 @@ $file_name = Session::get('content');
                <span class="selected"></span>
             </a>
          </li> -->
+         <li>
+            <a <?php if($file_name=='Dashboard' ){ echo 'class="active"'; } ?> href="{{URL('/admin/dashboard')}}">
+               <i class="icon-home" aria-hidden="true"></i>
+               <span class="title">Dashboard</span>
+               <span class="selected "></span>
+            </a>
+         </li>
          <li>
             <a <?php if($file_name=='User Management' ){ echo 'class="active"'; } ?> href="{{URL('/admin/profiles')}}">
                <i class="fa fa-user" aria-hidden="true"></i>
@@ -65,16 +73,23 @@ $file_name = Session::get('content');
          </li>
          <li>
             <a <?php if($file_name=='Classifieds (B2b)' ){ echo 'class="active"'; } ?>>
-               <i class="icon-home" aria-hidden="true"></i>
-               <span class="title">Classifieds (B2b)</span>
+               <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+               <span class="title">Products</span>
                <span class="arrow "></span>
             </a>
             <ul class="sidebar-sub-menu">
-               <li><a href="{{URL('/admin/product')}}">Manage Products</a></li>
-               <li><a href="{{URL('/admin/tradeshow-show')}}">Manage Tradeshow</a></li>
-               <li><a href="{{URL('/admin/Category-add')}}">Add Category</a></li>
-               <li><a href="{{URL('/admin/category-list')}}">Manage Categories</a></li>
+               <li><a href="{{URL('/admin/product')}}">Product List</a></li>
+               <!-- <li><a href="{{URL('/admin/tradeshow-show')}}">Manage Tradeshow</a></li> -->
+               <li><a href="{{URL('/admin/Category-add')}}">Add Product Category</a></li>
+               <li><a href="{{URL('/admin/category-list')}}">Manage Product Categories</a></li>
             </ul>
+         </li>
+         <li>
+            <a <?php if($file_name=='Manage TradeShow' ){ echo 'class="active"'; } ?> href="{{URL('/admin/tradeshow-show')}}">
+               <i class="icon-tag" aria-hidden="true"></i>
+               <span class="title">Manage Tradeshow</span>
+               <span class="arrow "></span>
+            </a>
          </li>
          <li>
             <a <?php if($file_name=='My B2B' ){ echo 'class="active"'; } ?> href="{{URL('admin/dashboard/My B2B')}}">

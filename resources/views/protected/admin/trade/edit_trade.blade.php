@@ -17,10 +17,14 @@
                 <a href="{{URL::route('admin_dashboard')}}" >Home</a>
                 <i class="fa fa-angle-right" style="color:black;"></i>
             </li>
-           
+<!--            
             <li>
-                <a href="{{URL('admin/dashboard/Classifieds (B2b)')}}">Classifieds (B2b)</a>
-                 <i class="fa fa-angle-right" style="color:black;"></i>
+                Products
+                <i class="fa fa-angle-right" style="color:black;"></i>
+            </li> -->
+            <li>
+                <a href="{{URL('admin/tradeshow-show')}}" >Manage TradeShow</a>
+                <i class="fa fa-angle-right" style="color:black;"></i>
             </li>
             <li>
                 Edit Trade

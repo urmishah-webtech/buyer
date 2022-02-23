@@ -22,16 +22,16 @@
                          <a href="{{URL::route('admin_dashboard')}}" >Home</a>
                          <i class="fa fa-angle-right" style="color:black;"></i>
                      </li>
-                     <li>
-                         <a href="{{URL('admin/dashboard/Classifieds (B2b)')}}">Classifieds (B2b)</a>
-                          <i class="fa fa-angle-right" style="color:black;"></i>
-                     </li>
+<!--                      <li>
+                           Products
+                           <i class="fa fa-angle-right" style="color:black;"></i>
+                     </li> -->
                      <li>
                         Manage TradeShow
                      </li>
                   </ul>
                   <div class="page-toolbar">
-                     <a href="{{URL('admin/dashboard/Classifieds (B2b)')}}" class="btn green-haze btn-circle pull-right back-btn"><i class="fa fa-backward"></i> Back</a>
+                     <a href="{{URL('admin/dashboard')}}" class="btn green-haze btn-circle pull-right back-btn"><i class="fa fa-backward"></i> Back</a>
                   </div>
                </div>
                   <div class="row">

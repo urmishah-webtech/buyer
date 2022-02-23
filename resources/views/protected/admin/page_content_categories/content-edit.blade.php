@@ -32,11 +32,15 @@
                 <i class="fa fa-angle-right" style="color:black"></i>
             </li>
             <li>
-                <a href="{{URL('admin/dashboard/Content Management')}}" >Content Management</a>
+                Content Management
                  <i class="fa fa-angle-right" style="color:black"></i>
             </li>
             <li>
-                <a href="#">Content Category Edit</a>
+                <a href="{{URL('admin/content-manage')}}" >Content Management</a>
+                 <i class="fa fa-angle-right" style="color:black"></i>
+            </li>
+            <li>
+                Content Category Edit
             </li>
         </ul>
         <div class="page-toolbar">

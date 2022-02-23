@@ -23,7 +23,7 @@
                          <i class="fa fa-angle-right" style="color:black;"></i>
                      </li>
                      <li>
-                         <a href="{{URL('admin/dashboard/Classifieds (B2b)')}}">Classifieds (B2b)</a>
+                         Products
                           <i class="fa fa-angle-right" style="color:black;"></i>
                      </li>
                      <li>
@@ -31,7 +31,7 @@
                      </li>
                   </ul>
                   <div class="page-toolbar">
-                     <a href="{{URL('admin/dashboard/Classifieds (B2b)')}}" class="btn green-haze btn-circle pull-right back-btn" style="margin-right:50px;margin-top: 5px;"><i class="fa fa-backward"></i> Back</a>
+                     <a href="{{URL('admin/dashboard')}}" class="btn green-haze btn-circle pull-right back-btn" style="margin-right:50px;margin-top: 5px;"><i class="fa fa-backward"></i> Back</a>
                   </div>
                </div>
                   <div class="row">
