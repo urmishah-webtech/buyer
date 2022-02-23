@@ -133,7 +133,7 @@ class BuyerController extends Controller
                 ->join('bdtdc_template_sections as btsec','btsec.id','=','bts.section_id')
                 ->where('bts.company_id',$company_id)
                 ->get(['bts.id','bts.section_id','bts.back_image','bts.title_logo','bts.back_color','bts.font_color','bts.is_show_image','bts.is_show_color','bts.height','bts.width','bts.company_id','btsec.section_name','btsec.slug']);
-        $header=BdtdcPageSeo::where('page_id',101)->first();
+        $header=BdtdcPageSeo::where('page_id',103)->first();
                 $data['title']=$header->title;
                 $data['keyword']=$header->meta_keyword;
                 $data['description']=$header->meta_description;

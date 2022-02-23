@@ -239,6 +239,7 @@ class SessionsController extends Controller
 
     public function postchangeEmail(Request $request)
     {
+        $page_content_title='Login';
 
         $rules = array(
         'email'=>'required', 
@@ -271,6 +272,7 @@ class SessionsController extends Controller
                 }
 
                 $www=Mail::send('emails.change', ['rand_key'=>$rand_key], function($message) use ($data) {
+                    dd($data['email']);
                     $message->to($data['email'])
                         ->subject('Please verify your e-mail address to finish your process');
                 });
