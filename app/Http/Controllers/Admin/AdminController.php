@@ -12,6 +12,9 @@ use App\Model\BdtdcProduct;
 use App\Model\BdtdcProductDescription;
 use App\Model\BdtdcOrder;
 use App\Model\BdtdcOrderDetails;
+use App\Model\BdtdcCustomer; 
+use App\Model\BdtdcCategory;
+use App\Model\BdtdcSupplier; 
 
 class AdminController extends Controller
 {
@@ -22,6 +25,12 @@ class AdminController extends Controller
 
     public function getHome()
     {
+		$customer = BdtdcCustomer::get()->count(); 
+		$order = BdtdcOrder::get()->count(); 
+		$category = BdtdcCategory::get()->count(); 
+		$supplier = BdtdcSupplier::get()->count(); 
+		$supplier_app = BdtdcSupplier::where('seller_approved',1)->get()->count(); 
+		
         $mostsellingproduct = DB::table('bdtdc_product_description')->JOIN('bdtdc_order_details', 'bdtdc_product_description.product_id', '=', 'bdtdc_order_details.product_id')
             ->JOIN('bdtdc_product_images', 'bdtdc_product_images.product_id', '=', 'bdtdc_product_description.product_id')
             ->JOIN('bdtdc_product_prices', 'bdtdc_product_prices.product_id', '=', 'bdtdc_product_description.product_id')
@@ -54,7 +63,7 @@ class AdminController extends Controller
 
         $content = 'User Management';
         $contentdetail = Module::where('name', 'User Management')->get();
-        return view('protected.admin.admin_dashboard', compact('content', 'contentdetail', 'mostsellingproduct', 'mostsellingcategory','mostsellingstock'));
+        return view('protected.admin.admin_dashboard', compact('content', 'contentdetail', 'mostsellingproduct', 'customer','order','category','supplier','supplier_app','mostsellingcategory','mostsellingstock'));
     }
     public function getcontent($content)
     {
