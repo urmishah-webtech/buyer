@@ -9,7 +9,7 @@ use DB;
 use App\Model\BdtdcSupplierQuery;
 use App\Model\Module;
 use App\Model\BdtdcProduct;
-use App\Model\BdtdcProductDescription;
+use App\Model\BdtdcProductDescription; 
 use App\Model\BdtdcOrder;
 use App\Model\BdtdcOrderDetails;
 use App\Model\BdtdcCustomer; 

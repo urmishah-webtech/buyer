@@ -5,7 +5,7 @@
    <p>{{ session()->get('flash_message') }}</p>
 @endif
 <div class="row">
-   @foreach($modules as $rowdata)
+   @foreach($modules as $rowdata) 
       @if($rowdata->name == @$content)
          <div class="col-md-12 col-sm-6">
             <!-- BEGIN REGIONAL STATS PORTLET-->
