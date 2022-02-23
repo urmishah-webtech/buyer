@@ -34,16 +34,16 @@
             </li>
            
             <li>
-                <a href="{{URL('admin/dashboard/Classifieds (B2b)')}}">Classifieds (B2b)</a>
-                 <i class="fa fa-angle-right" style="color:black;"></i>
+                  Products
+                  <i class="fa fa-angle-right" style="color:black;"></i>
             </li>
             <li>
-                Add Category
+                Add Product Category
             </li>
         </ul>
         <div class="page-toolbar">
            
-            <a href="{{URL('admin/dashboard/Classifieds (B2b)')}}" class="btn green-haze btn-circle pull-right back-btn"><i class="fa fa-backward"></i> Back</a>
+            <a href="{{URL('admin/dashboard')}}" class="btn green-haze btn-circle pull-right back-btn"><i class="fa fa-backward"></i> Back</a>
         </div>
     </div>
 
@@ -71,7 +71,7 @@
       {!! Form::open(array('route'=>array('admin.category.store'),'id'=>'form1','class'=>'form-horizontal form-row-seperated','files'=>true)) !!}
       <div class="portlet-title">
          <div class="caption">
-            Add Category
+            Add Product Category
          </div>
          <div class="actions btn-set">
             {{-- <button class="btn btn-default btn-circle "><i class="fa fa-reply"></i> Reset</button> --}}

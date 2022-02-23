@@ -24,7 +24,11 @@
             </li>
            
             <li>
-                <a href="{{URL('admin/dashboard/Classifieds (B2b)')}}">Classifieds (B2b)</a>
+                Products
+                <i class="fa fa-angle-right" style="color:black;"></i>
+            </li>
+            <li>
+                <a href="{{URL('admin/category-list')}}">Manage Product Categories</a>
                  <i class="fa fa-angle-right" style="color:black;"></i>
             </li>
             <li>

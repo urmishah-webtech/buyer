@@ -67,242 +67,148 @@
             </div>
          </div>
          <h3 class="h3">Product Edit Form</h3>
-         <div style="background: #fff;z-index: 0;margin: 0px" class="col-md-8 box">
-            <?php
-   	 	      use App\Model\BdtdcCategory;
-              $user_id = \Sentinel::getUser()->id;
-              $bdtdc_product_to_category = App\Model\BdtdcProductToCategory::where('product_id',$product->id)->first();
-              $company = App\Model\BdtdcCompany::where('id',$bdtdc_product_to_category->company_id)->first();
-              $wholesale=$company->wholesale;
-               //print_r($wholesale);
-            ?>
-            <input type="hidden" name="hidden_payment_tearms" value="{{ $product->payment_method }}">
-            <?php
-   			?>
-            @if (Sentinel::check())
-            <?php
-                 $role = App\Model\Role_user::where('user_id',Sentinel::getUser()->id)->first();
+         <div class="col-md-8">
+            <div class="page-content">
+               <?php
+      	 	      use App\Model\BdtdcCategory;
+                 $user_id = \Sentinel::getUser()->id;
+                 $bdtdc_product_to_category = App\Model\BdtdcProductToCategory::where('product_id',$product->id)->first();
+                 $company = App\Model\BdtdcCompany::where('id',$bdtdc_product_to_category->company_id)->first();
+                 $wholesale=$company->wholesale;
+                  //print_r($wholesale);
                ?>
-            @if($role->role_id ==2)
-            <form action="{{ URL::to('admin/product-update', $product->id) }}" method="post" enctype="multipart/form-data" accept-charset="UTF-8" class="product_info_form form-row-seperated">
-            @else
-            <form action="{{ URL::to('supplier/product_update', $product->id) }}" method="post" enctype="multipart/form-data" accept-charset="UTF-8" class="product_info_form form-row-seperated">
-            @endif
-            @endif
-            {!! csrf_field() !!}
-            <?php $product_parent_id = $products?$products->category_id:0?>
-            <input type="hidden" name="hidden_categorie" value="{{ $product_parent_id }}">
-            <input type="hidden" name="bdtdc_limited_time_offers_id" value="<?php if(isset($bdtdc_limited_lime_offers[0]->id)){echo $bdtdc_limited_lime_offers[0]->id;} ?>">
-                  <!-- <ul class="nav nav-tabs product_create_tab" role="tablist">
-   				<li class="active"><a data-toggle="tab" href="#product_details_tab_content">Product Details</a></li>
-   				<li><a data-toggle="tab" href="#product_image_tab_content">Product Image</a></li>
-   			</ul> -->
-            <div class="">
-               <!-------------PRODUCT-DETAILS-TAB-CONTENT;------------------>
-               <div id="product_details_tab_content" class="">
-                  <div class="sd-card">
-                     <h4 class="card-title">Product Information</h4>
-                     <div class="sd-card-body">
-                        <div class="margin_top1">
-                           <div class="form-group row">
-                              <div class="col-md-3 col-from-label">
-                                 <label>Product Name:</label>
-                              </div>
-                              <div class="col-md-8">
-                                 <input type="hidden" name="base_url" class="form-control" value="{{ URL::to('/',null) }}">
-                                 <input type="text" name="product_name" validation="validated_true" class="form-control validate" placeholder="Product Name" value="{{ old('product_name',$supplier_product->name) }}">
-                                 <p class="empty_error hidden_icon"><i class="fa fa-times-circle" aria-hidden="true"></i> Please enter a Product Name</p>
-                                 <i class="fa fa-check-square btn btn-sm btn-success hidden_icon validated_true"></i>
-                                 <i class="fa fa-exclamation-triangle btn btn-sm btn-danger hidden_icon validated_false"></i>
-                                 <span class="text-danger validation_message"></span>
-                              </div>
-                           </div>
-                        </div>
-                        @if($wholesale==1)
-
-                        <div class="margin_top1">
-                           <div class="col-md-2">
-                              <span>Wholesale product:</span>
-                           </div>
-                           <div class="col-md-10">
-                              <label><input type="checkbox" name="is_wholesale_product" class="" value="true" <?php if(isset($bdtdc_product_to_wholesale_category[0]->product_id)){echo "checked";} ?>>Make wholesale product</label><br>
-                              <label><input type="checkbox" name="is_limited_time_offer" id="limited_time_offer" class="" value="true">Make Limited time offer for this product</label>
-                           </div>
-                        </div>
-                        <div class="margin_top1 limited_offer_div" style="display: none;">
-                           <div style="text-align:right;padding-right:0px" class="col-md-2">
-                              <label for="">Limited time offer: </label>
-                           </div>
-                           <div class="col-md-7">
-                              <table class="table">
-                                 <tr>
-                                    <td>Percentage: </td>
-                                    <td>
-                                       <div class="input-group" style="width:150px;">
-                                          <input validation="validated_false" class="form-control check_number" style="height:27px;padding-bottom:1%;font-size:12px;width:150px;" type="text" name="percentage" aria-describedby="percentage-addon" value="<?php if(isset($bdtdc_limited_lime_offers[0])){echo $bdtdc_limited_lime_offers[0]->profit_percentage;}else{echo '';} ?>">
-                                          <span class="input-group-addon" style="color:black;" id="percentage-addon">%</span>
-                                       </div>
-                                    </td>
-                                 </tr>
-                                 <tr>
-                                    <td>From: </td>
-                                    <td>
-                                       <input class="form-control span2" id="dpd1" style="height:27px;padding-bottom:1%;font-size:12px;width:150px;" type="text" name="offer_from" placeholder="yyyy-mm-dd" value="<?php if(isset($bdtdc_limited_lime_offers[0])){echo date("Y-m-d",strtotime($bdtdc_limited_lime_offers[0]->start_date));}else{echo '';} ?>">
-                                    </td>
-                                    <td>To: </td>
-                                    <td>
-                                       <input class="form-control span2" id="dpd2" style="height:27px;padding-bottom:1%;font-size:12px;width:150px;" type="text" name="offer_to" placeholder="yyyy-mm-dd" value="<?php if(isset($bdtdc_limited_lime_offers[0])){echo date("Y-m-d",strtotime($bdtdc_limited_lime_offers[0]->end_date));}else{echo '';} ?>">
-                                    </td>
-                                    <!-- <td>
-      			      							<div class="col-xs-3 validation_status">
-      					                            <i class="fa fa-check-square btn btn-sm btn-success hidden_icon validated_true"></i>
-      					                            <i class="fa fa-exclamation-triangle btn btn-sm btn-danger hidden_icon validated_false"></i>
-      					                            <span class="text-danger validation_message"></span>
-      				                        	</div>
-      			                        	</td> -->
-                                 </tr>
-                              </table>
-                           </div>
-                        </div>
-                        @endif
-                        <div class="margin_top1">
-                           <div class="form-group row">
-                              <div  class="col-md-3 col-from-label">
-                                 <label>Category:</label>
-                              </div>
-                              <div class="col-md-8">
-                                 <div class="row">
-                                    <div class="col-md-6">
-                                       <label>Parent:</label>
-                                       <select name="parent_category" class="form-control" style="height:29px;padding-bottom:0%;padding-top:0px;font-size:12px">
-                                          <option value="0">----Please Select----</option>
-                                          @foreach(\App\Model\BdtdcCategory::where('parent_id',0)->get() as $v)
-                                          @if($v->id == $parent_id)
-                                          <option value="{{ $v->id }}" selected="selected">{{ trim($v->name) }}</option>
-                                          @else
-                                          <option value="{{ $v->id }}">{{ trim($v->name) }}</option>
-                                          @endif
-                                          @endforeach
-                                       </select>
-                                       <p class="empty_error hidden_icon parent_cat_error" style="margin-top: 4px;padding: 2px 4px;font-size: 12px;color: #333;border: 1px solid #ffd4d2;background-color: #ffefee;"><i style="color:red;" class="fa fa-times-circle" aria-hidden="true"></i> Please Select Parent Category</p>
-                                    </div>
-                                    <div class="col-md-6">
-                                       <label>Sub:</label>
-                                       <select name="sub_category" class="form-control" style="height:29px;padding-bottom:0%;padding-top:0px;font-size:12px">
-                                          <option value="0">Select a sub category</option>
-
-                                          @foreach(\App\Model\BdtdcCategory::where('parent_id',$parent_id)->get() as $v)
-                                          @if($v->id == $product_parent_id)
-                                          <option value="{{ $v->id }}" selected="selected">{{ trim($v->name) }}</option>
-                                          @else
-                                          <option value="{{ $v->id }}">{{ trim($v->name) }}</option>
-                                          @endif
-                                          @endforeach
-                                       </select>
-                                       <p class="empty_error hidden_icon sub_cat_error" style="margin-top: 4px;padding: 2px 4px;font-size: 12px;color: #333;border: 1px solid #ffd4d2;background-color: #ffefee;"><i style="color:red;" class="fa fa-times-circle" aria-hidden="true"></i> Please Select Sub-Category</p>
-                                    </div>   
-                                    <div class="col-md-12">
-                                       <span class="help-block">select only one category </span>
-                                    </div>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="margin_top1">
-                           <div class="form-group row">
-                              <div class="col-md-3 col-from-label">
-                                 <label for="">Meta Keyword:</label>
-                              </div>
-                              <div class="col-md-8">
-                                 <textarea class="form-control maxlength-handler validate" validation="validated_true" name="product_meta_keywords" maxlength="255">{{ $supplier_product->meta_keyword }}</textarea>
-                                 <p class="empty_error hidden_icon"><i class="fa fa-times-circle" aria-hidden="true"></i> Please type some Meta Keyword</p>
-                                 <div class="validation_status">
-                                    <i class="fa fa-check-square btn btn-sm btn-success hidden_icon validated_true"></i>
-                                    <i class="fa fa-exclamation-triangle btn btn-sm btn-danger hidden_icon validated_false"></i>
-                                    <span class="text-danger validation_message"></span>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="margin_top1">
-                           <div class="form-group row">
-                              <div class="col-md-3 col-from-label">
-                                 <label for="">Tag:</label>
-                              </div>
-                              <div class="col-md-8">
-                                 <textarea class="form-control maxlength-handler validate" validation="validated_true" name="product_meta_tag" maxlength="255">{{ $supplier_product->tag }}</textarea>
-                                 <p class="empty_error hidden_icon"><i class="fa fa-times-circle" aria-hidden="true"></i> Please type Meta Tags Separated by comma (,)</p>
-                              </div>
-                              <div class="col-xs-3 validation_status">
-                                 <i class="fa fa-check-square btn btn-sm btn-success hidden_icon validated_true"></i>
-                                 <i class="fa fa-exclamation-triangle btn btn-sm btn-danger hidden_icon validated_false"></i>
-                                 <span class="text-danger validation_message"></span>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-                  <!-------------PRODUCT-IMAGE-TAB-CONTENT;------------------>
-                  <div id="product_image_tab_content">
+               <input type="hidden" name="hidden_payment_tearms" value="{{ $product->payment_method }}">
+               <?php
+      			?>
+               @if (Sentinel::check())
+               <?php
+                    $role = App\Model\Role_user::where('user_id',Sentinel::getUser()->id)->first();
+                  ?>
+               @if($role->role_id ==2)
+               <form action="{{ URL::to('admin/product-update', $product->id) }}" method="post" enctype="multipart/form-data" accept-charset="UTF-8" class="product_info_form form-row-seperated">
+               @else
+               <form action="{{ URL::to('supplier/product_update', $product->id) }}" method="post" enctype="multipart/form-data" accept-charset="UTF-8" class="product_info_form form-row-seperated">
+               @endif
+               @endif
+               {!! csrf_field() !!}
+               <?php $product_parent_id = $products?$products->category_id:0?>
+               <input type="hidden" name="hidden_categorie" value="{{ $product_parent_id }}">
+               <input type="hidden" name="bdtdc_limited_time_offers_id" value="<?php if(isset($bdtdc_limited_lime_offers[0]->id)){echo $bdtdc_limited_lime_offers[0]->id;} ?>">
+                     <!-- <ul class="nav nav-tabs product_create_tab" role="tablist">
+      				<li class="active"><a data-toggle="tab" href="#product_details_tab_content">Product Details</a></li>
+      				<li><a data-toggle="tab" href="#product_image_tab_content">Product Image</a></li>
+      			</ul> -->
+               <div class="">
+                  <!-------------PRODUCT-DETAILS-TAB-CONTENT;------------------>
+                  <div id="product_details_tab_content" class="">
                      <div class="sd-card">
-                        <h4 class="card-title">Product Images</h4>
-                        <div class="col-md-3">
-                           <label for="">Choose Product Image:</label>
-                        </div>
-                        <div class="col-md-8">
-                           <div class="image_container">
-                              <input type="file" name="product_images[]" class="p_add_img img_1">
-                           </div>
-                           <span class="text-muted">(Max: 2MB, only jpg or png files are allowed. Maximum six images are allowed. Recommanded WxH 1000x1000 pixel)</span>
-                           <p class="image_required_error hidden_icon">
-                              <i class="fa fa-times-circle" aria-hidden="true"></i> Please insert at least one product image
-                           </p>
-                           <p class="image_attachment_error hidden_icon">
-                              <i class="fa fa-times-circle" aria-hidden="true"></i> 
-                              <span>Please fix image error</span>
-                           </p>
-                           <div class="col-xs-12 img_preview">
-                              <!----PREVIEW IMAGE HANDELED BY JAVASCRIPT--------- -->
-                              @if($product_images)
-                              @if(count($product_images)>0)
-                              @foreach($product_images as $img)
-                              <div class="col-sm-3 img_container">
-                                 <div class="col-xs-12 text-center">
-                                    <i class="fa fa-remove btn btn-xs btn-danger remove_img" data-img_target="0" data-img_id="{{$img->id}}"></i>
-                                 </div>
-                                 <div class="col-xs-12">
-                                    <a target="_blank" title="{{$img->image}}" href="{{URL::to($img->image,null)}}"><img src="{{URL::to($img->image,null)}}" alt="" class="img-responsive"></a>
-                                 </div>
-                                 <div class="col-xs-12">
-                                    <p title="{{ $img->image }}" class="img_details">Name: <a target="_blank" href="{{URL::to($img->image,null)}}"><span class="text-muted img_name">...{{ substr($img->image,-42) }}</span></a></p>
-                                 </div>
-                              </div>
-                              @endforeach
-                              @endif
-                              @endif
-                           </div>
-                           <div id="deleted_p_image">
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-
-                  <div class="atributes-details">
-                     <div class="sd-card">
-                        <h4 class="card-title">Attributes Details</h4>
+                        <h4 class="card-title">Product Information</h4>
                         <div class="sd-card-body">
                            <div class="margin_top1">
                               <div class="form-group row">
                                  <div class="col-md-3 col-from-label">
-                                    <label for="">Model/HS: </label>
+                                    <label>Product Name</label>
                                  </div>
                                  <div class="col-md-8">
-                                    <input type="text" name="product_model" validation="validated_true" class="form-control validate" placeholder="Model" value="{{ $supplier_product->model }}">
-                                    <p class="empty_error hidden_icon"><i class="fa fa-times-circle" aria-hidden="true"></i> Please type product Model/HS number</p>
-                                    <div class="validation_status">
-                                       <i class="fa fa-check-square btn btn-sm btn-success hidden_icon validated_true"></i>
-                                       <i class="fa fa-exclamation-triangle btn btn-sm btn-danger hidden_icon validated_false"></i>
-                                       <span class="text-danger validation_message"></span>
+                                    <div class="form-filed">
+                                       <input type="hidden" name="base_url" class="form-control" value="{{ URL::to('/',null) }}">
+                                       <input type="text" name="product_name" validation="validated_true" class="form-control validate" placeholder="Product Name" value="{{ old('product_name',$supplier_product->name) }}">
+                                       <div class="form-filed-error">
+                                          <p class="empty_error hidden_icon"><i class="fa fa-times-circle" aria-hidden="true"></i> Please enter a Product Name</p>
+                                          <i class="fa fa-check-square btn btn-sm btn-success hidden_icon validated_true"></i>
+                                          <i class="fa fa-exclamation-triangle btn btn-sm btn-danger hidden_icon validated_false"></i>
+                                          <span class="text-danger validation_message"></span>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                           @if($wholesale==1)
+
+                           <div class="margin_top1">
+                              <div class="col-md-2">
+                                 <span>Wholesale product:</span>
+                              </div>
+                              <div class="col-md-10">
+                                 <label><input type="checkbox" name="is_wholesale_product" class="" value="true" <?php if(isset($bdtdc_product_to_wholesale_category[0]->product_id)){echo "checked";} ?>>Make wholesale product</label><br>
+                                 <label><input type="checkbox" name="is_limited_time_offer" id="limited_time_offer" class="" value="true">Make Limited time offer for this product</label>
+                              </div>
+                           </div>
+                           <div class="margin_top1 limited_offer_div" style="display: none;">
+                              <div style="text-align:right;padding-right:0px" class="col-md-2">
+                                 <label for="">Limited time offer: </label>
+                              </div>
+                              <div class="col-md-7">
+                                 <table class="table">
+                                    <tr>
+                                       <td>Percentage: </td>
+                                       <td>
+                                          <div class="input-group" style="width:150px;">
+                                             <input validation="validated_false" class="form-control check_number" style="height:27px;padding-bottom:1%;font-size:12px;width:150px;" type="text" name="percentage" aria-describedby="percentage-addon" value="<?php if(isset($bdtdc_limited_lime_offers[0])){echo $bdtdc_limited_lime_offers[0]->profit_percentage;}else{echo '';} ?>">
+                                             <span class="input-group-addon" style="color:black;" id="percentage-addon">%</span>
+                                          </div>
+                                       </td>
+                                    </tr>
+                                    <tr>
+                                       <td>From: </td>
+                                       <td>
+                                          <input class="form-control span2" id="dpd1" style="height:27px;padding-bottom:1%;font-size:12px;width:150px;" type="text" name="offer_from" placeholder="yyyy-mm-dd" value="<?php if(isset($bdtdc_limited_lime_offers[0])){echo date("Y-m-d",strtotime($bdtdc_limited_lime_offers[0]->start_date));}else{echo '';} ?>">
+                                       </td>
+                                       <td>To: </td>
+                                       <td>
+                                          <input class="form-control span2" id="dpd2" style="height:27px;padding-bottom:1%;font-size:12px;width:150px;" type="text" name="offer_to" placeholder="yyyy-mm-dd" value="<?php if(isset($bdtdc_limited_lime_offers[0])){echo date("Y-m-d",strtotime($bdtdc_limited_lime_offers[0]->end_date));}else{echo '';} ?>">
+                                       </td>
+                                       <!-- <td>
+         			      							<div class="col-xs-3 validation_status">
+         					                            <i class="fa fa-check-square btn btn-sm btn-success hidden_icon validated_true"></i>
+         					                            <i class="fa fa-exclamation-triangle btn btn-sm btn-danger hidden_icon validated_false"></i>
+         					                            <span class="text-danger validation_message"></span>
+         				                        	</div>
+         			                        	</td> -->
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                           @endif
+                           <div class="margin_top1">
+                              <div class="form-group row">
+                                 <div  class="col-md-3 col-from-label">
+                                    <label>Category</label>
+                                 </div>
+                                 <div class="col-md-8">
+                                    <div class="row">
+                                       <div class="col-md-6 col-from-label">
+                                          <label>Parent</label>
+                                          <select name="parent_category" class="form-control" style="height:29px;padding-bottom:0%;padding-top:0px;font-size:12px">
+                                             <option value="0">----Please Select----</option>
+                                             @foreach(\App\Model\BdtdcCategory::where('parent_id',0)->get() as $v)
+                                             @if($v->id == $parent_id)
+                                             <option value="{{ $v->id }}" selected="selected">{{ trim($v->name) }}</option>
+                                             @else
+                                             <option value="{{ $v->id }}">{{ trim($v->name) }}</option>
+                                             @endif
+                                             @endforeach
+                                          </select>
+                                          <p class="empty_error hidden_icon parent_cat_error" style="margin-top: 4px;padding: 2px 4px;font-size: 12px;color: #333;border: 1px solid #ffd4d2;background-color: #ffefee;"><i style="color:red;" class="fa fa-times-circle" aria-hidden="true"></i> Please Select Parent Category</p>
+                                       </div>
+                                       <div class="col-md-6 col-from-label">
+                                          <label>Sub</label>
+                                          <select name="sub_category" class="form-control" style="height:29px;padding-bottom:0%;padding-top:0px;font-size:12px">
+                                             <option value="0">Select a sub category</option>
+
+                                             @foreach(\App\Model\BdtdcCategory::where('parent_id',$parent_id)->get() as $v)
+                                             @if($v->id == $product_parent_id)
+                                             <option value="{{ $v->id }}" selected="selected">{{ trim($v->name) }}</option>
+                                             @else
+                                             <option value="{{ $v->id }}">{{ trim($v->name) }}</option>
+                                             @endif
+                                             @endforeach
+                                          </select>
+                                          <p class="empty_error hidden_icon sub_cat_error" style="margin-top: 4px;padding: 2px 4px;font-size: 12px;color: #333;border: 1px solid #ffd4d2;background-color: #ffefee;"><i style="color:red;" class="fa fa-times-circle" aria-hidden="true"></i> Please Select Sub-Category</p>
+                                       </div>   
+                                       <div class="col-md-12">
+                                          <span class="help-block">select only one category </span>
+                                       </div>
                                     </div>
                                  </div>
                               </div>
@@ -310,15 +216,19 @@
                            <div class="margin_top1">
                               <div class="form-group row">
                                  <div class="col-md-3 col-from-label">
-                                    <label for="">Brand Name: </label>
+                                    <label for="">Meta Keyword</label>
                                  </div>
                                  <div class="col-md-8">
-                                    <input type="text" name="brand_name" validation="validated_true" class="form-control validate" value="{{ $supplier_product->brandname }}">
-                                    <p class="empty_error hidden_icon"><i class="fa fa-times-circle" aria-hidden="true"></i> Please type brand name</p>
-                                    <div class="validation_status">
-                                       <i class="fa fa-check-square btn btn-sm btn-success hidden_icon validated_true"></i>
-                                       <i class="fa fa-exclamation-triangle btn btn-sm btn-danger hidden_icon validated_false"></i>
-                                       <span class="text-danger validation_message"></span>
+                                    <div class="form-filed">
+                                       <textarea class="form-control maxlength-handler validate" validation="validated_true" name="product_meta_keywords" maxlength="255">{{ $supplier_product->meta_keyword }}</textarea>
+                                       <div class="form-filed-error">
+                                          <p class="empty_error hidden_icon"><i class="fa fa-times-circle" aria-hidden="true"></i> Please type some Meta Keyword</p>
+                                          <div class="validation_status">
+                                             <i class="fa fa-check-square btn btn-sm btn-success hidden_icon validated_true"></i>
+                                             <i class="fa fa-exclamation-triangle btn btn-sm btn-danger hidden_icon validated_false"></i>
+                                             <span class="text-danger validation_message"></span>
+                                          </div>
+                                       </div>
                                     </div>
                                  </div>
                               </div>
@@ -326,586 +236,713 @@
                            <div class="margin_top1">
                               <div class="form-group row">
                                  <div class="col-md-3 col-from-label">
-                                    <label for="">Place of Origin: </label>
+                                    <label for="">Tag</label>
                                  </div>
                                  <div class="col-md-8">
-                                    <select name="country" class="form-control validate validate_place_origin" validation="<?php if($supplier_product->location == 0){echo 'validated_false';}else{echo 'validated_true';} ?>">
-                                       <option value="0" <?php if($supplier_product->location == 0){echo 'selected';} ?>>--- Select Place of Origin ---</option>
-                                       @foreach(\App\Model\BdtdcCountry::get() as $bc)
-                                       <option value="{{ $bc->id }}" <?php if($supplier_product->location == $bc->id){echo 'selected';} ?>>{{ trim($bc->name) }}</option>
+                                    <div class="form-filed">
+                                       <textarea class="form-control maxlength-handler validate" validation="validated_true" name="product_meta_tag" maxlength="255">{{ $supplier_product->tag }}</textarea>
+                                       <div class="form-filed-error">
+                                          <p class="empty_error hidden_icon"><i class="fa fa-times-circle" aria-hidden="true"></i> Please type Meta Tags Separated by comma (,)</p>
+                                          <i class="fa fa-check-square btn btn-sm btn-success hidden_icon validated_true"></i>
+                                          <i class="fa fa-exclamation-triangle btn btn-sm btn-danger hidden_icon validated_false"></i>
+                                          <span class="text-danger validation_message"></span>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <!-------------PRODUCT-IMAGE-TAB-CONTENT;------------------>
+                     <div id="product_image_tab_content">
+                        <div class="sd-card">
+                           <h4 class="card-title">
+                              Product Images
+                           </h4>
+                           <div class="sd-card-body">
+                              <div class="form-group row">
+                                 <div class="col-md-3 col-from-label">
+                                    <label>Choose Product Image</label>
+                                 </div>
+                                 <div class="col-md-8">
+                                    <div class="image_container">
+                                       <input type="file" name="product_images[]" class="p_add_img img_1">
+                                    </div>
+                                    <span class="text-muted">(Max: 2MB, only jpg or png files are allowed. Maximum six images are allowed. Recommanded WxH 1000x1000 pixel)</span>
+                                    <p class="image_required_error hidden_icon">
+                                       <i class="fa fa-times-circle" aria-hidden="true"></i> Please insert at least one product image
+                                    </p>
+                                    <p class="image_attachment_error hidden_icon">
+                                       <i class="fa fa-times-circle" aria-hidden="true"></i> 
+                                       <span>Please fix image error</span>
+                                    </p>
+                                    <div class="col-xs-12 img_preview">
+                                       <!----PREVIEW IMAGE HANDELED BY JAVASCRIPT--------- -->
+                                       @if($product_images)
+                                       @if(count($product_images)>0)
+                                       @foreach($product_images as $img)
+                                       <div class="col-sm-3 img_container">
+                                          <div class="col-xs-12 text-center">
+                                             <i class="fa fa-remove btn btn-xs btn-danger remove_img" data-img_target="0" data-img_id="{{$img->id}}"></i>
+                                          </div>
+                                          <div class="col-xs-12">
+                                             <a target="_blank" title="{{$img->image}}" href="{{URL::to($img->image,null)}}"><img src="{{URL::to($img->image,null)}}" alt="" class="img-responsive"></a>
+                                          </div>
+                                          <div class="col-xs-12">
+                                             <p title="{{ $img->image }}" class="img_details">Name: <a target="_blank" href="{{URL::to($img->image,null)}}"><span class="text-muted img_name">...{{ substr($img->image,-42) }}</span></a></p>
+                                          </div>
+                                       </div>
                                        @endforeach
-                                    </select>
-                                    <p class="place_origin_error hidden_icon"><i class="fa fa-times-circle" aria-hidden="true"></i> Please Select product place of origin</p>
-                                    <!-- {-!! Form::select( 'country',\App\Model\BdtdcCountry::lists('name','id'), $supplier_product->location,array('class'=>'form-control validate','validation'=>'validated_true','style'=>'height:29px;padding-bottom:1%;padding-top:0px;font-size:12px')) !!-} -->
-                                    <div class="validation_status">
-                                       <i class="fa fa-check-square btn btn-sm btn-success hidden_icon validated_true"></i>
-                                       <i class="fa fa-exclamation-triangle btn btn-sm btn-danger hidden_icon validated_false"></i>
-                                       <span class="text-danger validation_message"></span>
+                                       @endif
+                                       @endif
+                                    </div>
+                                    <div id="deleted_p_image">
                                     </div>
                                  </div>
                               </div>
                            </div>
+                        </div>
+                     </div>
+
+                     <div class="atributes-details">
+                        <div class="sd-card">
+                           <h4 class="card-title">Attributes Details</h4>
+                           <div class="sd-card-body">
+                              <div class="margin_top1">
+                                 <div class="form-group row">
+                                    <div class="col-md-3 col-from-label">
+                                       <label for="">Model/HS </label>
+                                    </div>
+                                    <div class="col-md-8">
+                                       <div class="form-filed">
+                                          <input type="text" name="product_model" validation="validated_true" class="form-control validate" placeholder="Model" value="{{ $supplier_product->model }}">
+                                          <div class="form-filed-error">
+                                             <p class="empty_error hidden_icon"><i class="fa fa-times-circle" aria-hidden="true"></i> Please type product Model/HS number</p>
+                                             <div class="validation_status">
+                                                <i class="fa fa-check-square btn btn-sm btn-success hidden_icon validated_true"></i>
+                                                <i class="fa fa-exclamation-triangle btn btn-sm btn-danger hidden_icon validated_false"></i>
+                                                <span class="text-danger validation_message"></span>
+                                             </div>
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
+                              <div class="margin_top1">
+                                 <div class="form-group row">
+                                    <div class="col-md-3 col-from-label">
+                                       <label for="">Brand Name </label>
+                                    </div>
+                                    <div class="col-md-8">
+                                       <div class="form-filed">
+                                          <input type="text" name="brand_name" validation="validated_true" class="form-control validate" value="{{ $supplier_product->brandname }}">
+                                          <div class="form-filed-error">
+                                             <p class="empty_error hidden_icon"><i class="fa fa-times-circle" aria-hidden="true"></i> Please type brand name</p>
+                                             <div class="validation_status">
+                                                <i class="fa fa-check-square btn btn-sm btn-success hidden_icon validated_true"></i>
+                                                <i class="fa fa-exclamation-triangle btn btn-sm btn-danger hidden_icon validated_false"></i>
+                                                <span class="text-danger validation_message"></span>
+                                             </div>
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
+                              <div class="margin_top1">
+                                 <div class="form-group row">
+                                    <div class="col-md-3 col-from-label">
+                                       <label for="">Place of Origin</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                       <select name="country" class="form-control validate validate_place_origin" validation="<?php if($supplier_product->location == 0){echo 'validated_false';}else{echo 'validated_true';} ?>">
+                                          <option value="0" <?php if($supplier_product->location == 0){echo 'selected';} ?>>--- Select Place of Origin ---</option>
+                                          @foreach(\App\Model\BdtdcCountry::get() as $bc)
+                                          <option value="{{ $bc->id }}" <?php if($supplier_product->location == $bc->id){echo 'selected';} ?>>{{ trim($bc->name) }}</option>
+                                          @endforeach
+                                       </select>
+                                       <p class="place_origin_error hidden_icon"><i class="fa fa-times-circle" aria-hidden="true"></i> Please Select product place of origin</p>
+                                       <!-- {-!! Form::select( 'country',\App\Model\BdtdcCountry::lists('name','id'), $supplier_product->location,array('class'=>'form-control validate','validation'=>'validated_true','style'=>'height:29px;padding-bottom:1%;padding-top:0px;font-size:12px')) !!-} -->
+                                       <div class="validation_status">
+                                          <i class="fa fa-check-square btn btn-sm btn-success hidden_icon validated_true"></i>
+                                          <i class="fa fa-exclamation-triangle btn btn-sm btn-danger hidden_icon validated_false"></i>
+                                          <span class="text-danger validation_message"></span>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
+                              <div class="attribute_area margin_top1">
+                                 <div class="form-group row">
+                                    <div class="col-md-3 col-from-label">
+                                       <label for="">Attributes </label>
+                                    </div>
+                                    <div class="col-md-8">
+                                       <div class="row">
+                                             <?php $i_remove = 1; $attribute_found = false;?>
+                                             @foreach($attributes as $attr)
+                                             <?php if(isset($attr->bdtdcAttribute->id)) { ?>
+                                             <?php $attribute_found = true; ?>
+                                                <div class="col-md-6">
+                                                   <label>Name</label>
+                                                   <input name="attr_id[]" type="hidden" value="{{ $attr->bdtdcAttribute->id }}"><input type="text" name="product_attr_name[]" value="{{ $attr->bdtdcAttribute->name ?? '' }}" class="form-control">
+                                                </div>
+                                                <div class="col-md-6">
+                                                   <label>Value</label>
+                                                
+                                                   <input type="text" name="product_attr_value[]" value="{{ $attr->bdtdcAttribute->value ?? ''  }}" class="form-control">
+                                                
+                                                <?php if($i_remove == 1){ ?>
+                                                
+                                                   <button class="btn btn-primary btn-xs add_more_attribute_btn_for_edit"><i class="fa fa-plus"></i></button> 
+                                                
+                                                <?php } ?>
+
+                                                <?php if($i_remove != 1){ ?>
+                                                
+                                                   <button class="btn btn-danger btn-xs remove_attributes" check_btn="attribute" deleted_attr_id="{{ $attr->bdtdcAttribute->id }}">
+                                                      <i class="fa fa-minus"></i>
+                                                   </button> 
+                                                <?php } ?>
+
+                                                </div>
+                                             <?php  $i_remove++; ?>
+                                             <?php } ?>
+                                             @endforeach
+
+                                             @if(!$attribute_found)
+                                                <input name="attr_id[]" value="0" type="hidden">
+                                                <div class="col-md-5 col-from-label">
+                                                   <label>Name</label>
+                                                   <input name="product_attr_name[]" class="form-control" type="text">
+                                                </div>
+                                                <div class="col-md-5 col-from-label">
+                                                   <label>Value</label>
+                                                   <input name="product_attr_value[]" class="form-control" type="text">
+                                                </div>
+                                                <div class="col-2">
+                                                      <button class="btn btn-primary btn-xs add_more_attribute_btn_for_edit"><i class="fa fa-plus"></i></button>
+                                                </div>
+                                             @endif
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+
+                     <div class="Trade-details">
+                        <div class="sd-card">
+                        <h4 class="card-title">Trade Details</h4>
+                        <div class="sd-card-body">
                            <div class="attribute_area margin_top1">
                               <div class="form-group row">
                                  <div class="col-md-3 col-from-label">
-                                    <label for="">Attributes: </label>
+                                    <label for="">Trade Details </label>
                                  </div>
                                  <div class="col-md-8">
-                                    <div class="row">
-                                          <?php $i_remove = 1; $attribute_found = false;?>
-                                          @foreach($attributes as $attr)
-                                          <?php if(isset($attr->bdtdcAttribute->id)) { ?>
-                                          <?php $attribute_found = true; ?>
-                                             <div class="col-md-6">
-                                                <label>Name</label>
-                                                <input name="attr_id[]" type="hidden" value="{{ $attr->bdtdcAttribute->id }}"><input type="text" name="product_attr_name[]" value="{{ $attr->bdtdcAttribute->name ?? '' }}" class="form-control">
-                                             </div>
-                                             <div class="col-md-6">
-                                                <label>Value</label>
-                                             
-                                                <input type="text" name="product_attr_value[]" value="{{ $attr->bdtdcAttribute->value ?? ''  }}" class="form-control">
-                                             
-                                             <?php if($i_remove == 1){ ?>
-                                             
-                                                <button class="btn btn-primary btn-xs add_more_attribute_btn_for_edit"><i class="fa fa-plus"></i></button> 
-                                             
-                                             <?php } ?>
-
-                                             <?php if($i_remove != 1){ ?>
-                                             
-                                                <button class="btn btn-danger btn-xs remove_attributes" check_btn="attribute" deleted_attr_id="{{ $attr->bdtdcAttribute->id }}">
-                                                   <i class="fa fa-minus"></i>
-                                                </button> 
-                                             <?php } ?>
-
-                                             </div>
-                                          <?php  $i_remove++; ?>
-                                          <?php } ?>
-                                          @endforeach
-
-                                          @if(!$attribute_found)
-                                             <input name="attr_id[]" value="0" type="hidden">
-                                             <div class="col-md-5">
-                                                <label>Name:</label>
-                                                <input name="product_attr_name[]" class="form-control" type="text">
-                                             </div>
-                                             <div class="col-md-5">
-                                                <label>Value:</label>
-                                                <input name="product_attr_value[]" class="form-control" type="text">
-                                             </div>
-                                             <div class="col-2">
-                                                   <button class="btn btn-primary btn-xs add_more_attribute_btn_for_edit"><i class="fa fa-plus"></i></button>
-                                             </div>
-                                          @endif
-                                    </div>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-
-                  <div class="Trade-details">
-                     <div class="sd-card">
-                     <h4 class="card-title">Trade Details:</h4>
-                     <div class="sd-card-body">
-                        <div class="attribute_area margin_top1">
-                           <div class="form-group row">
-                              <div class="col-md-3 col-from-label">
-                                 <label for="">Trade Details: </label>
-                              </div>
-                              <div class="col-md-8">
-                                 <label><input type="radio" name="base" value="based_quantity" <?php if(count($product_price) > 0){if(trim($product_price[0]->currency) == ''){echo "checked";}}else{if(count($product_price) == 0){echo "checked";}} ?> /> Based on Quantity
-                                 </label>
-                                 <label>
-                                    <input type="radio" name="base" id="based_FOB_id" value="based_FOB" <?php if(count($product_price) > 0){if($product_price[0]->currency != ''){echo "checked";}} ?> /> FOB
-                                 </label>
-                                 @if(count($product_price) > 0)
-                                 <div class="table quantity_base">
-                                    <div class="row">
-                                       <div class="col-md-6">
-                                          <label>Unit Type:</label>
-                                          <select class="form-control" name="unit_type" id="sel1">
-                                             @foreach($units as $u)
-                                             @if($u->id == $product->unit_type_id)
-                                             <option value="{!! $u->id !!}" selected>{!! $u->name !!}</option>
-                                             @else
-                                             <option value="{!! $u->id !!}">{!! $u->name !!}</option>
-                                             @endif
-
-                                             @endforeach
-                                          </select>
-                                       </div>
-                                    </div>
-                                    @if($product_price[0]->currency == '')
-                                    <?php $i_remove_moq = 1; ?>
-                                    @foreach($product_price as $p)
-                                    <tr>
-                                       <td>MOQ: <span></span></td>
-                                    </tr>
-                                    <tr>
-                                       <td>
-                                          <input type="hidden" name="product_price_id[]" value="{{ $p->id }}">
-                                          <input type="text" name="product_MOQ[]" value="{{ $p->product_MOQ }}" class="form-control">
-                                       </td>
-                                    </tr>
-                                    <tr>
-                                       <td>FOB Price: </td>
-                                    </tr>
-                                       <?php
-      		      						      $fob_price_array = explode('-', $p->product_FOB)
-      		      						   ?>
-                                    <tr>
-                                       <td>
-                                          <input type="text" name="product_FOB_from[]" class="form-control check_number" value="<?php if(isset($fob_price_array[0])){echo $fob_price_array[0];} ?>" placeholder="From">
-                                       </td>
-                                       <td>-</td>
-                                       <td>
-                                          <input type="text" name="product_FOB_to[]" class="form-control check_number" placeholder="To" value="<?php if(isset($fob_price_array[1])){echo $fob_price_array[1];} ?>">
-                                       </td>
-                                       <td>
-                                          <i class="fa fa-plus btn btn-xs btn-primary add_price_btn"></i>
-                                          <?php if($i_remove_moq != 1){ ?>
-                                          <i class="fa fa-minus btn btn-xs btn-danger remove_attributes" check_btn="trade" deleted_attr_id="{{ $p->id }}"></i>
-                                          <?php } ?>
-                                       </td>
-                                    </tr>
-                                    <?php $i_remove_moq++; ?>
-                                    @endforeach
-                                    @else
-                                    <div class="row">
-                                       <div class="col-md-12">
-                                          <label>MOQ: <span></span></label>
-                                          <input type="hidden" name="product_price_id[]" value="<?php if(isset($product_price[0])){echo $product_price[0]->id;} ?>">
-                                          <input type="hidden" name="product_price_id_FOB[]" value="<?php if(isset($product_price[0])){echo $product_price[0]->id;} ?>">
-                                          <input type="text" name="product_MOQ[]" class="form-control" value="<?php if(isset($product_price[0])){echo $product_price[0]->product_MOQ;} ?>">
-                                       </div>
-                                    </div>
-                                    <div class="row">
-                                       <div class="col-md-12">
-                                          <label>FOB Price: </label>
-                                       </div>
-                                       <?php
-      			      						   $fob_price_array = explode('-', $product_price[0]->product_FOB);
-      			      						?>
-                                       <div class="col-md-5">
-                                          <input type="text" name="product_FOB_from[]" class="form-control" placeholder="From" value="<?php if(isset($fob_price_array[0])){echo $fob_price_array[0];} ?>">
-                                       </div>
-                                       <div class="col-md-1">-</div>
-                                       <div class="col-md-5">
-                                          <input type="text" name="product_FOB_to[]" class="form-control" placeholder="To" value="<?php if(isset($fob_price_array[1])){echo $fob_price_array[1];} ?>">
-                                       </div>
-                                       <div class="col-md-1">
-                                          <i class="fa fa-plus btn btn-xs btn-primary add_price_btn"></i>
-                                       </div>
-                                    </div>
-                                    @endif
-                                 </div>
-                                 @else
-                                 <table class="table quantity_base">
-                                    <tbody>
-                                       <tr>
-                                          <input type="hidden" name="product_price_id[]" value="0">
-                                          <td>Unit Type: </td>
-                                          <td>
+                                    <label><input type="radio" name="base" value="based_quantity" <?php if(count($product_price) > 0){if(trim($product_price[0]->currency) == ''){echo "checked";}}else{if(count($product_price) == 0){echo "checked";}} ?> /> Based on Quantity
+                                    </label>
+                                    <label>
+                                       <input type="radio" name="base" id="based_FOB_id" value="based_FOB" <?php if(count($product_price) > 0){if($product_price[0]->currency != ''){echo "checked";}} ?> /> FOB
+                                    </label>
+                                    @if(count($product_price) > 0)
+                                    <div class="table quantity_base">
+                                       <div class="row">
+                                          <div class="col-md-12">
+                                             <label>Unit Type:</label>
                                              <select class="form-control" name="unit_type" id="sel1">
                                                 @foreach($units as $u)
-                                                <option value={!! $u->id !!}>{!! $u->name !!}</option>
+                                                @if($u->id == $product->unit_type_id)
+                                                <option value="{!! $u->id !!}" selected>{!! $u->name !!}</option>
+                                                @else
+                                                <option value="{!! $u->id !!}">{!! $u->name !!}</option>
+                                                @endif
+
                                                 @endforeach
                                              </select>
+                                          </div>
+                                       </div>
+                                       @if($product_price[0]->currency == '')
+                                       <?php $i_remove_moq = 1; ?>
+                                       @foreach($product_price as $p)
+                                       <tr>
+                                          <td>MOQ <span></span></td>
+                                       </tr>
+                                       <tr>
+                                          <td>
+                                             <input type="hidden" name="product_price_id[]" value="{{ $p->id }}">
+                                             <input type="text" name="product_MOQ[]" value="{{ $p->product_MOQ }}" class="form-control">
                                           </td>
                                        </tr>
                                        <tr>
-                                          <td>MOQ: <span></span></td>
-                                          <td>
-                                             <input type="text" name="product_MOQ[]" class="form-control"></td>
                                           <td>FOB Price: </td>
+                                       </tr>
+                                          <?php
+         		      						      $fob_price_array = explode('-', $p->product_FOB)
+         		      						   ?>
+                                       <tr>
                                           <td>
-                                             <input type="text" name="product_FOB_from[]" class="form-control check_number" placeholder="From">
+                                             <input type="text" name="product_FOB_from[]" class="form-control check_number" value="<?php if(isset($fob_price_array[0])){echo $fob_price_array[0];} ?>" placeholder="From">
                                           </td>
                                           <td>-</td>
                                           <td>
-                                             <input type="text" name="product_FOB_to[]" class="form-control check_number" placeholder="To">
+                                             <input type="text" name="product_FOB_to[]" class="form-control check_number" placeholder="To" value="<?php if(isset($fob_price_array[1])){echo $fob_price_array[1];} ?>">
                                           </td>
-                                          <td><i class="fa fa-plus btn btn-xs btn-primary add_price_btn"></i></td>
+                                          <td>
+                                             <i class="fa fa-plus btn btn-xs btn-primary add_price_btn"></i>
+                                             <?php if($i_remove_moq != 1){ ?>
+                                             <i class="fa fa-minus btn btn-xs btn-danger remove_attributes" check_btn="trade" deleted_attr_id="{{ $p->id }}"></i>
+                                             <?php } ?>
+                                          </td>
                                        </tr>
-                                    </tbody>
-                                 </table>
-                                 @endif
-                                 @if(count($product_price) > 0)
-                                 <div class="table FOB_base" style="display: none;">
-                                       <div class="row">
-                                          <div class="col-md-12">
-                                             <label>Currency: </label>
-                                             <input type="hidden" name="product_price_id_FOB[]" value="<?php if(isset($product_price[0])){echo $product_price[0]->id;} ?>"></input>
-                                             <select name="currencies">
-                                                <option value="">Select currency</option>
-                                                <option value="USD">America (United States) Dollars – USD</option>
-                                                <option value="AFN">Afghanistan Afghanis – AFN</option>
-                                                <option value="ALL">Albania Leke – ALL</option>
-                                                <option value="DZD">Algeria Dinars – DZD</option>
-                                                <option value="ARS">Argentina Pesos – ARS</option>
-                                                <option value="AUD">Australia Dollars – AUD</option>
-                                                <option value="ATS">Austria Schillings – ATS</option>
-                                                <option value="BSD">Bahamas Dollars – BSD</option>
-                                                <option value="BHD">Bahrain Dinars – BHD</option>
-                                                <option value="BDT">Bangladesh Taka – BDT</option>
-                                                <option value="BBD">Barbados Dollars – BBD</option>
-                                                <option value="BEF">Belgium Francs – BEF</option>
-                                                <option value="BMD">Bermuda Dollars – BMD</option>
-                                                <option value="BRL">Brazil Reais – BRL</option>
-                                                <option value="BGN">Bulgaria Leva – BGN</option>
-                                                <option value="CAD">Canada Dollars – CAD</option>
-                                                <option value="XOF">CFA BCEAO Francs – XOF</option>
-                                                <option value="XAF">CFA BEAC Francs – XAF</option>
-                                                <option value="CLP">Chile Pesos – CLP</option>
-                                                <option value="CNY">China Yuan Renminbi – CNY</option>
-                                                <option value="RMB - CNY">RMB (China Yuan Renminbi) – CNY</option>
-                                                <option value="COP">Colombia Pesos – COP</option>
-                                                <option value="XPF">CFP Francs – XPF</option>
-                                                <option value="CRC">Costa Rica Colones – CRC</option>
-                                                <option value="HRK">Croatia Kuna – HRK</option>
-                                                <option value="CYP">Cyprus Pounds – CYP</option>
-                                                <option value="CZK">Czech Republic Koruny – CZK</option>
-                                                <option value="DKK">Denmark Kroner – DKK</option>
-                                                <option value="DEM">Deutsche (Germany) Marks – DEM</option>
-                                                <option value="DOP">Dominican Republic Pesos – DOP</option>
-                                                <option value="NLG">Dutch (Netherlands) Guilders – NLG</option>
-                                                <option value="XCD">Eastern Caribbean Dollars – XCD</option>
-                                                <option value="EGP">Egypt Pounds – EGP</option>
-                                                <option value="EEK">Estonia Krooni – EEK</option>
-                                                <option value="EUR">Euro – EUR</option>
-                                                <option value="FJD">Fiji Dollars – FJD</option>
-                                                <option value="FIM">Finland Markkaa – FIM</option>
-                                                <option value="FRF*">France Francs – FRF*</option>
-                                                <option value="DEM">Germany Deutsche Marks – DEM</option>
-                                                <option value="XAU">Gold Ounces – XAU</option>
-                                                <option value="GRD">Greece Drachmae – GRD</option>
-                                                <option value="GTQ">Guatemalan Quetzal – GTQ</option>
-                                                <option value="NLG">Holland (Netherlands) Guilders – NLG</option>
-                                                <option value="HKD">Hong Kong Dollars – HKD</option>
-                                                <option value="HUF">Hungary Forint – HUF</option>
-                                                <option value="ISK">Iceland Kronur – ISK</option>
-                                                <option value="XDR">IMF Special Drawing Right – XDR</option>
-                                                <option value="INR">India Rupees – INR</option>
-                                                <option value="IDR">Indonesia Rupiahs – IDR</option>
-                                                <option value="IRR">Iran Rials – IRR</option>
-                                                <option value="IQD">Iraq Dinars – IQD</option>
-                                                <option value="IEP*">Ireland Pounds – IEP*</option>
-                                                <option value="ILS">Israel New Shekels – ILS</option>
-                                                <option value="ITL*">Italy Lire – ITL*</option>
-                                                <option value="JMD">Jamaica Dollars – JMD</option>
-                                                <option value="JPY">Japan Yen – JPY</option>
-                                                <option value="JOD">Jordan Dinars – JOD</option>
-                                                <option value="KES">Kenya Shillings – KES</option>
-                                                <option value="KRW">Korea (South) Won – KRW</option>
-                                                <option value="KWD">Kuwait Dinars – KWD</option>
-                                                <option value="LBP">Lebanon Pounds – LBP</option>
-                                                <option value="LUF">Luxembourg Francs – LUF</option>
-                                                <option value="MYR">Malaysia Ringgits – MYR</option>
-                                                <option value="MTL">Malta Liri – MTL</option>
-                                                <option value="MUR">Mauritius Rupees – MUR</option>
-                                                <option value="MXN">Mexico Pesos – MXN</option>
-                                                <option value="MAD">Morocco Dirhams – MAD</option>
-                                                <option value="NLG">Netherlands Guilders – NLG</option>
-                                                <option value="NZD">New Zealand Dollars – NZD</option>
-                                                <option value="NOK">Norway Kroner – NOK</option>
-                                                <option value="OMR">Oman Rials – OMR</option>
-                                                <option value="PKR">Pakistan Rupees – PKR</option>
-                                                <option value="XPD">Palladium Ounces – XPD</option>
-                                                <option value="PEN">Peru Nuevos Soles – PEN</option>
-                                                <option value="PHP">Philippines Pesos – PHP</option>
-                                                <option value="XPT">Platinum Ounces – XPT</option>
-                                                <option value="PLN">Poland Zlotych – PLN</option>
-                                                <option value="PTE">Portugal Escudos – PTE</option>
-                                                <option value="QAR">Qatar Riyals – QAR</option>
-                                                <option value="RON">Romania New Lei – RON</option>
-                                                <option value="ROL">Romania Lei – ROL</option>
-                                                <option value="RUB">Russia Rubles – RUB</option>
-                                                <option value="SAR">Saudi Arabia Riyals – SAR</option>
-                                                <option value="XAG">Silver Ounces – XAG</option>
-                                                <option value="SGD">Singapore Dollars – SGD</option>
-                                                <option value="SKK">Slovakia Koruny – SKK</option>
-                                                <option value="SIT">Slovenia Tolars – SIT</option>
-                                                <option value="ZAR">South Africa Rand – ZAR</option>
-                                                <option value="KRW">South Korea Won – KRW</option>
-                                                <option value="ESP">Spain Pesetas – ESP</option>
-                                                <option value="XDR">Special Drawing Rights (IMF) – XDR</option>
-                                                <option value="LKR">Sri Lanka Rupees – LKR</option>
-                                                <option value="SDD">Sudan Dinars – SDD</option>
-                                                <option value="SEK">Sweden Kronor – SEK</option>
-                                                <option value="CHF">Switzerland Francs – CHF</option>
-                                                <option value="TWD">Taiwan New Dollars – TWD</option>
-                                                <option value="THB">Thailand Baht – THB</option>
-                                                <option value="TTD">Trinidad and Tobago Dollars – TTD</option>
-                                                <option value="TND">Tunisia Dinars – TND</option>
-                                                <option value="TRY">Turkey New Lira – TRY</option>
-                                                <option value="AED">United Arab Emirates Dirhams – AED</option>
-                                                <option value="GBP">United Kingdom Pounds – GBP</option>
-                                                <option value="USD">United States Dollars – USD</option>
-                                                <option value="VEB">Venezuela Bolivares – VEB</option>
-                                                <option value="VND">Vietnam Dong – VND</option>
-                                                <option value="ZMK">Zambia Kwacha – ZMK</option>
-                                             </select>
-                                          </div>
-                                       </div>
-                                          <?php
-         			      						   $fob_price_array = explode('-', $product_price[0]->product_FOB);
-         			      						?>
-                                          <div class="row">
-                                             <div class="col-md-5">
-                                                <input type="text" name="currency_from" class="form-control check_number" placeholder="Price From" value="<?php if(isset($fob_price_array[0])){echo $fob_price_array[0];} ?>">
-                                             </div>
-                                             <div class="col-md-2">-</div>
-                                             <div class="col-md-5">
-                                                <input type="text" name="currency_to" class="form-control check_number" placeholder="Price To" value="<?php if(isset($fob_price_array[1])){echo $fob_price_array[1];} ?>">
-                                             </div>
-                                          </div>
-                                          <div class="row">
-                                             <div class="col-md-12">
-                                                <label>Per Unit: </label>
-                                                <select class="form-control" name="unit_type_FOB" id="sel1">
-                                                   @foreach($units as $u)
-                                                   @if($u->id == $product->unit_type_id)
-                                                   <option value="{!! $u->id !!}" selected>{!! $u->name !!}</option>
-                                                   @else
-                                                   <option value="{!! $u->id !!}">{!! $u->name !!}</option>
-                                                   @endif
-
-                                                   @endforeach
-                                                </select>
-                                             </div>
-                                          </div>
+                                       <?php $i_remove_moq++; ?>
+                                       @endforeach
+                                       @else
                                        <div class="row">
                                           <div class="col-md-12">
                                              <label>MOQ: <span></span></label>
-                                             <input type="text" name="product_MOQ_FOB" class="form-control" value="<?php if(isset($product_price[0])){echo $product_price[0]->product_MOQ;} ?>">
+                                             <input type="hidden" name="product_price_id[]" value="<?php if(isset($product_price[0])){echo $product_price[0]->id;} ?>">
+                                             <input type="hidden" name="product_price_id_FOB[]" value="<?php if(isset($product_price[0])){echo $product_price[0]->id;} ?>">
+                                             <input type="text" name="product_MOQ[]" class="form-control" value="<?php if(isset($product_price[0])){echo $product_price[0]->product_MOQ;} ?>">
                                           </div>
                                        </div>
                                        <div class="row">
                                           <div class="col-md-12">
-                                             <label>Discounted Price: <span></span></label>
-                                             <input type="text" name="discounted_price" class="form-control check_number" value="<?php if(isset($product_price[0])){echo $product_price[0]->discounted_price;} ?>">
+                                             <label>FOB Price: </label>
+                                          </div>
+                                          <?php
+         			      						   $fob_price_array = explode('-', $product_price[0]->product_FOB);
+         			      						?>
+                                          <div class="col-md-5">
+                                             <input type="text" name="product_FOB_from[]" class="form-control" placeholder="From" value="<?php if(isset($fob_price_array[0])){echo $fob_price_array[0];} ?>">
+                                          </div>
+                                          <div class="col-md-1">-</div>
+                                          <div class="col-md-5">
+                                             <input type="text" name="product_FOB_to[]" class="form-control" placeholder="To" value="<?php if(isset($fob_price_array[1])){echo $fob_price_array[1];} ?>">
+                                          </div>
+                                          <div class="col-md-1">
+                                             <i class="fa fa-plus btn btn-xs btn-primary add_price_btn"></i>
                                           </div>
                                        </div>
+                                       @endif
+                                    </div>
+                                    @else
+                                    <table class="table quantity_base">
+                                       <tbody>
+                                          <tr>
+                                             <input type="hidden" name="product_price_id[]" value="0">
+                                             <td>Unit Type: </td>
+                                             <td>
+                                                <select class="form-control" name="unit_type" id="sel1">
+                                                   @foreach($units as $u)
+                                                   <option value={!! $u->id !!}>{!! $u->name !!}</option>
+                                                   @endforeach
+                                                </select>
+                                             </td>
+                                          </tr>
+                                          <tr>
+                                             <td>MOQ: <span></span></td>
+                                             <td>
+                                                <input type="text" name="product_MOQ[]" class="form-control"></td>
+                                             <td>FOB Price: </td>
+                                             <td>
+                                                <input type="text" name="product_FOB_from[]" class="form-control check_number" placeholder="From">
+                                             </td>
+                                             <td>-</td>
+                                             <td>
+                                                <input type="text" name="product_FOB_to[]" class="form-control check_number" placeholder="To">
+                                             </td>
+                                             <td><i class="fa fa-plus btn btn-xs btn-primary add_price_btn"></i></td>
+                                          </tr>
+                                       </tbody>
+                                    </table>
+                                    @endif
+                                    @if(count($product_price) > 0)
+                                    <div class="table FOB_base" style="display: none;">
+                                          <div class="form-group row">
+                                             <div class="col-md-12 col-from-label">
+                                                <label>Currency </label>
+                                                <input type="hidden" name="product_price_id_FOB[]" value="<?php if(isset($product_price[0])){echo $product_price[0]->id;} ?>"></input>
+                                                <select name="currencies" class="form-control">
+                                                   <option value="">Select currency</option>
+                                                   <option value="USD">America (United States) Dollars – USD</option>
+                                                   <option value="AFN">Afghanistan Afghanis – AFN</option>
+                                                   <option value="ALL">Albania Leke – ALL</option>
+                                                   <option value="DZD">Algeria Dinars – DZD</option>
+                                                   <option value="ARS">Argentina Pesos – ARS</option>
+                                                   <option value="AUD">Australia Dollars – AUD</option>
+                                                   <option value="ATS">Austria Schillings – ATS</option>
+                                                   <option value="BSD">Bahamas Dollars – BSD</option>
+                                                   <option value="BHD">Bahrain Dinars – BHD</option>
+                                                   <option value="BDT">Bangladesh Taka – BDT</option>
+                                                   <option value="BBD">Barbados Dollars – BBD</option>
+                                                   <option value="BEF">Belgium Francs – BEF</option>
+                                                   <option value="BMD">Bermuda Dollars – BMD</option>
+                                                   <option value="BRL">Brazil Reais – BRL</option>
+                                                   <option value="BGN">Bulgaria Leva – BGN</option>
+                                                   <option value="CAD">Canada Dollars – CAD</option>
+                                                   <option value="XOF">CFA BCEAO Francs – XOF</option>
+                                                   <option value="XAF">CFA BEAC Francs – XAF</option>
+                                                   <option value="CLP">Chile Pesos – CLP</option>
+                                                   <option value="CNY">China Yuan Renminbi – CNY</option>
+                                                   <option value="RMB - CNY">RMB (China Yuan Renminbi) – CNY</option>
+                                                   <option value="COP">Colombia Pesos – COP</option>
+                                                   <option value="XPF">CFP Francs – XPF</option>
+                                                   <option value="CRC">Costa Rica Colones – CRC</option>
+                                                   <option value="HRK">Croatia Kuna – HRK</option>
+                                                   <option value="CYP">Cyprus Pounds – CYP</option>
+                                                   <option value="CZK">Czech Republic Koruny – CZK</option>
+                                                   <option value="DKK">Denmark Kroner – DKK</option>
+                                                   <option value="DEM">Deutsche (Germany) Marks – DEM</option>
+                                                   <option value="DOP">Dominican Republic Pesos – DOP</option>
+                                                   <option value="NLG">Dutch (Netherlands) Guilders – NLG</option>
+                                                   <option value="XCD">Eastern Caribbean Dollars – XCD</option>
+                                                   <option value="EGP">Egypt Pounds – EGP</option>
+                                                   <option value="EEK">Estonia Krooni – EEK</option>
+                                                   <option value="EUR">Euro – EUR</option>
+                                                   <option value="FJD">Fiji Dollars – FJD</option>
+                                                   <option value="FIM">Finland Markkaa – FIM</option>
+                                                   <option value="FRF*">France Francs – FRF*</option>
+                                                   <option value="DEM">Germany Deutsche Marks – DEM</option>
+                                                   <option value="XAU">Gold Ounces – XAU</option>
+                                                   <option value="GRD">Greece Drachmae – GRD</option>
+                                                   <option value="GTQ">Guatemalan Quetzal – GTQ</option>
+                                                   <option value="NLG">Holland (Netherlands) Guilders – NLG</option>
+                                                   <option value="HKD">Hong Kong Dollars – HKD</option>
+                                                   <option value="HUF">Hungary Forint – HUF</option>
+                                                   <option value="ISK">Iceland Kronur – ISK</option>
+                                                   <option value="XDR">IMF Special Drawing Right – XDR</option>
+                                                   <option value="INR">India Rupees – INR</option>
+                                                   <option value="IDR">Indonesia Rupiahs – IDR</option>
+                                                   <option value="IRR">Iran Rials – IRR</option>
+                                                   <option value="IQD">Iraq Dinars – IQD</option>
+                                                   <option value="IEP*">Ireland Pounds – IEP*</option>
+                                                   <option value="ILS">Israel New Shekels – ILS</option>
+                                                   <option value="ITL*">Italy Lire – ITL*</option>
+                                                   <option value="JMD">Jamaica Dollars – JMD</option>
+                                                   <option value="JPY">Japan Yen – JPY</option>
+                                                   <option value="JOD">Jordan Dinars – JOD</option>
+                                                   <option value="KES">Kenya Shillings – KES</option>
+                                                   <option value="KRW">Korea (South) Won – KRW</option>
+                                                   <option value="KWD">Kuwait Dinars – KWD</option>
+                                                   <option value="LBP">Lebanon Pounds – LBP</option>
+                                                   <option value="LUF">Luxembourg Francs – LUF</option>
+                                                   <option value="MYR">Malaysia Ringgits – MYR</option>
+                                                   <option value="MTL">Malta Liri – MTL</option>
+                                                   <option value="MUR">Mauritius Rupees – MUR</option>
+                                                   <option value="MXN">Mexico Pesos – MXN</option>
+                                                   <option value="MAD">Morocco Dirhams – MAD</option>
+                                                   <option value="NLG">Netherlands Guilders – NLG</option>
+                                                   <option value="NZD">New Zealand Dollars – NZD</option>
+                                                   <option value="NOK">Norway Kroner – NOK</option>
+                                                   <option value="OMR">Oman Rials – OMR</option>
+                                                   <option value="PKR">Pakistan Rupees – PKR</option>
+                                                   <option value="XPD">Palladium Ounces – XPD</option>
+                                                   <option value="PEN">Peru Nuevos Soles – PEN</option>
+                                                   <option value="PHP">Philippines Pesos – PHP</option>
+                                                   <option value="XPT">Platinum Ounces – XPT</option>
+                                                   <option value="PLN">Poland Zlotych – PLN</option>
+                                                   <option value="PTE">Portugal Escudos – PTE</option>
+                                                   <option value="QAR">Qatar Riyals – QAR</option>
+                                                   <option value="RON">Romania New Lei – RON</option>
+                                                   <option value="ROL">Romania Lei – ROL</option>
+                                                   <option value="RUB">Russia Rubles – RUB</option>
+                                                   <option value="SAR">Saudi Arabia Riyals – SAR</option>
+                                                   <option value="XAG">Silver Ounces – XAG</option>
+                                                   <option value="SGD">Singapore Dollars – SGD</option>
+                                                   <option value="SKK">Slovakia Koruny – SKK</option>
+                                                   <option value="SIT">Slovenia Tolars – SIT</option>
+                                                   <option value="ZAR">South Africa Rand – ZAR</option>
+                                                   <option value="KRW">South Korea Won – KRW</option>
+                                                   <option value="ESP">Spain Pesetas – ESP</option>
+                                                   <option value="XDR">Special Drawing Rights (IMF) – XDR</option>
+                                                   <option value="LKR">Sri Lanka Rupees – LKR</option>
+                                                   <option value="SDD">Sudan Dinars – SDD</option>
+                                                   <option value="SEK">Sweden Kronor – SEK</option>
+                                                   <option value="CHF">Switzerland Francs – CHF</option>
+                                                   <option value="TWD">Taiwan New Dollars – TWD</option>
+                                                   <option value="THB">Thailand Baht – THB</option>
+                                                   <option value="TTD">Trinidad and Tobago Dollars – TTD</option>
+                                                   <option value="TND">Tunisia Dinars – TND</option>
+                                                   <option value="TRY">Turkey New Lira – TRY</option>
+                                                   <option value="AED">United Arab Emirates Dirhams – AED</option>
+                                                   <option value="GBP">United Kingdom Pounds – GBP</option>
+                                                   <option value="USD">United States Dollars – USD</option>
+                                                   <option value="VEB">Venezuela Bolivares – VEB</option>
+                                                   <option value="VND">Vietnam Dong – VND</option>
+                                                   <option value="ZMK">Zambia Kwacha – ZMK</option>
+                                                </select>
+                                             </div>
+                                          </div>
+                                             <?php
+            			      						   $fob_price_array = explode('-', $product_price[0]->product_FOB);
+            			      						?>
+                                             <div class="row">
+                                                <div class="col-md-5">
+                                                   <input type="text" name="currency_from" class="form-control check_number" placeholder="Price From" value="<?php if(isset($fob_price_array[0])){echo $fob_price_array[0];} ?>">
+                                                </div>
+                                                <div class="col-md-2">-</div>
+                                                <div class="col-md-5">
+                                                   <input type="text" name="currency_to" class="form-control check_number" placeholder="Price To" value="<?php if(isset($fob_price_array[1])){echo $fob_price_array[1];} ?>">
+                                                </div>
+                                             </div>
+                                             <div class="row">
+                                                <div class="col-md-12 col-from-label">
+                                                   <label>Per Unit</label>
+                                                   <select class="form-control" name="unit_type_FOB" id="sel1">
+                                                      @foreach($units as $u)
+                                                      @if($u->id == $product->unit_type_id)
+                                                      <option value="{!! $u->id !!}" selected>{!! $u->name !!}</option>
+                                                      @else
+                                                      <option value="{!! $u->id !!}">{!! $u->name !!}</option>
+                                                      @endif
+
+                                                      @endforeach
+                                                   </select>
+                                                </div>
+                                             </div>
+                                          <div class="row">
+                                             <div class="col-md-12 col-from-label">
+                                                <label>MOQ <span></span></label>
+                                                <input type="text" name="product_MOQ_FOB" class="form-control" value="<?php if(isset($product_price[0])){echo $product_price[0]->product_MOQ;} ?>">
+                                             </div>
+                                          </div>
+                                          <div class="row">
+                                             <div class="col-md-12 col-from-label">
+                                                <label>Discounted Price <span></span></label>
+                                                <input type="text" name="discounted_price" class="form-control check_number" value="<?php if(isset($product_price[0])){echo $product_price[0]->discounted_price;} ?>">
+                                             </div>
+                                          </div>
+                                    </div>
+                                    @else
+
+
+                                    <table class="table FOB_base" style="display: none;">
+                                       <tbody>
+                                          <tr>
+                                             <td>Currency </td>
+                                             <td>
+                                                <input type="hidden" name="product_price_id_FOB[]" value="0">
+                                                <select name="currencies">
+                                                   <option value="">Select currency</option>
+                                                   <option value="USD">America (United States) Dollars – USD</option>
+                                                   <option value="AFN">Afghanistan Afghanis – AFN</option>
+                                                   <option value="ALL">Albania Leke – ALL</option>
+                                                   <option value="DZD">Algeria Dinars – DZD</option>
+                                                   <option value="ARS">Argentina Pesos – ARS</option>
+                                                   <option value="AUD">Australia Dollars – AUD</option>
+                                                   <option value="ATS">Austria Schillings – ATS</option>
+                                                   <option value="BSD">Bahamas Dollars – BSD</option>
+                                                   <option value="BHD">Bahrain Dinars – BHD</option>
+                                                   <option value="BDT">Bangladesh Taka – BDT</option>
+                                                   <option value="BBD">Barbados Dollars – BBD</option>
+                                                   <option value="BEF">Belgium Francs – BEF</option>
+                                                   <option value="BMD">Bermuda Dollars – BMD</option>
+                                                   <option value="BRL">Brazil Reais – BRL</option>
+                                                   <option value="BGN">Bulgaria Leva – BGN</option>
+                                                   <option value="CAD">Canada Dollars – CAD</option>
+                                                   <option value="XOF">CFA BCEAO Francs – XOF</option>
+                                                   <option value="XAF">CFA BEAC Francs – XAF</option>
+                                                   <option value="CLP">Chile Pesos – CLP</option>
+                                                   <option value="CNY">China Yuan Renminbi – CNY</option>
+                                                   <option value="RMB - CNY">RMB (China Yuan Renminbi) – CNY</option>
+                                                   <option value="COP">Colombia Pesos – COP</option>
+                                                   <option value="XPF">CFP Francs – XPF</option>
+                                                   <option value="CRC">Costa Rica Colones – CRC</option>
+                                                   <option value="HRK">Croatia Kuna – HRK</option>
+                                                   <option value="CYP">Cyprus Pounds – CYP</option>
+                                                   <option value="CZK">Czech Republic Koruny – CZK</option>
+                                                   <option value="DKK">Denmark Kroner – DKK</option>
+                                                   <option value="DEM">Deutsche (Germany) Marks – DEM</option>
+                                                   <option value="DOP">Dominican Republic Pesos – DOP</option>
+                                                   <option value="NLG">Dutch (Netherlands) Guilders – NLG</option>
+                                                   <option value="XCD">Eastern Caribbean Dollars – XCD</option>
+                                                   <option value="EGP">Egypt Pounds – EGP</option>
+                                                   <option value="EEK">Estonia Krooni – EEK</option>
+                                                   <option value="EUR">Euro – EUR</option>
+                                                   <option value="FJD">Fiji Dollars – FJD</option>
+                                                   <option value="FIM">Finland Markkaa – FIM</option>
+                                                   <option value="FRF*">France Francs – FRF*</option>
+                                                   <option value="DEM">Germany Deutsche Marks – DEM</option>
+                                                   <option value="XAU">Gold Ounces – XAU</option>
+                                                   <option value="GRD">Greece Drachmae – GRD</option>
+                                                   <option value="GTQ">Guatemalan Quetzal – GTQ</option>
+                                                   <option value="NLG">Holland (Netherlands) Guilders – NLG</option>
+                                                   <option value="HKD">Hong Kong Dollars – HKD</option>
+                                                   <option value="HUF">Hungary Forint – HUF</option>
+                                                   <option value="ISK">Iceland Kronur – ISK</option>
+                                                   <option value="XDR">IMF Special Drawing Right – XDR</option>
+                                                   <option value="INR">India Rupees – INR</option>
+                                                   <option value="IDR">Indonesia Rupiahs – IDR</option>
+                                                   <option value="IRR">Iran Rials – IRR</option>
+                                                   <option value="IQD">Iraq Dinars – IQD</option>
+                                                   <option value="IEP*">Ireland Pounds – IEP*</option>
+                                                   <option value="ILS">Israel New Shekels – ILS</option>
+                                                   <option value="ITL*">Italy Lire – ITL*</option>
+                                                   <option value="JMD">Jamaica Dollars – JMD</option>
+                                                   <option value="JPY">Japan Yen – JPY</option>
+                                                   <option value="JOD">Jordan Dinars – JOD</option>
+                                                   <option value="KES">Kenya Shillings – KES</option>
+                                                   <option value="KRW">Korea (South) Won – KRW</option>
+                                                   <option value="KWD">Kuwait Dinars – KWD</option>
+                                                   <option value="LBP">Lebanon Pounds – LBP</option>
+                                                   <option value="LUF">Luxembourg Francs – LUF</option>
+                                                   <option value="MYR">Malaysia Ringgits – MYR</option>
+                                                   <option value="MTL">Malta Liri – MTL</option>
+                                                   <option value="MUR">Mauritius Rupees – MUR</option>
+                                                   <option value="MXN">Mexico Pesos – MXN</option>
+                                                   <option value="MAD">Morocco Dirhams – MAD</option>
+                                                   <option value="NLG">Netherlands Guilders – NLG</option>
+                                                   <option value="NZD">New Zealand Dollars – NZD</option>
+                                                   <option value="NOK">Norway Kroner – NOK</option>
+                                                   <option value="OMR">Oman Rials – OMR</option>
+                                                   <option value="PKR">Pakistan Rupees – PKR</option>
+                                                   <option value="XPD">Palladium Ounces – XPD</option>
+                                                   <option value="PEN">Peru Nuevos Soles – PEN</option>
+                                                   <option value="PHP">Philippines Pesos – PHP</option>
+                                                   <option value="XPT">Platinum Ounces – XPT</option>
+                                                   <option value="PLN">Poland Zlotych – PLN</option>
+                                                   <option value="PTE">Portugal Escudos – PTE</option>
+                                                   <option value="QAR">Qatar Riyals – QAR</option>
+                                                   <option value="RON">Romania New Lei – RON</option>
+                                                   <option value="ROL">Romania Lei – ROL</option>
+                                                   <option value="RUB">Russia Rubles – RUB</option>
+                                                   <option value="SAR">Saudi Arabia Riyals – SAR</option>
+                                                   <option value="XAG">Silver Ounces – XAG</option>
+                                                   <option value="SGD">Singapore Dollars – SGD</option>
+                                                   <option value="SKK">Slovakia Koruny – SKK</option>
+                                                   <option value="SIT">Slovenia Tolars – SIT</option>
+                                                   <option value="ZAR">South Africa Rand – ZAR</option>
+                                                   <option value="KRW">South Korea Won – KRW</option>
+                                                   <option value="ESP">Spain Pesetas – ESP</option>
+                                                   <option value="XDR">Special Drawing Rights (IMF) – XDR</option>
+                                                   <option value="LKR">Sri Lanka Rupees – LKR</option>
+                                                   <option value="SDD">Sudan Dinars – SDD</option>
+                                                   <option value="SEK">Sweden Kronor – SEK</option>
+                                                   <option value="CHF">Switzerland Francs – CHF</option>
+                                                   <option value="TWD">Taiwan New Dollars – TWD</option>
+                                                   <option value="THB">Thailand Baht – THB</option>
+                                                   <option value="TTD">Trinidad and Tobago Dollars – TTD</option>
+                                                   <option value="TND">Tunisia Dinars – TND</option>
+                                                   <option value="TRY">Turkey New Lira – TRY</option>
+                                                   <option value="AED">United Arab Emirates Dirhams – AED</option>
+                                                   <option value="GBP">United Kingdom Pounds – GBP</option>
+                                                   <option value="USD">United States Dollars – USD</option>
+                                                   <option value="VEB">Venezuela Bolivares – VEB</option>
+                                                   <option value="VND">Vietnam Dong – VND</option>
+                                                   <option value="ZMK">Zambia Kwacha – ZMK</option>
+                                                </select>
+                                             </td>
+                                             <td>
+                                                <input type="text" name="currency_from" class="form-control check_number" placeholder="Price From">
+                                             </td>
+                                             <td>-</td>
+                                             <td>
+                                                <input type="text" name="currency_to" class="form-control check_number" placeholder="Price To">
+                                             </td>
+                                             <td>Per Unit: </td>
+                                             <td>
+                                                <select class="form-control" name="unit_type_FOB" id="sel1">
+                                                   @foreach($units as $u)
+                                                   <option value={!! $u->id !!}>{!! $u->name !!}</option>
+                                                   @endforeach
+                                                </select>
+                                             </td>
+                                          </tr>
+                                          <tr>
+                                             <td>MOQ: <span></span></td>
+                                             <td><input type="text" name="product_MOQ_FOB" class="form-control"></td>
+                                          </tr>
+                                          <tr>
+                                             <td>Discounted Price: <span></span></td>
+                                             <td><input type="text" name="discounted_price" class="form-control check_number"></td>
+                                          </tr>
+                                       </tbody>
+                                    </table>
+                                    @endif
                                  </div>
-                                 @else
-
-
-                                 <table class="table FOB_base" style="display: none;">
-                                    <tbody>
-                                       <tr>
-                                          <td>Currency: </td>
-                                          <td>
-                                             <input type="hidden" name="product_price_id_FOB[]" value="0">
-                                             <select name="currencies">
-                                                <option value="">Select currency</option>
-                                                <option value="USD">America (United States) Dollars – USD</option>
-                                                <option value="AFN">Afghanistan Afghanis – AFN</option>
-                                                <option value="ALL">Albania Leke – ALL</option>
-                                                <option value="DZD">Algeria Dinars – DZD</option>
-                                                <option value="ARS">Argentina Pesos – ARS</option>
-                                                <option value="AUD">Australia Dollars – AUD</option>
-                                                <option value="ATS">Austria Schillings – ATS</option>
-                                                <option value="BSD">Bahamas Dollars – BSD</option>
-                                                <option value="BHD">Bahrain Dinars – BHD</option>
-                                                <option value="BDT">Bangladesh Taka – BDT</option>
-                                                <option value="BBD">Barbados Dollars – BBD</option>
-                                                <option value="BEF">Belgium Francs – BEF</option>
-                                                <option value="BMD">Bermuda Dollars – BMD</option>
-                                                <option value="BRL">Brazil Reais – BRL</option>
-                                                <option value="BGN">Bulgaria Leva – BGN</option>
-                                                <option value="CAD">Canada Dollars – CAD</option>
-                                                <option value="XOF">CFA BCEAO Francs – XOF</option>
-                                                <option value="XAF">CFA BEAC Francs – XAF</option>
-                                                <option value="CLP">Chile Pesos – CLP</option>
-                                                <option value="CNY">China Yuan Renminbi – CNY</option>
-                                                <option value="RMB - CNY">RMB (China Yuan Renminbi) – CNY</option>
-                                                <option value="COP">Colombia Pesos – COP</option>
-                                                <option value="XPF">CFP Francs – XPF</option>
-                                                <option value="CRC">Costa Rica Colones – CRC</option>
-                                                <option value="HRK">Croatia Kuna – HRK</option>
-                                                <option value="CYP">Cyprus Pounds – CYP</option>
-                                                <option value="CZK">Czech Republic Koruny – CZK</option>
-                                                <option value="DKK">Denmark Kroner – DKK</option>
-                                                <option value="DEM">Deutsche (Germany) Marks – DEM</option>
-                                                <option value="DOP">Dominican Republic Pesos – DOP</option>
-                                                <option value="NLG">Dutch (Netherlands) Guilders – NLG</option>
-                                                <option value="XCD">Eastern Caribbean Dollars – XCD</option>
-                                                <option value="EGP">Egypt Pounds – EGP</option>
-                                                <option value="EEK">Estonia Krooni – EEK</option>
-                                                <option value="EUR">Euro – EUR</option>
-                                                <option value="FJD">Fiji Dollars – FJD</option>
-                                                <option value="FIM">Finland Markkaa – FIM</option>
-                                                <option value="FRF*">France Francs – FRF*</option>
-                                                <option value="DEM">Germany Deutsche Marks – DEM</option>
-                                                <option value="XAU">Gold Ounces – XAU</option>
-                                                <option value="GRD">Greece Drachmae – GRD</option>
-                                                <option value="GTQ">Guatemalan Quetzal – GTQ</option>
-                                                <option value="NLG">Holland (Netherlands) Guilders – NLG</option>
-                                                <option value="HKD">Hong Kong Dollars – HKD</option>
-                                                <option value="HUF">Hungary Forint – HUF</option>
-                                                <option value="ISK">Iceland Kronur – ISK</option>
-                                                <option value="XDR">IMF Special Drawing Right – XDR</option>
-                                                <option value="INR">India Rupees – INR</option>
-                                                <option value="IDR">Indonesia Rupiahs – IDR</option>
-                                                <option value="IRR">Iran Rials – IRR</option>
-                                                <option value="IQD">Iraq Dinars – IQD</option>
-                                                <option value="IEP*">Ireland Pounds – IEP*</option>
-                                                <option value="ILS">Israel New Shekels – ILS</option>
-                                                <option value="ITL*">Italy Lire – ITL*</option>
-                                                <option value="JMD">Jamaica Dollars – JMD</option>
-                                                <option value="JPY">Japan Yen – JPY</option>
-                                                <option value="JOD">Jordan Dinars – JOD</option>
-                                                <option value="KES">Kenya Shillings – KES</option>
-                                                <option value="KRW">Korea (South) Won – KRW</option>
-                                                <option value="KWD">Kuwait Dinars – KWD</option>
-                                                <option value="LBP">Lebanon Pounds – LBP</option>
-                                                <option value="LUF">Luxembourg Francs – LUF</option>
-                                                <option value="MYR">Malaysia Ringgits – MYR</option>
-                                                <option value="MTL">Malta Liri – MTL</option>
-                                                <option value="MUR">Mauritius Rupees – MUR</option>
-                                                <option value="MXN">Mexico Pesos – MXN</option>
-                                                <option value="MAD">Morocco Dirhams – MAD</option>
-                                                <option value="NLG">Netherlands Guilders – NLG</option>
-                                                <option value="NZD">New Zealand Dollars – NZD</option>
-                                                <option value="NOK">Norway Kroner – NOK</option>
-                                                <option value="OMR">Oman Rials – OMR</option>
-                                                <option value="PKR">Pakistan Rupees – PKR</option>
-                                                <option value="XPD">Palladium Ounces – XPD</option>
-                                                <option value="PEN">Peru Nuevos Soles – PEN</option>
-                                                <option value="PHP">Philippines Pesos – PHP</option>
-                                                <option value="XPT">Platinum Ounces – XPT</option>
-                                                <option value="PLN">Poland Zlotych – PLN</option>
-                                                <option value="PTE">Portugal Escudos – PTE</option>
-                                                <option value="QAR">Qatar Riyals – QAR</option>
-                                                <option value="RON">Romania New Lei – RON</option>
-                                                <option value="ROL">Romania Lei – ROL</option>
-                                                <option value="RUB">Russia Rubles – RUB</option>
-                                                <option value="SAR">Saudi Arabia Riyals – SAR</option>
-                                                <option value="XAG">Silver Ounces – XAG</option>
-                                                <option value="SGD">Singapore Dollars – SGD</option>
-                                                <option value="SKK">Slovakia Koruny – SKK</option>
-                                                <option value="SIT">Slovenia Tolars – SIT</option>
-                                                <option value="ZAR">South Africa Rand – ZAR</option>
-                                                <option value="KRW">South Korea Won – KRW</option>
-                                                <option value="ESP">Spain Pesetas – ESP</option>
-                                                <option value="XDR">Special Drawing Rights (IMF) – XDR</option>
-                                                <option value="LKR">Sri Lanka Rupees – LKR</option>
-                                                <option value="SDD">Sudan Dinars – SDD</option>
-                                                <option value="SEK">Sweden Kronor – SEK</option>
-                                                <option value="CHF">Switzerland Francs – CHF</option>
-                                                <option value="TWD">Taiwan New Dollars – TWD</option>
-                                                <option value="THB">Thailand Baht – THB</option>
-                                                <option value="TTD">Trinidad and Tobago Dollars – TTD</option>
-                                                <option value="TND">Tunisia Dinars – TND</option>
-                                                <option value="TRY">Turkey New Lira – TRY</option>
-                                                <option value="AED">United Arab Emirates Dirhams – AED</option>
-                                                <option value="GBP">United Kingdom Pounds – GBP</option>
-                                                <option value="USD">United States Dollars – USD</option>
-                                                <option value="VEB">Venezuela Bolivares – VEB</option>
-                                                <option value="VND">Vietnam Dong – VND</option>
-                                                <option value="ZMK">Zambia Kwacha – ZMK</option>
-                                             </select>
-                                          </td>
-                                          <td>
-                                             <input type="text" name="currency_from" class="form-control check_number" placeholder="Price From">
-                                          </td>
-                                          <td>-</td>
-                                          <td>
-                                             <input type="text" name="currency_to" class="form-control check_number" placeholder="Price To">
-                                          </td>
-                                          <td>Per Unit: </td>
-                                          <td>
-                                             <select class="form-control" name="unit_type_FOB" id="sel1">
-                                                @foreach($units as $u)
-                                                <option value={!! $u->id !!}>{!! $u->name !!}</option>
-                                                @endforeach
-                                             </select>
-                                          </td>
-                                       </tr>
-                                       <tr>
-                                          <td>MOQ: <span></span></td>
-                                          <td><input type="text" name="product_MOQ_FOB" class="form-control"></td>
-                                       </tr>
-                                       <tr>
-                                          <td>Discounted Price: <span></span></td>
-                                          <td><input type="text" name="discounted_price" class="form-control check_number"></td>
-                                       </tr>
-                                    </tbody>
-                                 </table>
-                                 @endif
                               </div>
                            </div>
                         </div>
                      </div>
-                  </div>
-                  </div>
+                     </div>
 
-                  <div class="row margin_top1">
-                     <div style="text-align:right;padding-right:0px;margin-top: 4px;" class="col-md-2">
-                        <label for="">Logistic info: </label>
-                     </div>
-                     <div class="col-md-7">
-                        <!-- <div class="form-control height-auto"> -->
-                        <!-- <ul class="list-unstyled">
-								<li> -->
-                        <table class="table">
-                           <tr>
-                              <td>Processing time: </td>
-                              <td>
-                                 <input validation="validated_true" class="form-control validate check_integer" maxlength="4" max="9999" style="height:27px;padding-bottom:1%;font-size:12px;" type="text" name="processing_time" value="<?php if(isset($bdtdc_logistic_infos[0])){echo $bdtdc_logistic_infos[0]->processing_time;}else{echo '';} ?>">
-                                 <p class="empty_error hidden_icon" style="margin-top: 4px;padding: 2px 4px;font-size: 12px;color: #333;border: 1px solid #ffd4d2;background-color: #ffefee;">
-                                    <i style="color:red;" class="fa fa-times-circle" aria-hidden="true"></i> Please enter processing time or put 0 to ignore</p>
-                              </td>
-                              <td>
-                                 <div class="col-xs-3 validation_status">
+                     <div class="margin_top1">
+                        <div class="sd-card">
+                           <h4 class="card-title">
+                              Logistic info
+                           </h4>
+                           <!-- <div class="form-control height-auto"> -->
+                           <!-- <ul class="list-unstyled">
+   								<li> -->
+                           <div class="sd-card-body">
+                              <div class="form-group row">
+                                 <div class="col-md-3 col-from-label">
+                                    <label>Processing time</label>
+                                 </div>
+                                 <div class="col-md-8">
+                                     <input validation="validated_true" class="form-control validate check_integer" maxlength="4" max="9999" type="text" name="processing_time" value="<?php if(isset($bdtdc_logistic_infos[0])){echo $bdtdc_logistic_infos[0]->processing_time;}else{echo '';} ?>">
+                                    <p class="empty_error hidden_icon">
+                                    <i class="fa fa-times-circle" aria-hidden="true"></i> Please enter processing time or put 0 to ignore</p>
+                                    <div class="col-xs-3 validation_status">
                                     <i class="fa fa-check-square btn btn-sm btn-success hidden_icon validated_true"></i>
                                     <i class="fa fa-exclamation-triangle btn btn-sm btn-danger hidden_icon validated_false"></i>
                                     <span class="text-danger validation_message"></span>
+                                    </div>
                                  </div>
-                              </td>
-                           </tr>
-                           <tr>
-                              <td>Port: </td>
-                              <td><input validation="validated_true" class="form-control validate" style="height:27px;padding-bottom:1%;font-size:12px;" type="text" name="port" value="<?php if(isset($bdtdc_logistic_infos[0])){echo $bdtdc_logistic_infos[0]->port;}else{echo '';} ?>">
-                                 <p class="empty_error hidden_icon" style="margin-top: 4px;padding: 2px 4px;font-size: 12px;color: #333;border: 1px solid #ffd4d2;background-color: #ffefee;"><i style="color:red;" class="fa fa-times-circle" aria-hidden="true"></i> Please Enter port or put 0 to ignore</p>
-                              </td>
-                              <td>
-                                 <div class="col-xs-3 validation_status">
-                                    <i class="fa fa-check-square btn btn-sm btn-success hidden_icon validated_true"></i>
-                                    <i class="fa fa-exclamation-triangle btn btn-sm btn-danger hidden_icon validated_false"></i>
-                                    <span class="text-danger validation_message"></span>
-                                 </div>
-                              </td>
+                              </div>
 
-                           </tr>
-                           <tr>
-                              <td>Supply ability: </td>
-                              <td><input validation="validated_true" class="form-control validate check_integer" maxlength="9" max="999999999" style="height:27px;padding-bottom:1%;font-size:12px;" type="text" name="supply_ability" value="<?php if(isset($bdtdc_logistic_infos[0])){echo $bdtdc_logistic_infos[0]->supply_ability;}else{echo '';} ?>">
-                                 <p class="empty_error hidden_icon" style="margin-top: 4px;padding: 2px 4px;font-size: 12px;color: #333;border: 1px solid #ffd4d2;background-color: #ffefee;"><i style="color:red;" class="fa fa-times-circle" aria-hidden="true"></i> Please enter supply ability or put 0 to ignore</p>
-                              </td>
-                              <td>
-                                 <div class="col-xs-3 validation_status">
-                                    <i class="fa fa-check-square btn btn-sm btn-success hidden_icon validated_true"></i>
-                                    <i class="fa fa-exclamation-triangle btn btn-sm btn-danger hidden_icon validated_false"></i>
-                                    <span class="text-danger validation_message"></span>
+                              <div class="form-group row">
+                                 <div class="col-md-3 col-from-label">
+                                    <label>Port</label>
                                  </div>
-                              </td>
-                           </tr>
-                        </table>
+                                 <div class="col-md-8">
+                                    <input validation="validated_true" class="form-control validate" type="text" name="port" value="<?php if(isset($bdtdc_logistic_infos[0])){echo $bdtdc_logistic_infos[0]->port;}else{echo '';} ?>">
+                                    <p class="empty_error hidden_icon"><i style="color:red;" class="fa fa-times-circle" aria-hidden="true"></i> Please Enter port or put 0 to ignore</p>
+                                    <div class="col-xs-3 validation_status">
+                                       <i class="fa fa-check-square btn btn-sm btn-success hidden_icon validated_true"></i>
+                                       <i class="fa fa-exclamation-triangle btn btn-sm btn-danger hidden_icon validated_false"></i>
+                                       <span class="text-danger validation_message"></span>
+                                    </div>
+                                 </div>
+
+                              </div>
+
+                              <div class="form-group row">
+                                 <div class="col-md-3 col-from-label">
+                                    <label>Supply ability</label>
+                                 </div>
+                                 <div class="col-md-8">
+                                    <input validation="validated_true" class="form-control validate check_integer" maxlength="9" max="999999999" type="text" name="supply_ability" value="<?php if(isset($bdtdc_logistic_infos[0])){echo $bdtdc_logistic_infos[0]->supply_ability;}else{echo '';} ?>">
+                                    <p class="empty_error hidden_icon"><i style="color:red;" class="fa fa-times-circle" aria-hidden="true"></i> Please enter supply ability or put 0 to ignore</p>
+                                    <div class="col-xs-3 validation_status">
+                                       <i class="fa fa-check-square btn btn-sm btn-success hidden_icon validated_true"></i>
+                                       <i class="fa fa-exclamation-triangle btn btn-sm btn-danger hidden_icon validated_false"></i>
+                                       <span class="text-danger validation_message"></span>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
                      </div>
-                  </div>
-                  <div class="row attribute_area margin_top1">
-                     <div style="padding-right:0px;margin-top:2%" class="col-md-12">
-                        <label for="">Product Group: <span class="summary">Grouping your products makes it easier for buyers to find them</span></label>
-                     </div>
-                     <div class="col-md-7">
-                        <table class="table">
-                           <tbody>
-                              <tr>
-                                 <td align="right">Group Name:</td>
-                                 <td>
+
+                     <div class="margin_top1">
+                        <div class="sd-card">
+                           <h4 class="card-title">
+                              Product Group
+                           </h4>
+                           <div class="sd-card-body">
+                              <div class="form-group row">
+                                 <div class="col-md-3"></div>
+                                 <div class="col-md-8">
+                                    <p class="summary">Grouping your products makes it easier for buyers to find them</p>
+                                 </div> 
+                              </div>
+                              <div class="form-group row">
+                                 <div class="col-md-3 col-from-label">
+                                    <label>Group Name</label>
+                                 </div>
+                                 <div class="col-md-8">
                                     <select style="height:28px;padding-bottom:1%;font-size:12px;padding-top:0%" class="form-control" name="product_groups" id="sel1">
                                        @foreach($product_groups as $u)
                                        @if($supplier_product->product_groups == $u->id)
@@ -916,98 +953,125 @@
                                        @endforeach
                                     </select>
                                     <p class="product_group_error hidden_icon" style="margin-top: 4px;padding: 2px 4px;font-size: 12px;color: #333;border: 1px solid #ffd4d2;background-color: #ffefee;"><i style="color:red;" class="fa fa-times-circle" aria-hidden="true"></i> Please select a product group (add new if not available)</p>
-
-                                 </td>
-                                 <td>
                                     <span class="group_name_form_opener"> 
                                        <i style="font-size: 25px;color: #19446F;" class="btn btn-xs fa fa-plus-square"></i>
                                     </span>
-                                 </td>
-                              </tr>
-
-                           </tbody>
-                        </table>
-                     </div>
-                     <div class="col-md-5 add_group_name_form_area" style="border:1px solid #ddd;padding:1%">
-                        <div class="col-md-10">
-                           <input type="text" name="add_group_name[]" placeholder="Group Name" class="form-control" style="height:30px;font-size:12px;margin-bottom: 1%">
-                           <a href="" class="btn btn-success btn-sm product_group_submit_btn">Save</a>
-                        </div>
-                        <div class="col-md-2 text-right" style="margin-bottom: 2%">
-                           <a class="btn btn-xs btn-danger group_name_from_remover" href=""><i class="fa fa-remove"></i></a>
-                        </div>
-                     </div>
-                  </div>
-                  <div class="row margin_top1">
-                     <div style="text-align:right;padding-right:0px" class="col-md-2">
-                        <label for="">Payments: </label>
-                     </div>
-                     <div class="col-md-7">
-                        <div class="form-control height-auto">
-                           <ul class="list-unstyled">
-                              <li>
-                                 <label><input class="" type="checkbox" name="payment[]" value="L/C"> L/C</label>
-                                 <label><input class="" type="checkbox" name="payment[]" value="Paypal"> Paypal</label>
-                                 <label><input class="" type="checkbox" name="payment[]" value="D/A"> D/A</label>
-                                 <label><input class="" type="checkbox" name="payment[]" value="Western Union"> Western Union</label>
-                                 <label><input class="" type="checkbox" name="payment[]" value="D/P"> D/P</label>
-                                 <label><input class="" type="checkbox" name="payment[]" value="MoneyGram"> MoneyGram</label>
-                                 <label><input class="" type="checkbox" name="payment[]" value="Cash"> Cash</label>
-                                 <label><input class="" type="checkbox" name="payment[]" value="Escrow"> Escrow</label>
-                                 <label><input class="" type="checkbox" name="payment[]" value="T/T"> T/T</label>
-                                 <label><input class="" type="checkbox" name="payment[]" value="others" id="others_id"> Others</label>
-                                 <div id="others_area" style="display:none;border: 1px solid rgb(23, 175, 186);padding: 10px;"><input type="text" name="others_payment" placeholder="Other Payments Method" class="form-control" style="height:30px;font-size:12px;margin-bottom: 1%">
+                                    <div class="add_group_name_form_area">
+                                       <div class="col-md-10">
+                                          <input type="text" name="add_group_name[]" placeholder="Group Name" class="form-control">
+                                          <a href="" class="btn btn-success btn-sm product_group_submit_btn">Save</a>
+                                       </div>
+                                       <div class="text-right">
+                                          <a class="btn btn-xs btn-danger group_name_from_remover" href="">
+                                             <i class="fa fa-remove"></i>
+                                          </a>
+                                       </div>
+                                    </div>
                                  </div>
-                              </li>
-                           </ul>
+                              </div>
+                           </div>
                         </div>
-                        <span class="help-block">
-                           select one or more options 
-                        </span>
                      </div>
-                  </div>
-                  <div class="row margin_top1">
-                     <div style="text-align:right;padding-right:0px" class="col-md-2">
-                        <label for="packages_delivery">Packages And Delivery: </label>
+
+                     <div class="margin_top1">
+                        <div class="sd-card">
+                           <h4 class="card-title">
+                              Payments Details
+                           </h4>
+                           <div class="sd-card-body">
+                              <div class="form-group row">
+                                 <div class="col-md-3 col-from-label">
+                                    <label>Group Name</label>
+                                 </div>
+                                 <div class="col-md-8">
+                                    <div class="form-control height-auto">
+                                       <ul class="list-unstyled">
+                                          <li>
+                                             <label><input class="" type="checkbox" name="payment[]" value="L/C"> L/C</label>
+                                             <label><input class="" type="checkbox" name="payment[]" value="Paypal"> Paypal</label>
+                                             <label><input class="" type="checkbox" name="payment[]" value="D/A"> D/A</label>
+                                             <label><input class="" type="checkbox" name="payment[]" value="Western Union"> Western Union</label>
+                                             <label><input class="" type="checkbox" name="payment[]" value="D/P"> D/P</label>
+                                             <label><input class="" type="checkbox" name="payment[]" value="MoneyGram"> MoneyGram</label>
+                                             <label><input class="" type="checkbox" name="payment[]" value="Cash"> Cash</label>
+                                             <label><input class="" type="checkbox" name="payment[]" value="Escrow"> Escrow</label>
+                                             <label><input class="" type="checkbox" name="payment[]" value="T/T"> T/T</label>
+                                             <label><input class="" type="checkbox" name="payment[]" value="others" id="others_id"> Others</label>
+                                             <div id="others_area" style="display:none;border: 1px solid rgb(23, 175, 186);padding: 10px;"><input type="text" name="others_payment" placeholder="Other Payments Method" class="form-control" style="height:30px;font-size:12px;margin-bottom: 1%">
+                                             </div>
+                                          </li>
+                                       </ul>
+                                    </div>
+                                    <span class="help-block">
+                                       select one or more options 
+                                    </span>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
                      </div>
-                     <div class="col-md-7">
-                        <textarea class="form-control maxlength-handler validate" validation="validated_true" name="packages_delivery" maxlength="1000">{{ $supplier_product->delivery }}</textarea>
-                        <p class="empty_error hidden_icon" style="margin-top: 4px;padding: 2px 4px;font-size: 12px;color: #333;border: 1px solid #ffd4d2;background-color: #ffefee;"><i style="color:red;" class="fa fa-times-circle" aria-hidden="true"></i> Please give product packages and delivery information</p>
+
+                     <div class="margin_top1">
+                        <div class="sd-card">
+                           <h4 class="card-title">
+                              Packages And Delivery Details
+                           </h4>
+                           <div class="sd-card-body">
+                              <div class="form-group row">
+                                 <div class="col-md-3 col-from-label">
+                                    <label>Packages And Delivery</label>
+                                 </div>
+                                 <div class="col-md-8">
+                                    <textarea class="form-control maxlength-handler validate" validation="validated_true" name="packages_delivery" maxlength="1000">{{ $supplier_product->delivery }}</textarea>
+                                    <p class="empty_error hidden_icon" style="margin-top: 4px;padding: 2px 4px;font-size: 12px;color: #333;border: 1px solid #ffd4d2;background-color: #ffefee;"><i style="color:red;" class="fa fa-times-circle" aria-hidden="true"></i> Please give product packages and delivery information</p>
+                                    <i class="fa fa-check-square btn btn-sm btn-success hidden_icon validated_true"></i>
+                                    <i class="fa fa-exclamation-triangle btn btn-sm btn-danger hidden_icon validated_false"></i>
+                                    <span class="text-danger validation_message"></span>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
                      </div>
-                     <div class="col-xs-3 validation_status">
-                        <i class="fa fa-check-square btn btn-sm btn-success hidden_icon validated_true"></i>
-                        <i class="fa fa-exclamation-triangle btn btn-sm btn-danger hidden_icon validated_false"></i>
-                        <span class="text-danger validation_message"></span>
+
+                     <div class="margin_top1">
+                        <div class="sd-card">
+                           <h4 class="card-title">
+                              Product Description
+                           </h4>
+                           <div class="sd-card-body">
+                              <div class="form-group row">
+                                 <div class="col-md-3 col-from-label">
+                                    <label>Product Details</label>
+                                 </div>
+                                 <div class="col-md-9">
+                                    <textarea id="editor" class="form-control product_desc" validation="validated_true" name="product_description">{{ $supplier_product->description }}</textarea>
+                                    <p class="empty_error hidden_icon" style="margin-top: -24px;padding: 2px 4px;font-size: 12px;color: #333;border: 1px solid #ffd4d2;background-color: #ffefee;"><i style="color:red;" class="fa fa-times-circle" aria-hidden="true"></i> Please type some product details</p>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
                      </div>
-                  </div>
-                  <div class="row margin_top1">
-                     <div style="text-align:right;padding-right:0px;margin-top:3%" class="col-md-2">
-                        <label for="">Product Details: </label>
-                     </div>
-                     <div class="col-md-10">
-                        <textarea id="editor" class="form-control product_desc" validation="validated_true" name="product_description">{{ $supplier_product->description }}</textarea>
-                        <p class="empty_error hidden_icon" style="margin-top: -24px;padding: 2px 4px;font-size: 12px;color: #333;border: 1px solid #ffd4d2;background-color: #ffefee;"><i style="color:red;" class="fa fa-times-circle" aria-hidden="true"></i> Please type some product details</p>
-                     </div>
-                  </div>
-                  <div class="row margin_top1" style="margin-top: 30px;">
-                     <div style="text-align:right;padding-right:0px" class="col-md-2">
-                        <label for=""></label>
-                     </div>
-                     <div class="col-md-7">
-                        <div style="">
-                           <label>
-                              <input type="checkbox" name="terms_condition" value="terms" checked> I accept with the <a target="_blank" href="{{ URL::to('product_listing_policy',null) }}">terms and conditions.</a>
-                              <p class="term_condition_error hidden_icon" style="margin-top: 4px;padding: 2px 4px;font-size: 12px;color: #333;border: 1px solid #ffd4d2;background-color: #ffefee;"><i style="color:red;" class="fa fa-times-circle" aria-hidden="true"></i> Please accept the terms and conditions.</p>
+
+                     <div class="row margin_top1" style="margin-top: 30px;">
+                        <div style="text-align:right;padding-right:0px" class="col-md-2">
+                           <label for=""></label>
+                        </div>
+                        <div class="col-md-7">
+                           <div style="">
+                              <label>
+                                 <input type="checkbox" name="terms_condition" value="terms" checked> I accept with the <a target="_blank" href="{{ URL::to('product_listing_policy',null) }}">terms and conditions.</a>
+                                 <p class="term_condition_error hidden_icon" style="margin-top: 4px;padding: 2px 4px;font-size: 12px;color: #333;border: 1px solid #ffd4d2;background-color: #ffefee;"><i style="color:red;" class="fa fa-times-circle" aria-hidden="true"></i> Please accept the terms and conditions.</p>
+                           </div>
                         </div>
                      </div>
                   </div>
                </div>
+               <div class="col-xs-12 bg-info" style="padding:1%;padding-left:18%;margin-bottom:2%;margin-top:4%">
+                  <input type="submit" class="btn btn-primary btn-lg btn-join product_update_submit_btn" value="Update">
+                  <a class="btn btn-primary btn-lg btn-join" href="{!! URL::to('dashboard/product') !!}">Cancel</a>
+               </div>
+                     {!! Form::close() !!}
             </div>
-            <div class="col-xs-12 bg-info" style="padding:1%;padding-left:18%;margin-bottom:2%;margin-top:4%">
-               <input type="submit" class="btn btn-primary btn-lg btn-join product_update_submit_btn" value="Update">
-               <a class="btn btn-primary btn-lg btn-join" href="{!! URL::to('dashboard/product') !!}">Cancel</a>
-            </div>
-                  {!! Form::close() !!}
          </div>
          <div class="col-md-4">
             <div style="z-index: 0;margin: 0px; background-color: #fff; width: 100%" class="box">

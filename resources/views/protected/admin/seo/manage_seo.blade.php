@@ -25,7 +25,7 @@
                 </li>
             
                 <li>
-                    <a href="{{URL('admin/dashboard/Content Management')}}">Content Management</a>
+                    Content Management
                     <i class="fa fa-angle-right" style="color:black;"></i>
                 </li>
                 <li>
@@ -33,7 +33,7 @@
                 </li>
             </ul>
             <div class="page-toolbar">
-                <a href="{{URL('admin/dashboard/Content Management')}}" class="btn green-haze btn-circle pull-right back-btn"><i class="fa fa-backward"></i> Back</a>
+                <a href="{{URL('admin/dashboard')}}" class="btn green-haze btn-circle pull-right back-btn"><i class="fa fa-backward"></i> Back</a>
             </div>
         </div>
 <!-- BEGIN PAGE CONTENT-->
