@@ -156,7 +156,7 @@
                   <div class="col-md-6">
                      <div class="dash-card">
                         <div class="card-header">
-                           <h4>product wise sale</h4>
+                           <h4>Product wise sale</h4>
                         </div>
                         <div class="chart-body">
                            <ul class="chart-info">
@@ -172,7 +172,7 @@
                   <div class="col-md-6">
                      <div class="dash-card">
                         <div class="card-header">
-                           <h4>product wise stock</h4>
+                           <h4>Product wise stock</h4>
                         </div>
                         <div class="chart-body">
                            <ul class="chart-info">

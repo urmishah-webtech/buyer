@@ -179,32 +179,40 @@
                                     <div class="row">
                                        <div class="col-md-6 col-from-label">
                                           <label>Parent</label>
-                                          <select name="parent_category" class="form-control" style="height:29px;padding-bottom:0%;padding-top:0px;font-size:12px">
-                                             <option value="0">----Please Select----</option>
-                                             @foreach(\App\Model\BdtdcCategory::where('parent_id',0)->get() as $v)
-                                             @if($v->id == $parent_id)
-                                             <option value="{{ $v->id }}" selected="selected">{{ trim($v->name) }}</option>
-                                             @else
-                                             <option value="{{ $v->id }}">{{ trim($v->name) }}</option>
-                                             @endif
-                                             @endforeach
-                                          </select>
-                                          <p class="empty_error hidden_icon parent_cat_error" style="margin-top: 4px;padding: 2px 4px;font-size: 12px;color: #333;border: 1px solid #ffd4d2;background-color: #ffefee;"><i style="color:red;" class="fa fa-times-circle" aria-hidden="true"></i> Please Select Parent Category</p>
+                                          <div class="form-filed">
+                                             <select name="parent_category" class="form-control" >
+                                                <option value="0">----Please Select----</option>
+                                                @foreach(\App\Model\BdtdcCategory::where('parent_id',0)->get() as $v)
+                                                @if($v->id == $parent_id)
+                                                <option value="{{ $v->id }}" selected="selected">{{ trim($v->name) }}</option>
+                                                @else
+                                                <option value="{{ $v->id }}">{{ trim($v->name) }}</option>
+                                                @endif
+                                                @endforeach
+                                             </select>
+                                             <div class="form-filed-error">
+                                                <p class="empty_error hidden_icon parent_cat_error"><i class="fa fa-times-circle" aria-hidden="true"></i> Please Select Parent Category</p>
+                                             </div>
+                                          </div>
                                        </div>
                                        <div class="col-md-6 col-from-label">
                                           <label>Sub</label>
-                                          <select name="sub_category" class="form-control" style="height:29px;padding-bottom:0%;padding-top:0px;font-size:12px">
-                                             <option value="0">Select a sub category</option>
+                                          <div class="form-filed">
+                                             <select name="sub_category" class="form-control">
+                                                <option value="0">Select a sub category</option>
 
-                                             @foreach(\App\Model\BdtdcCategory::where('parent_id',$parent_id)->get() as $v)
-                                             @if($v->id == $product_parent_id)
-                                             <option value="{{ $v->id }}" selected="selected">{{ trim($v->name) }}</option>
-                                             @else
-                                             <option value="{{ $v->id }}">{{ trim($v->name) }}</option>
-                                             @endif
-                                             @endforeach
-                                          </select>
-                                          <p class="empty_error hidden_icon sub_cat_error" style="margin-top: 4px;padding: 2px 4px;font-size: 12px;color: #333;border: 1px solid #ffd4d2;background-color: #ffefee;"><i style="color:red;" class="fa fa-times-circle" aria-hidden="true"></i> Please Select Sub-Category</p>
+                                                @foreach(\App\Model\BdtdcCategory::where('parent_id',$parent_id)->get() as $v)
+                                                @if($v->id == $product_parent_id)
+                                                <option value="{{ $v->id }}" selected="selected">{{ trim($v->name) }}</option>
+                                                @else
+                                                <option value="{{ $v->id }}">{{ trim($v->name) }}</option>
+                                                @endif
+                                                @endforeach
+                                             </select>
+                                             <div class="form-filed-error">
+                                                <p class="empty_error hidden_icon sub_cat_error"><i class="fa fa-times-circle" aria-hidden="true"></i> Please Select Sub-Category</p>
+                                             </div>
+                                          </div>
                                        </div>   
                                        <div class="col-md-12">
                                           <span class="help-block">select only one category </span>

@@ -16,13 +16,13 @@ $file_name = Session::get('content');
 <div class="page-sidebar-wrapper">
    <!-- DOC: Set data-auto-scroll="false" to disable the sidebar from auto scrolling/focusing -->
    <!-- DOC: Change data-auto-speed="200" to adjust the sub menu slide up/down speed -->
+   <div class="sidebar-logo">
+      <a href="{{URL('admin/dashboard')}}">
+         <!-- <img src="http://127.0.0.1:8000/assets/logo.png"> -->
+         <img src="{{ url('assets/logo.png') }}">
+      </a>
+   </div>
    <div class="page-sidebar navbar-collapse collapse">
-      <div class="sidebar-logo">
-         <a href="{{URL('admin/dashboard')}}">
-            <!-- <img src="http://127.0.0.1:8000/assets/logo.png"> -->
-            <img src="{{ url('assets/logo.png') }}">
-         </a>
-      </div>
       <form class="navbar-form sidebar-search">
          <input type="text" class="form-control" placeholder="Search in menu">
       </form>
