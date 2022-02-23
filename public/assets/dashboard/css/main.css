@@ -3365,7 +3365,21 @@ select:disabled::-ms-expand {
 
 /*Globle css start*/
 .h3, h3 {font-size: 16px; color: #1b1b28; line-height: 19px; font-weight: 500; }
-.seller-dashboard-right .h3 { margin: 5px 30px 15px;}
+.seller-dashboard-right .h3 { margin: 5px 25px 15px;}
+
+
+/*form field css start*/
+input.form-control, select.form-control, textarea.form-control {padding: 8px 16px !important; font-size: 14px !important; height: 42px !important; border: 1px solid #e2e5ec; color: #495057 !important; line-height: 21px; font-weight: 400; border-radius: 4px !important; }
+input.form-control::placeholder, select.form-control, textarea.form-control::placeholder {color: #898b92 !important; }
+textarea.form-control {min-height: 58px; }
+.form-group .col-from-label label {font-size: 12px; line-height: 18px; color: #1b1b28; }
+
+.form-filed {position: relative; }
+.form-filed-error .btn-success {position: absolute; top: 14px; right: 6px; padding: 0 !important; border: none !important; font-size: 24px; }
+.form-filed-error .btn-danger.validated_false {position: absolute; top: 14px; right: 10px; padding: 0 !important; border: none !important; font-size: 14px; color: #f3565d; background: transparent; margin: 0 !important; }
+.form-filed-error .empty_error {color: #f3565d; margin-top: 4px; margin-bottom: 0; }
+.form-filed-error .empty_error i {padding-right: 4px; }
+/*form field css end*/
 
 /*Globle css end*/
 
@@ -3428,6 +3442,7 @@ button.search-close-btn {position: absolute; border: 1px solid; background: tran
 .seller-dashboard {display: flex; }
 .seller-dashboard-left {width: 265px; min-width: 265px; position: fixed; top: 123px; height: 100vh; overflow-y: auto; background: #141423; z-index: 1; transition: all 0.3s; -webkit-transition: all 0.3s; }
 .seller-dashboard-right {width: calc(100% - 265px); margin-left: auto; transition: all 0.3s; -webkit-transition: all 0.3s; }
+.seller-dashboard-right .page-content {padding-left: 10px; }
 
 .navigation-normal-title {margin: 20px 0 15px; padding: 0 20px; }
 .navigation-normal-title a {background: #262837; padding: 10px 15px; display: flex; align-items: center; min-height: auto; font-weight: 500; color: #a2a3b7; font-size: 14px; border-radius: 4px !important; }
@@ -3464,7 +3479,7 @@ button.search-close-btn {position: absolute; border: 1px solid; background: tran
 
 
 /*seller dashboard breadcrumbs css*/
-.sdb-inner {display: flex; align-items: center; justify-content: space-between; padding: 20px 10px;}
+.sdb-inner {display: flex; align-items: center; justify-content: space-between; padding: 20px 3px;}
 .sdb-inner ul {display: flex; align-items: center; }
 .sdb-inner ul li a {color: #082154; font-size: 13px; text-shadow: none; display: flex; align-items: center; }
 .sdb-inner ul li a i {margin-left: 6px; }
