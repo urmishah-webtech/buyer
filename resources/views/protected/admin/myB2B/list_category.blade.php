@@ -33,6 +33,7 @@
             <div class="caption">
                Manage Product Categories
             </div>
+            <a id="sample_editable_1_new" href="{{ URL::to('admin/Category-add',null)}}" class="btn-primary ml-auto">Add New </a>
 <!--            <div class="tools">
                 <a href="javascript:;" class="collapse">
                </a>
@@ -46,10 +47,9 @@
          <div class="portlet-body table-new">
             <div class="table-toolbar table-header">
                <div class="row">
-                  <div class="form-group">
-                     <a id="sample_editable_1_new" href="{{ URL::to('admin/Category-add',null)}}" class="btn-primary">Add New
-                     </a>
-                  </div>
+                  <!-- <div class="form-group">
+                     
+                  </div> -->
                   <!-- <div class="col-md-4"> -->
                      <!-- <input type="text" class="light-table-filter" data-table="order-table" placeholder="search..." style=" padding: 2px 5px;font-size: 13px;"> -->
                      {{-- <div class="btn-group pull-right">
@@ -114,7 +114,7 @@
                      </td>
                      <td>
                         <div class="table-grp-btn">
-                           <a href="{{ URL::to('admin/category-edit',$data->id) }}" class="btn btn-xs btn-info edit-icon-btn"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                           <a href="{{ URL::to('admin/category-edit',$data->id) }}" class="btn btn-xs btn-info edit-icon-btn"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
                         </div>
                      </td>
                   </tr>

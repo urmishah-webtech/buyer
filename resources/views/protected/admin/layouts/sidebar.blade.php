@@ -43,26 +43,32 @@ $file_name = Session::get('content');
          </li> -->
          <li>
             <a <?php if($file_name=='Dashboard' ){ echo 'class="active"'; } ?> href="{{URL('/admin/dashboard')}}">
-               <i class="icon-home" aria-hidden="true"></i>
+               <i class="fa fa-home" aria-hidden="true"></i>
                <span class="title">Dashboard</span>
                <span class="selected "></span>
             </a>
          </li>
          <li>
-            <a <?php if($file_name=='User Management' ){ echo 'class="active"'; } ?> href="{{URL('/admin/profiles')}}">
+            <a <?php if($file_name=='User' ){ echo 'class="active"'; } ?>>
+
                <i class="fa fa-user" aria-hidden="true"></i>
-               <span class="title">User Management</span>
-               <span class="selected "></span>
+               <span class="title">User</span>
+               <span class="arrow "></span>
             </a>
+            <ul class="sidebar-sub-menu">
+               <li><a href="{{URL('admin/dashboard/Add Users')}}">Add Users</a></li>
+               <li><a href="{{URL('/admin/profiles')}}">Manage Users</a></li>
+               <li><a href="{{URL('/admin/profiles/listarchiveuser')}}">Archive User</a></li>
+            </ul>
          </li>
          <li>
             <a <?php if($file_name=='Content Management' ){ echo 'class="active"'; } ?>>
-               <i class="fa fa-file-text-o" aria-hidden="true"></i>
+               <i class="fa fa-file-text" aria-hidden="true"></i>
                <span class="title">Content Management</span>
                <span class="arrow "></span>
             </a>
             <ul class="sidebar-sub-menu">
-               <li><a href="{{URL('/admin/description-add')}}">Content Description</a></li>
+               <li><a href="{{URL('/admin/profiles')}}">Content Description</a></li>
                <li><a href="{{URL('/admin/content-add')}}">Content Categories</a></li>
                <li><a href="{{URL('/admin/content-manage')}}">Categories Lists</a></li>
                <li><a href="{{URL('/page_content/create')}}">Add Page</a></li>
@@ -78,43 +84,22 @@ $file_name = Session::get('content');
                <span class="arrow "></span>
             </a>
             <ul class="sidebar-sub-menu">
-               <li><a href="{{URL('/admin/product')}}">Product List</a></li>
+               <li><a href="{{URL('/admin/product')}}">All products</a></li>
                <!-- <li><a href="{{URL('/admin/tradeshow-show')}}">Manage Tradeshow</a></li> -->
-               <li><a href="{{URL('/admin/Category-add')}}">Add Product Category</a></li>
-               <li><a href="{{URL('/admin/category-list')}}">Manage Product Categories</a></li>
+               <!-- <li><a href="{{URL('/admin/Category-add')}}">Add Product Category</a></li> -->
+               <li><a href="{{URL('/admin/category-list')}}">Category</a></li>
             </ul>
          </li>
          <li>
             <a <?php if($file_name=='Manage TradeShow' ){ echo 'class="active"'; } ?> href="{{URL('/admin/tradeshow-show')}}">
-               <i class="icon-tag" aria-hidden="true"></i>
+               <i class="fa fa-tag" aria-hidden="true"></i>
                <span class="title">Manage Tradeshow</span>
                <span class="arrow "></span>
             </a>
          </li>
          <li>
-            <a <?php if($file_name=='My B2B' ){ echo 'class="active"'; } ?> href="{{URL('admin/dashboard/My B2B')}}">
-               <i class="icon-tag" aria-hidden="true"></i>
-               <span class="title">My B2B</span>
-               <span class="arrow "></span>
-            </a>
-         </li>
-         <li>
-            <a <?php if($file_name=='Add Users' ){ echo 'class="active"'; } ?> href="{{URL('admin/dashboard/Add Users')}}">
-               <i class="fa fa-user" aria-hidden="true"></i>
-               <span class="title">Add Users</span>
-               <span class="arrow "></span>
-            </a>
-         </li>
-         <li>
-            <a <?php if($file_name=='Modules' ){ echo 'class="active"'; } ?> href="{{URL('admin/dashboard/Modules')}}">
-               <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
-               <span class="title">Modules</span>
-               <span class="arrow "></span>
-            </a>
-         </li>
-         <li>
             <a <?php if($file_name=='Menu' ){ echo 'class="active"'; } ?>>
-               <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
+               <i class="fa fa-bars" aria-hidden="true"></i>
                <span class="title">Menu</span>
                <span class="arrow "></span>
             </a>
@@ -151,16 +136,25 @@ $file_name = Session::get('content');
          </li>
          <li>
             <a <?php if($file_name=='sliderSetting' ){ echo 'class="active"'; } ?> href="{{URL::route('admin.slider_setting')}}">
-               <i class="fa fa-file-image-o" aria-hidden="true"></i>
+               <i class="fa fa-sliders" aria-hidden="true"></i>
                <span class="title">Slider Setting</span>
                <span class="arrow "></span>
             </a>
          </li>
+         
          <li>
-            <a <?php if($file_name=='listarchiveuser' ){ echo 'class="active"'; } ?> href="{{URL('admin/profiles/listarchiveuser')}}">
-               <i class="fa fa-user" aria-hidden="true"></i>
-               <span class="title">Archive User</span>
-               <span class="selected "></span>
+            <a <?php if($file_name=='My B2B' ){ echo 'class="active"'; } ?> href="{{URL('admin/dashboard/My B2B')}}">
+               <i class="fa fa-handshake-o" aria-hidden="true"></i>
+               <span class="title">My B2B</span>
+               <span class="arrow "></span>
+            </a>
+         </li>
+         
+         <li>
+            <a <?php if($file_name=='Modules' ){ echo 'class="active"'; } ?> href="{{URL('admin/dashboard/Modules')}}">
+               <i class="fa fa-thumbs-up" aria-hidden="true"></i>
+               <span class="title">Modules</span>
+               <span class="arrow "></span>
             </a>
          </li>
       </ul>

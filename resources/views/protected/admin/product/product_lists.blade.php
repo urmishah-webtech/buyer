@@ -15,7 +15,7 @@
             <p style="color:white;">{{ session('flash_message') }}</p>
       </div>
    @endif
-               <div class="page-bar page-top-bar">
+               <!-- <div class="page-bar page-top-bar">
                   <ul class="page-breadcrumb" >
                      <li>
                          <i class="fa fa-home" style="color:black;"></i>
@@ -33,14 +33,62 @@
                   <div class="page-toolbar">
                      <a href="{{URL('admin/dashboard')}}" class="btn green-haze btn-circle pull-right back-btn" style="margin-right:50px;margin-top: 5px;"><i class="fa fa-backward"></i> Back</a>
                   </div>
-               </div>
+               </div> -->
                   <div class="row">
                     <div class="col-md-12">
                         <!-- BEGIN EXAMPLE TABLE PORTLET-->
+                        <div class="portlet-title btn-width-title">
+                           <div class="caption">
+                              All products
+                           </div>
+                           <div class="header-btn">
+                              <a class="add-new-btn" href="#">Add New Product</a>
+                           </div>
+                        </div>
                         <div class="portlet box grey-cascade">
-                            <div class="portlet-title justify-content-start">
+                            <div class="portlet-title justify-content-start card-title-width-option">
                                 <div class="caption">
-                                    Products list
+                                    All products
+                                </div>
+                                <div class="card-title-option">
+                                    <form class="card-title-form">
+                                       <div class="btn-group btn-dropdown">
+                                          <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                             Bulk Action <span class="caret"></span>
+                                          </button>
+                                          <ul class="dropdown-menu">
+                                             <li><a href="#"> Delete selection</a></li>
+                                          </ul>
+                                       </div>
+                                       <div class="btn-group btn-dropdown custome-dropdown">
+                                          <div class="form-group">
+                                             <select name="all-sellers" placeholder="All-Sellers" class="form-control">
+                                                <option>All Sellers</option>
+                                                <option>admin</option>
+                                                <option>Mark And Spenser</option>
+                                                <option>Disney</option>
+                                                <option>zara Fashion</option>
+                                             </select>
+                                          </div>
+                                       </div>
+                                       <div class="btn-group btn-dropdown custome-dropdown">
+                                          <div class="form-group">
+                                             <select name="all-sellers" placeholder="All-Sellers" class="form-control">
+                                                <option>Sort by</option>
+                                                <option>Rating (High > Low)</option>
+                                                <option>Rating (Low > High)</option>
+                                                <option>Num of Sale (Low > High)</option>
+                                                <option>Base Price (High > Low)</option>
+                                                <option>Base Price (Low > High)</option>
+                                             </select>
+                                          </div>
+                                       </div>
+                                       <div class="btn-group btn-dropdown custome-search">
+                                          <div class="form-group">
+                                             <input type="text" class="form-control" id="search" name="search" placeholder="Type & Enter">
+                                          </div>
+                                       </div>
+                                    </form>
                                 </div>
 <!--                                <div class="tools">
                                     <a href="javascript:;" class="collapse">
@@ -52,7 +100,7 @@
                                  <!-- <a href="{{URL('admin/dashboard/Classifieds (B2b)')}}" class="btn green-haze btn-circle pull-right" style="margin-right:50px;margin-top: 5px;"><i class="fa fa-backward"></i> Back</a> -->
                             </div>
                             <div class="portlet-body">
-                              <div class="table-toolbar">
+                              <!-- <div class="table-toolbar">
                                  <div class="row">
                                     <div class="col-12">
                                        <input type="hidden" name="url" value="{{ URL::to('/') }}">
@@ -76,9 +124,9 @@
                                                 @endforeach
                                              </select>
                                              @endif
-                                             <br><br>
+                                             <br><br> -->
                                              <!-- <input type="text" name="product_category" style="height: 34px;" placeholder=" Product category"> -->
-                                          </div>
+                                          <!-- </div>
 
                                           <div class="form-group">
                                              @if($country_list)
@@ -89,7 +137,7 @@
                                                 @endforeach
                                              </select>
                                              @endif
-                                             <!-- <input type="text" placeholder=" Product country"> -->
+                                             <input type="text" placeholder=" Product country">
                                           </div>
                                            <div class="form-group flex-none ">
                                              <input type="submit" class="btn btn-success trade_search_btn btn-primary"  value="SEARCH" />
@@ -100,7 +148,7 @@
                                        </form>
                                     </div>
                                 </div>
-                             </div>
+                             </div> -->
                                 <!--<h3>All Available Products list-->
           <!-- <span class="pull-right"><label class=" control-label" style="margin-right:10px;"> Search </label><input type="text" class="light-table-filter" data-table="order-table" placeholder="" style=" padding: 5px;font-size: 13px;"></span> -->
       <!--</h3>-->
@@ -123,7 +171,7 @@
                <td>{{ $product->category->bdtdcCategory->name ?? ''  }}</td>
                <td  style="white-space: nowrap;">
                   <div class="table-grp-btn">
-                     <a href="{{ URL::to('admin/edit-product',$product->id) }}" class="btn btn-xs btn-info edit-icon-btn"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                     <a href="{{ URL::to('admin/edit-product',$product->id) }}" class="btn btn-xs btn-info edit-icon-btn"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
                      <!-- <a href="{{ URL::to('supplier/product_edit',$product->id) }}" class="btn btn-xs btn-info">Edit</a> -->
                      <a onclick="return confirm('Are you sure want to delete the Product?')" class="btn btn-xs btn-danger delete-icon-btn" href="{{ URL::to('admin/productdelete/'.$product->id) }}" class="btn btn-xs btn-info"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
                      <!-- <a class="btn btn-xs btn-danger delete_product" data-product_id="{{$product->id}}">Delete</a> -->

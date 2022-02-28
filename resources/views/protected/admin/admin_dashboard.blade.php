@@ -9,12 +9,12 @@
       @if($rowdata->name == @$content)
          <div class="col-md-12 col-sm-6">
             <!-- BEGIN REGIONAL STATS PORTLET-->
-            <!-- <div class="admin-alert-alert">
+            <div class="admin-alert-alert">
                <div class="alert alert-danger d-flex align-items-center">
                   Please Configure SMTP Setting to work all email sending functionality,
                   <a class="alert-link ml-2" href="http://localhost/script/script/install/admin/smtp-settings">Configure Now</a>
               </div>
-            </div> -->
+            </div>
             <div class="dashboard-pd-sec">
                <div class="row">
                   <div class="col-md-6">
@@ -165,7 +165,7 @@
                                  <b>Number of sale</b>
                               </li>
                            </ul>
-                           <canvas id="PdSaleChart" width="500" height="455"></canvas>
+                           <canvas id="PdSaleChart" width="455" height="468"></canvas>
                         </div>
                      </div>
                   </div>
@@ -181,7 +181,7 @@
                                  <b>Number of Stock</b>
                               </li>
                            </ul>
-                           <canvas id="PdStockChart" width="500" height="455"></canvas>
+                           <canvas id="PdStockChart" width="455" height="468"></canvas>
                         </div>
                      </div>
                   </div>

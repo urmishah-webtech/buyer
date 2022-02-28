@@ -2,7 +2,7 @@
 <!-- // -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <link rel="stylesheet" type="text/css" href="https://skywalkapps.github.io/bootstrap-notifications/stylesheets/bootstrap-notifications.css">
-  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">
 <link href="{!! asset('assets/global/plugins/simple-line-icons/simple-line-icons.min.css') !!}" media="all" rel="stylesheet" type="text/css" />
 <link href="{!! asset('assets/fontend/bootstrap-home.min.css') !!}" media="all" rel="stylesheet" type="text/css" />
 <link href="{!! asset('assets/global/plugins/uniform/css/uniform.default.css') !!}" media="all" rel="stylesheet" type="text/css" />

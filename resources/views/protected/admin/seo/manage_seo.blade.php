@@ -163,7 +163,7 @@
                                    
                                     <td  style="white-space: nowrap;">
                                         <div class="table-grp-btn">
-                                            <a href="{{ URL::to('admin/edit-seo',$s->id) }}" class="btn btn-xs btn-info edit-icon-btn"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                                            <a href="{{ URL::to('admin/edit-seo',$s->id) }}" class="btn btn-xs btn-info edit-icon-btn"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
                                             <a onclick="return confirm('Are you sure, you want to delete the SEO?')" href="{{ URL::to('admin/delete-seo',$s->id) }}" class="btn btn-xs btn-danger delete-icon-btn"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
                                         </div>
                                     </td>

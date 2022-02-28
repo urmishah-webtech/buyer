@@ -340,7 +340,7 @@ table.removecheckbox div.checker input,table.removecheckbox input[type="search"]
                                                         <td  style="white-space: nowrap;">
                                                             <div class="table-grp-btn">
                                                                 <button class="btn btn-xs btn-success inq_details details-icon-btn" data-toggle="modal" data-target="#message_view_modal" data-inqid="{{$i->id}}"><i class="fa fa-info" aria-hidden="true"></i></button> 
-                                                                <a href="{{URL::to('admin/edit-inquiry',$i->id)}}" class="btn btn-xs btn-info flip edit-icon-btn"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                                                                <a href="{{URL::to('admin/edit-inquiry',$i->id)}}" class="btn btn-xs btn-info flip edit-icon-btn"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
                                                                 <a class="btn btn-xs btn-info panel done_panel" style="background-color: #428BCA;margin-bottom: 10%;display:none;" edit_id="" update_id="<?php echo $i->id;?>">Done</a><br>
                                                                 <a class="btn btn-xs btn-info panel cancel_panel" style="background-color: #428BCA;display:none;">Cancel</a>
                                                                 <button class="btn btn-xs btn-danger inq_delete delete-icon-btn" data-delete-id="{{ $i->id }}"><i class="fa fa-trash-o" aria-hidden="true"></i></button>

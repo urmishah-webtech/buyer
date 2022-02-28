@@ -30,7 +30,7 @@
          @include('fontend.layouts.dashboard-aside')
       </div>
 
-      <div class="seller-dashboard-right">
+      <div class="seller-dashboard-right mb-25">
          <div class="seller-dashboard-breadcrumb">
             <div class="container-fluid">
                <div class="row">
@@ -176,7 +176,7 @@
                                     <label>Category</label>
                                  </div>
                                  <div class="col-md-8">
-                                    <div class="row">
+                                    <div class="row two-col-filed">
                                        <div class="col-md-6 col-from-label">
                                           <label>Parent</label>
                                           <div class="form-filed">
@@ -273,38 +273,47 @@
                                     <label>Choose Product Image</label>
                                  </div>
                                  <div class="col-md-8">
-                                    <div class="image_container">
-                                       <input type="file" name="product_images[]" class="p_add_img img_1">
-                                    </div>
-                                    <span class="text-muted">(Max: 2MB, only jpg or png files are allowed. Maximum six images are allowed. Recommanded WxH 1000x1000 pixel)</span>
-                                    <p class="image_required_error hidden_icon">
-                                       <i class="fa fa-times-circle" aria-hidden="true"></i> Please insert at least one product image
-                                    </p>
-                                    <p class="image_attachment_error hidden_icon">
-                                       <i class="fa fa-times-circle" aria-hidden="true"></i> 
-                                       <span>Please fix image error</span>
-                                    </p>
-                                    <div class="col-xs-12 img_preview">
-                                       <!----PREVIEW IMAGE HANDELED BY JAVASCRIPT--------- -->
-                                       @if($product_images)
-                                       @if(count($product_images)>0)
-                                       @foreach($product_images as $img)
-                                       <div class="col-sm-3 img_container">
-                                          <div class="col-xs-12 text-center">
-                                             <i class="fa fa-remove btn btn-xs btn-danger remove_img" data-img_target="0" data-img_id="{{$img->id}}"></i>
+                                    <div class="img-upload-main">
+                                       <div class="img-upload-field">
+                                          <div class="image_container">
+                                             <input type="file" name="product_images[]" class="p_add_img img_1">
                                           </div>
-                                          <div class="col-xs-12">
-                                             <a target="_blank" title="{{$img->image}}" href="{{URL::to($img->image,null)}}"><img src="{{URL::to($img->image,null)}}" alt="" class="img-responsive"></a>
-                                          </div>
-                                          <div class="col-xs-12">
-                                             <p title="{{ $img->image }}" class="img_details">Name: <a target="_blank" href="{{URL::to($img->image,null)}}"><span class="text-muted img_name">...{{ substr($img->image,-42) }}</span></a></p>
+                                          <div class="upload-field-box">
+                                             <span class="upload-lable">Browse</span>
+                                             <span class="upload-box">Choose File</span>
                                           </div>
                                        </div>
-                                       @endforeach
-                                       @endif
-                                       @endif
-                                    </div>
-                                    <div id="deleted_p_image">
+                                       <span class="text-muted">(Max: 2MB, only jpg or png files are allowed. Maximum six images are allowed. Recommanded WxH 1000x1000 pixel)</span>
+                                       <p class="image_required_error hidden_icon">
+                                          <i class="fa fa-times-circle" aria-hidden="true"></i> Please insert at least one product image
+                                       </p>
+                                       <p class="image_attachment_error hidden_icon">
+                                          <i class="fa fa-times-circle" aria-hidden="true"></i> 
+                                          <span>Please fix image error</span>
+                                       </p>
+                                       <div class="img_preview">
+                                          <!----PREVIEW IMAGE HANDELED BY JAVASCRIPT--------- -->
+                                          @if($product_images)
+                                          @if(count($product_images)>0)
+                                          @foreach($product_images as $img)
+                                          <div class="img_container">
+                                             <div class="text-center remove-img-btn">
+                                                <div class="remove_img" data-img_target="0" data-img_id="{{$img->id}}">×
+                                                </div>
+                                             </div>
+                                             <div>
+                                                <a target="_blank" title="{{$img->image}}" href="{{URL::to($img->image,null)}}"><img src="{{URL::to($img->image,null)}}" alt="" class="img-responsive"></a>
+                                             </div>
+                                             <div class="upload-img-details">
+                                                <p title="{{ $img->image }}" class="img_details">Name: <a target="_blank" href="{{URL::to($img->image,null)}}"><span class="text-muted img_name">...{{ substr($img->image,-42) }}</span></a></p>
+                                             </div>
+                                          </div>
+                                          @endforeach
+                                          @endif
+                                          @endif
+                                       </div>
+                                       <div id="deleted_p_image">
+                                       </div>
                                     </div>
                                  </div>
                               </div>
@@ -362,18 +371,22 @@
                                        <label for="">Place of Origin</label>
                                     </div>
                                     <div class="col-md-8">
-                                       <select name="country" class="form-control validate validate_place_origin" validation="<?php if($supplier_product->location == 0){echo 'validated_false';}else{echo 'validated_true';} ?>">
-                                          <option value="0" <?php if($supplier_product->location == 0){echo 'selected';} ?>>--- Select Place of Origin ---</option>
-                                          @foreach(\App\Model\BdtdcCountry::get() as $bc)
-                                          <option value="{{ $bc->id }}" <?php if($supplier_product->location == $bc->id){echo 'selected';} ?>>{{ trim($bc->name) }}</option>
-                                          @endforeach
-                                       </select>
-                                       <p class="place_origin_error hidden_icon"><i class="fa fa-times-circle" aria-hidden="true"></i> Please Select product place of origin</p>
-                                       <!-- {-!! Form::select( 'country',\App\Model\BdtdcCountry::lists('name','id'), $supplier_product->location,array('class'=>'form-control validate','validation'=>'validated_true','style'=>'height:29px;padding-bottom:1%;padding-top:0px;font-size:12px')) !!-} -->
-                                       <div class="validation_status">
-                                          <i class="fa fa-check-square btn btn-sm btn-success hidden_icon validated_true"></i>
-                                          <i class="fa fa-exclamation-triangle btn btn-sm btn-danger hidden_icon validated_false"></i>
-                                          <span class="text-danger validation_message"></span>
+                                       <div class="select-form-filed form-filed">
+                                          <select name="country" class="form-control validate validate_place_origin" validation="<?php if($supplier_product->location == 0){echo 'validated_false';}else{echo 'validated_true';} ?>">
+                                             <option value="0" <?php if($supplier_product->location == 0){echo 'selected';} ?>>--- Select Place of Origin ---</option>
+                                             @foreach(\App\Model\BdtdcCountry::get() as $bc)
+                                             <option value="{{ $bc->id }}" <?php if($supplier_product->location == $bc->id){echo 'selected';} ?>>{{ trim($bc->name) }}</option>
+                                             @endforeach
+                                          </select>
+                                          <div class="form-filed-error">
+                                             <p class="place_origin_error hidden_icon"><i class="fa fa-times-circle" aria-hidden="true"></i> Please Select product place of origin</p>
+                                             <!-- {-!! Form::select( 'country',\App\Model\BdtdcCountry::lists('name','id'), $supplier_product->location,array('class'=>'form-control validate','validation'=>'validated_true','style'=>'height:29px;padding-bottom:1%;padding-top:0px;font-size:12px')) !!-} -->
+                                             <div class="validation_status">
+                                                <i class="fa fa-check-square btn btn-sm btn-success hidden_icon validated_true"></i>
+                                                <i class="fa fa-exclamation-triangle btn btn-sm btn-danger hidden_icon validated_false"></i>
+                                                <span class="text-danger validation_message"></span>
+                                             </div>
+                                          </div>
                                        </div>
                                     </div>
                                  </div>
@@ -384,7 +397,7 @@
                                        <label for="">Attributes </label>
                                     </div>
                                     <div class="col-md-8">
-                                       <div class="row">
+                                       <div class="row three-col-filed">
                                              <?php $i_remove = 1; $attribute_found = false;?>
                                              @foreach($attributes as $attr)
                                              <?php if(isset($attr->bdtdcAttribute->id)) { ?>
@@ -426,8 +439,8 @@
                                                    <label>Value</label>
                                                    <input name="product_attr_value[]" class="form-control" type="text">
                                                 </div>
-                                                <div class="col-2">
-                                                      <button class="btn btn-primary btn-xs add_more_attribute_btn_for_edit"><i class="fa fa-plus"></i></button>
+                                                <div class="col-2 col-from-label">
+                                                      <button class="btn btn-primary btn-xs add_more_attribute_btn_for_edit add-more-btn"><i class="fa fa-plus"></i></button>
                                                 </div>
                                              @endif
                                        </div>
@@ -448,11 +461,13 @@
                                     <label for="">Trade Details </label>
                                  </div>
                                  <div class="col-md-8">
-                                    <label><input type="radio" name="base" value="based_quantity" <?php if(count($product_price) > 0){if(trim($product_price[0]->currency) == ''){echo "checked";}}else{if(count($product_price) == 0){echo "checked";}} ?> /> Based on Quantity
-                                    </label>
-                                    <label>
-                                       <input type="radio" name="base" id="based_FOB_id" value="based_FOB" <?php if(count($product_price) > 0){if($product_price[0]->currency != ''){echo "checked";}} ?> /> FOB
-                                    </label>
+                                    <div class="form-filed-radio">
+                                       <label><input type="radio" name="base" value="based_quantity" <?php if(count($product_price) > 0){if(trim($product_price[0]->currency) == ''){echo "checked";}}else{if(count($product_price) == 0){echo "checked";}} ?> /> Based on Quantity
+                                       </label>
+                                       <label>
+                                          <input type="radio" name="base" id="based_FOB_id" value="based_FOB" <?php if(count($product_price) > 0){if($product_price[0]->currency != ''){echo "checked";}} ?> /> FOB
+                                       </label>
+                                    </div>
                                     @if(count($product_price) > 0)
                                     <div class="table quantity_base">
                                        <div class="row">
@@ -524,7 +539,6 @@
                                           <div class="col-md-5">
                                              <input type="text" name="product_FOB_from[]" class="form-control" placeholder="From" value="<?php if(isset($fob_price_array[0])){echo $fob_price_array[0];} ?>">
                                           </div>
-                                          <div class="col-md-1">-</div>
                                           <div class="col-md-5">
                                              <input type="text" name="product_FOB_to[]" class="form-control" placeholder="To" value="<?php if(isset($fob_price_array[1])){echo $fob_price_array[1];} ?>">
                                           </div>
@@ -685,12 +699,11 @@
                                              <?php
             			      						   $fob_price_array = explode('-', $product_price[0]->product_FOB);
             			      						?>
-                                             <div class="row">
-                                                <div class="col-md-5">
+                                             <div class="row two-col-filed">
+                                                <div class="col-md-6 col-from-label form-filed-dash">
                                                    <input type="text" name="currency_from" class="form-control check_number" placeholder="Price From" value="<?php if(isset($fob_price_array[0])){echo $fob_price_array[0];} ?>">
                                                 </div>
-                                                <div class="col-md-2">-</div>
-                                                <div class="col-md-5">
+                                                <div class="col-md-6 col-from-label">
                                                    <input type="text" name="currency_to" class="form-control check_number" placeholder="Price To" value="<?php if(isset($fob_price_array[1])){echo $fob_price_array[1];} ?>">
                                                 </div>
                                              </div>
@@ -889,13 +902,15 @@
                                     <label>Processing time</label>
                                  </div>
                                  <div class="col-md-8">
-                                     <input validation="validated_true" class="form-control validate check_integer" maxlength="4" max="9999" type="text" name="processing_time" value="<?php if(isset($bdtdc_logistic_infos[0])){echo $bdtdc_logistic_infos[0]->processing_time;}else{echo '';} ?>">
-                                    <p class="empty_error hidden_icon">
-                                    <i class="fa fa-times-circle" aria-hidden="true"></i> Please enter processing time or put 0 to ignore</p>
-                                    <div class="col-xs-3 validation_status">
-                                    <i class="fa fa-check-square btn btn-sm btn-success hidden_icon validated_true"></i>
-                                    <i class="fa fa-exclamation-triangle btn btn-sm btn-danger hidden_icon validated_false"></i>
-                                    <span class="text-danger validation_message"></span>
+                                    <div class="form-filed">
+                                       <input validation="validated_true" class="form-control validate check_integer" maxlength="4" max="9999" type="text" name="processing_time" value="<?php if(isset($bdtdc_logistic_infos[0])){echo $bdtdc_logistic_infos[0]->processing_time;}else{echo '';} ?>">
+                                       <div class="form-filed-error">
+                                          <p class="empty_error hidden_icon">
+                                          <i class="fa fa-times-circle" aria-hidden="true"></i> Please enter processing time or put 0 to ignore</p>
+                                          <i class="fa fa-check-square btn btn-sm btn-success hidden_icon validated_true"></i>
+                                          <i class="fa fa-exclamation-triangle btn btn-sm btn-danger hidden_icon validated_false"></i>
+                                          <span class="text-danger validation_message"></span>
+                                       </div>
                                     </div>
                                  </div>
                               </div>
@@ -905,12 +920,16 @@
                                     <label>Port</label>
                                  </div>
                                  <div class="col-md-8">
-                                    <input validation="validated_true" class="form-control validate" type="text" name="port" value="<?php if(isset($bdtdc_logistic_infos[0])){echo $bdtdc_logistic_infos[0]->port;}else{echo '';} ?>">
-                                    <p class="empty_error hidden_icon"><i style="color:red;" class="fa fa-times-circle" aria-hidden="true"></i> Please Enter port or put 0 to ignore</p>
-                                    <div class="col-xs-3 validation_status">
-                                       <i class="fa fa-check-square btn btn-sm btn-success hidden_icon validated_true"></i>
-                                       <i class="fa fa-exclamation-triangle btn btn-sm btn-danger hidden_icon validated_false"></i>
-                                       <span class="text-danger validation_message"></span>
+                                    <div class="form-filed">
+                                       <input validation="validated_true" class="form-control validate" type="text" name="port" value="<?php if(isset($bdtdc_logistic_infos[0])){echo $bdtdc_logistic_infos[0]->port;}else{echo '';} ?>">
+                                       <div class="form-filed-error">
+                                          <p class="empty_error hidden_icon"><i style="color:red;" class="fa fa-times-circle" aria-hidden="true"></i> Please Enter port or put 0 to ignore</p>
+                                          <div class="validation_status">
+                                             <i class="fa fa-check-square btn btn-sm btn-success hidden_icon validated_true"></i>
+                                             <i class="fa fa-exclamation-triangle btn btn-sm btn-danger hidden_icon validated_false"></i>
+                                             <span class="text-danger validation_message"></span>
+                                          </div>
+                                       </div>
                                     </div>
                                  </div>
 
@@ -921,12 +940,16 @@
                                     <label>Supply ability</label>
                                  </div>
                                  <div class="col-md-8">
-                                    <input validation="validated_true" class="form-control validate check_integer" maxlength="9" max="999999999" type="text" name="supply_ability" value="<?php if(isset($bdtdc_logistic_infos[0])){echo $bdtdc_logistic_infos[0]->supply_ability;}else{echo '';} ?>">
-                                    <p class="empty_error hidden_icon"><i style="color:red;" class="fa fa-times-circle" aria-hidden="true"></i> Please enter supply ability or put 0 to ignore</p>
-                                    <div class="col-xs-3 validation_status">
-                                       <i class="fa fa-check-square btn btn-sm btn-success hidden_icon validated_true"></i>
-                                       <i class="fa fa-exclamation-triangle btn btn-sm btn-danger hidden_icon validated_false"></i>
-                                       <span class="text-danger validation_message"></span>
+                                    <div class="form-filed">
+                                       <input validation="validated_true" class="form-control validate check_integer" maxlength="9" max="999999999" type="text" name="supply_ability" value="<?php if(isset($bdtdc_logistic_infos[0])){echo $bdtdc_logistic_infos[0]->supply_ability;}else{echo '';} ?>">
+                                       <div class="form-filed-error">
+                                          <p class="empty_error hidden_icon"><i style="color:red;" class="fa fa-times-circle" aria-hidden="true"></i> Please enter supply ability or put 0 to ignore</p>
+                                          <div class="validation_status">
+                                             <i class="fa fa-check-square btn btn-sm btn-success hidden_icon validated_true"></i>
+                                             <i class="fa fa-exclamation-triangle btn btn-sm btn-danger hidden_icon validated_false"></i>
+                                             <span class="text-danger validation_message"></span>
+                                          </div>
+                                       </div>
                                     </div>
                                  </div>
                               </div>
@@ -943,7 +966,7 @@
                               <div class="form-group row">
                                  <div class="col-md-3"></div>
                                  <div class="col-md-8">
-                                    <p class="summary">Grouping your products makes it easier for buyers to find them</p>
+                                    <p class="summary mb-0">Grouping your products makes it easier for buyers to find them</p>
                                  </div> 
                               </div>
                               <div class="form-group row">
@@ -951,28 +974,38 @@
                                     <label>Group Name</label>
                                  </div>
                                  <div class="col-md-8">
-                                    <select style="height:28px;padding-bottom:1%;font-size:12px;padding-top:0%" class="form-control" name="product_groups" id="sel1">
-                                       @foreach($product_groups as $u)
-                                       @if($supplier_product->product_groups == $u->id)
-                                       <option value="{!! $u->id !!}" selected>{!! $u->name !!}</option>
-                                       @else
-                                       <option value="{!! $u->id !!}">{!! $u->name !!}</option>
-                                       @endif
-                                       @endforeach
-                                    </select>
-                                    <p class="product_group_error hidden_icon" style="margin-top: 4px;padding: 2px 4px;font-size: 12px;color: #333;border: 1px solid #ffd4d2;background-color: #ffefee;"><i style="color:red;" class="fa fa-times-circle" aria-hidden="true"></i> Please select a product group (add new if not available)</p>
-                                    <span class="group_name_form_opener"> 
-                                       <i style="font-size: 25px;color: #19446F;" class="btn btn-xs fa fa-plus-square"></i>
-                                    </span>
-                                    <div class="add_group_name_form_area">
-                                       <div class="col-md-10">
-                                          <input type="text" name="add_group_name[]" placeholder="Group Name" class="form-control">
-                                          <a href="" class="btn btn-success btn-sm product_group_submit_btn">Save</a>
+                                    <div class="row filed-with-btn">
+                                       <div class="col-md-10 col-from-label">
+                                          <select class="form-control" name="product_groups" id="sel1">
+                                             @foreach($product_groups as $u)
+                                             @if($supplier_product->product_groups == $u->id)
+                                             <option value="{!! $u->id !!}" selected>{!! $u->name !!}</option>
+                                             @else
+                                             <option value="{!! $u->id !!}">{!! $u->name !!}</option>
+                                             @endif
+                                             @endforeach
+                                          </select>
                                        </div>
-                                       <div class="text-right">
-                                          <a class="btn btn-xs btn-danger group_name_from_remover" href="">
-                                             <i class="fa fa-remove"></i>
-                                          </a>
+                                       <div class="col-md-2 col-from-label">
+                                          <span class="group_name_form_opener add-more-btn"> 
+                                             <i class="fa fa-plus" aria-hidden="true"></i>
+                                          </span>
+                                       </div>
+                                       <p class="product_group_error hidden_icon" class="fa fa-times-circle" aria-hidden="true"></i> Please select a product group (add new if not available)</p>
+                                       <div class="add_group_name_form_area">
+                                          <div class="form-filed-inner">
+                                             <div class="col-md-10 col-from-label">
+                                                <input type="text" name="add_group_name[]" placeholder="Group Name" class="form-control">
+                                             </div>
+                                             <div class="col-md-2 col-from-label">
+                                                <a class="btn btn-xs btn-danger group_name_from_remover" href="">
+                                                   <i class="fa fa-remove"></i>
+                                                </a>
+                                             </div>
+                                             <div class="col-md-12 col-from-label">
+                                                <a href="" class="btn btn-success btn-sm product_group_submit_btn">Save</a>
+                                             </div>
+                                          </div>
                                        </div>
                                     </div>
                                  </div>
@@ -992,7 +1025,7 @@
                                     <label>Group Name</label>
                                  </div>
                                  <div class="col-md-8">
-                                    <div class="form-control height-auto">
+                                    <div class="form-control form-border-box height-auto">
                                        <ul class="list-unstyled">
                                           <li>
                                              <label><input class="" type="checkbox" name="payment[]" value="L/C"> L/C</label>
@@ -1005,7 +1038,7 @@
                                              <label><input class="" type="checkbox" name="payment[]" value="Escrow"> Escrow</label>
                                              <label><input class="" type="checkbox" name="payment[]" value="T/T"> T/T</label>
                                              <label><input class="" type="checkbox" name="payment[]" value="others" id="others_id"> Others</label>
-                                             <div id="others_area" style="display:none;border: 1px solid rgb(23, 175, 186);padding: 10px;"><input type="text" name="others_payment" placeholder="Other Payments Method" class="form-control" style="height:30px;font-size:12px;margin-bottom: 1%">
+                                             <div id="others_area" style="display:none;"><input type="text" name="others_payment" placeholder="Other Payments Method" class="form-control">
                                              </div>
                                           </li>
                                        </ul>
@@ -1030,11 +1063,15 @@
                                     <label>Packages And Delivery</label>
                                  </div>
                                  <div class="col-md-8">
-                                    <textarea class="form-control maxlength-handler validate" validation="validated_true" name="packages_delivery" maxlength="1000">{{ $supplier_product->delivery }}</textarea>
-                                    <p class="empty_error hidden_icon" style="margin-top: 4px;padding: 2px 4px;font-size: 12px;color: #333;border: 1px solid #ffd4d2;background-color: #ffefee;"><i style="color:red;" class="fa fa-times-circle" aria-hidden="true"></i> Please give product packages and delivery information</p>
-                                    <i class="fa fa-check-square btn btn-sm btn-success hidden_icon validated_true"></i>
-                                    <i class="fa fa-exclamation-triangle btn btn-sm btn-danger hidden_icon validated_false"></i>
-                                    <span class="text-danger validation_message"></span>
+                                    <div class="form-filed big-textarea">
+                                       <textarea class="form-control maxlength-handler validate" validation="validated_true" name="packages_delivery" maxlength="1000">{{ $supplier_product->delivery }}</textarea>
+                                       <div class="form-filed-error">
+                                          <p class="empty_error hidden_icon"><i style="color:red;" class="fa fa-times-circle" aria-hidden="true"></i> Please give product packages and delivery information</p>
+                                          <i class="fa fa-check-square btn btn-sm btn-success hidden_icon validated_true"></i>
+                                          <i class="fa fa-exclamation-triangle btn btn-sm btn-danger hidden_icon validated_false"></i>
+                                          <span class="text-danger validation_message"></span>
+                                       </div>
+                                    </div>
                                  </div>
                               </div>
                            </div>
@@ -1053,51 +1090,51 @@
                                  </div>
                                  <div class="col-md-9">
                                     <textarea id="editor" class="form-control product_desc" validation="validated_true" name="product_description">{{ $supplier_product->description }}</textarea>
-                                    <p class="empty_error hidden_icon" style="margin-top: -24px;padding: 2px 4px;font-size: 12px;color: #333;border: 1px solid #ffd4d2;background-color: #ffefee;"><i style="color:red;" class="fa fa-times-circle" aria-hidden="true"></i> Please type some product details</p>
+                                    <p class="empty_error hidden_icon"><i style="color:red;" class="fa fa-times-circle" aria-hidden="true"></i> Please type some product details</p>
                                  </div>
                               </div>
                            </div>
                         </div>
                      </div>
 
-                     <div class="row margin_top1" style="margin-top: 30px;">
-                        <div style="text-align:right;padding-right:0px" class="col-md-2">
+                     <div class="row margin_top1 terms-and-conditions">
+<!--                         <div class="col-md-2">
                            <label for=""></label>
-                        </div>
-                        <div class="col-md-7">
+                        </div> -->
+                        <div class="col-md-12">
                            <div style="">
                               <label>
                                  <input type="checkbox" name="terms_condition" value="terms" checked> I accept with the <a target="_blank" href="{{ URL::to('product_listing_policy',null) }}">terms and conditions.</a>
-                                 <p class="term_condition_error hidden_icon" style="margin-top: 4px;padding: 2px 4px;font-size: 12px;color: #333;border: 1px solid #ffd4d2;background-color: #ffefee;"><i style="color:red;" class="fa fa-times-circle" aria-hidden="true"></i> Please accept the terms and conditions.</p>
+                                 <p class="term_condition_error hidden_icon"><i class="fa fa-times-circle" aria-hidden="true"></i> Please accept the terms and conditions.</p>
                            </div>
                         </div>
                      </div>
                   </div>
                </div>
-               <div class="col-xs-12 bg-info" style="padding:1%;padding-left:18%;margin-bottom:2%;margin-top:4%">
-                  <input type="submit" class="btn btn-primary btn-lg btn-join product_update_submit_btn" value="Update">
-                  <a class="btn btn-primary btn-lg btn-join" href="{!! URL::to('dashboard/product') !!}">Cancel</a>
+               <div class="row">
+                  <div class="col-xs-12 form-main-btn">
+                     <input type="submit" class="btn btn-primary product_update_submit_btn green-btn" value="Update">
+                     <a class="btn btn-primary red-btn" href="{!! URL::to('dashboard/product') !!}">Cancel</a>
+                  </div>
                </div>
                      {!! Form::close() !!}
             </div>
          </div>
          <div class="col-md-4">
-            <div style="z-index: 0;margin: 0px; background-color: #fff; width: 100%" class="box">
-               <div style="padding-left:4px;width:100%;padding-top:2px;padding-bottom:30px">
-                  <div style="border-bottom: 1px solid rgba(204, 204, 204, 0.62)">
-                     <h4 style="text-align: left;padding-left: 15px">Tips & Helps</h4>
-                  </div>
-                  <ul style=" padding-left: 10px;" class="">
+            <div class="sd-card">
+               <h4 class="card-title">
+                  Tips & Helps
+               </h4>
+               <div class="sd-card-body">
+                  <ul class="car-listing">
                      <!-- <li class="navigation-menu-list-li"><a itemprop="url"  href="{{ URL::to('account-settings',null) }}" class="navigation-menu-list-li-a">Account Settings</a></li> -->
-                     <div style="border-bottom: 1px solid rgba(204, 204, 204, 0.62)">
-                        <h4 style="text-align: left;padding-left: 5px">For Buyer</h4>
-                     </div>
-                     <li class="navigation-menu-list-li" style="padding: 5px;">
+                     <h5 class="card-small-title">For Buyer</h5>
+                     <li class="navigation-menu-list-li">
                         <a itemprop="url" href="{{ URL::to('ServiceChannel/pages/for_buyer',35)}}" class="navigation-menu-list-li-a">Help Center for Buyers</a>
                      </li>
                      @foreach($pages as $page)
                      @if($page->prefix == 'BuyerChannel' )
-                     <li class="navigation-menu-list-li" style="padding: 5px;">
+                     <li class="navigation-menu-list-li">
                         <a itemprop="url" href="{{ URL::to($page->prefix.'/pages/'.$page->sort_name,$page->id)}}" class="navigation-menu-list-li-a">{{ $page->name }}</a>
                      </li>
                      @endif
@@ -1105,20 +1142,22 @@
                   </ul>
                </div>
             </div>
-            <div style="width: 100%;z-index: 9;margin: 0px;background-color: #fff;margin-top: 5%" class="box">
-               <div style="padding-left:4px;width:100%;padding-top:2px;padding-bottom:30px">
-                  <div style="border-bottom: 1px solid rgba(204, 204, 204, 0.62)">
-                     <h4 style="text-align: left;padding-left: 15px">For Supplier</h4>
+            <div class="sd-card">
+               <div>
+                  <h4 class="card-title">
+                     For Supplier
+                  </h4>
+                  <div class="sd-card-body">
+                     <ul class="car-listing">
+                        <!-- <li class="navigation-menu-list-li"><a itemprop="url"  href="{{ URL::to('account-settings',null) }}" class="navigation-menu-list-li-a">Account Settings</a></li> -->
+                        <li class="navigation-menu-list-li"><a itemprop="url" href="{{ URL::to('ServiceChannel/pages/for_buyer',35)}}" class="navigation-menu-list-li-a">Help Center for Suppliers</a></li>
+                        @foreach($pages as $page)
+                        @if($page->prefix == 'SupplierChannel' )
+                        <li class="navigation-menu-list-li"><a itemprop="url" href="{{ URL::to($page->prefix.'/pages/'.$page->sort_name,$page->id)}}" class="navigation-menu-list-li-a">{{ $page->name }}</a></li>
+                        @endif
+                        @endforeach
+                     </ul>
                   </div>
-                  <ul style="    padding-left: 10px;" class="">
-                     <!-- <li class="navigation-menu-list-li"><a itemprop="url"  href="{{ URL::to('account-settings',null) }}" class="navigation-menu-list-li-a">Account Settings</a></li> -->
-                     <li class="navigation-menu-list-li" style="padding: 5px;"><a itemprop="url" href="{{ URL::to('ServiceChannel/pages/for_buyer',35)}}" class="navigation-menu-list-li-a">Help Center for Suppliers</a></li>
-                     @foreach($pages as $page)
-                     @if($page->prefix == 'SupplierChannel' )
-                     <li class="navigation-menu-list-li" style="    padding: 5px;"><a itemprop="url" href="{{ URL::to($page->prefix.'/pages/'.$page->sort_name,$page->id)}}" class="navigation-menu-list-li-a">{{ $page->name }}</a></li>
-                     @endif
-                     @endforeach
-                  </ul>
                </div>
             </div>
          </div>

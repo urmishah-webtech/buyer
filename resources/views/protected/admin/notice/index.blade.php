@@ -97,7 +97,7 @@
                      <td>
                         <div class="table-grp-btn">
                            <a href="{{ URL::to('admin/noticeView',$notice->id) }}" class="btn view-icon-btn"><i class="fa fa-eye" aria-hidden="true"></i></a>
-                           <a href="{{ URL::to('admin/noticeEdit',$notice->id) }}" class="btn edit-icon-btn"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                           <a href="{{ URL::to('admin/noticeEdit',$notice->id) }}" class="btn edit-icon-btn"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
                            <a href="{{ URL::to('admin/noticeDelete',$notice->id) }}" class="btn delete-icon-btn"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
                         </div>
                      </td>

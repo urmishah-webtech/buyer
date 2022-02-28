@@ -130,7 +130,7 @@
                <td>{{ date('d-M-Y',strtotime(@$data->tradeshow_description->created_at)) }}</td>
                <td  style="white-space: nowrap;">
                   <div class="table-grp-btn">
-                     <a href="{{ URL::to('admin/tradeshow-edit',$data->id) }}" class="btn btn-xs btn-info edit-icon-btn"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                     <a href="{{ URL::to('admin/tradeshow-edit',$data->id) }}" class="btn btn-xs btn-info edit-icon-btn"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
                      <a onclick="confirm('Are you sure, you want to delete the Trade details?')" href="{{ URL::to('admin/tradeshow-delete',$data->id) }}" class="btn btn-xs btn-danger trade_delete delete-icon-btn"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
                   </div>
                </td>

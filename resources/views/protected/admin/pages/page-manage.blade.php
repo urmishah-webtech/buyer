@@ -92,7 +92,7 @@
                             <td class="join-date-filed">{{ date('d-M-Y',strtotime($page->created_at)) }}</td>
                             <td>
                                 <div class="table-grp-btn">
-                                    <a href="{{ URL::to('page_content/'.$page->id.'/edit',null) }}" class="btn btn-xs btn-info edit-icon-btn"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                                    <a href="{{ URL::to('page_content/'.$page->id.'/edit',null) }}" class="btn btn-xs btn-info edit-icon-btn"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
                                     <a onclick="return confirm('Are you sure, you want to delete the Page?')" href="{{ URL::to('admin/page_content-delete',$page->id) }}" class="btn btn-xs btn-danger delete-icon-btn"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
                                 </div>
                             </td>
