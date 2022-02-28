@@ -209,18 +209,18 @@ const myChart = new Chart(ctx, {
             label: '# of Votes',
             data: [145, 94, 51],
             backgroundColor: [
-                '#FF1A85',
-                '#0FCCA6',
-                '#3859FF'
+                '#fd3995',
+                '#34bfa3',
+                '#5d78ff'
             ],
             borderWidth: 2,
+            cutout: 66
         }]
     },
     options: {
       plugins: {
         legend: {
           display: false,
-          cutoutPercentage: 70
         }
       }
     }
@@ -242,11 +242,12 @@ const myChart = new Chart(ctx, {
             label: '# of Votes',
             data: [11, 10, 1],
             backgroundColor: [
-                '#FF1A85',
-                '#0FCCA6',
-                '#3859FF'
+                '#fd3995',
+                '#34bfa3',
+                '#5d78ff'
             ],
-            borderWidth: 2
+            borderWidth: 2,
+            cutout: 66
         }]
     },
     options: {
@@ -259,7 +260,134 @@ const myChart = new Chart(ctx, {
 });
 });
 
+// Product number of sale chart js
 
+$(function () {
+     Chart.defaults.font.size = 11;
+    Chart.defaults.color = "#9a9a9a";
+    const ctx = document.getElementById('PdSaleChart');
+    const myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: [
+                'Men clothing &amp; Fashion',
+                'Computer &amp; Accessories',
+                'Automobile &amp; Motorcycle',
+                'kids &amp; toy',
+                'sports &amp; autdoor',
+                'Jewelry &amp; watches',
+                'Cellphones &amp; Tabs',
+                'Beaty, Health &amp; Tabs',
+                'Beauty, Helth &amp; Hair',
+                'Home improvement &amp; Tools',
+                'Home decoration &amp; Appliance',
+                'Toy',
+                'Software'
+            ],
+            datasets: [{
+                label: '# of Votes',
+                data: [11, 18, 5, 1, 4, 0, 4, 5, 0, 0, 0, 0, 2],
+                backgroundColor: [
+                    'rgb(85, 140, 242, 0.5)'
+                ],
+                borderColor: [
+                    'rgb(85, 140, 242, 1)'
+                ],
+                borderWidth: 1.5,
+                barPercentage: .9
+            }]
+        },
+        options: {
+          plugins: {
+            legend: {
+              display: false
+            }
+          }, 
+          scales: {
+              y: {
+                grid: {
+                  color: '#F2F3F8'
+                }
+              },
+              x: {
+                grid: {
+                  color: '#F2F3F8'
+                },
+                ticks: {
+                  font: {
+                    size: 11,
+                  },
+                },
+              }
+            }
+        }
+    });
+});
+
+
+// Product number of stock chart js
+
+$(function () {
+    Chart.defaults.font.size = 11;
+    Chart.defaults.color = "#9a9a9a";
+    const ctx = document.getElementById('PdStockChart');
+    const myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: [
+                'Men clothing &amp; Fashion',
+                'Computer &amp; Accessories',
+                'Automobile &amp; Motorcycle',
+                'kids &amp; toy',
+                'sports &amp; autdoor',
+                'Jewelry &amp; watches',
+                'Cellphones &amp; Tabs',
+                'Beaty, Health &amp; Tabs',
+                'Beauty, Helth &amp; Hair',
+                'Home improvement &amp; Tools',
+                'Home decoration &amp; Appliance',
+                'Toy',
+                'Software'
+            ],
+            datasets: [{
+                label: '# of Votes',
+                data: [20102, 19980, 7538, 6559, 20527, 0, 3998, 10998, 0, 2500, 0, 1, 0],
+                backgroundColor: [
+                    'rgb(253, 90, 167, 0.5)'
+                ],
+                borderColor: [
+                    '#FF1A85'
+                ],
+                borderWidth: 1,
+                barPercentage: .9
+            }]
+        },
+        options: {
+          plugins: {
+            legend: {
+              display: false
+            }
+          }, 
+          scales: {
+              y: {
+                grid: {
+                  color: '#F2F3F8'
+                }
+              },
+              x: {
+                grid: {
+                  color: '#F2F3F8'
+                },
+                ticks: {
+                  font: {
+                    size: 11,
+                  },
+                },
+              }
+            }
+        }
+    });
+});
 
 
 // home top product js
